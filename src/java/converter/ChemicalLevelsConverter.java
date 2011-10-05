@@ -1,20 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package converter;
 
-import beans.ChemicalLevels;
-import beans.ChemicalLevelsPK;
+import beans.ChemicalLevel;
 import java.net.URI;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.ws.rs.core.UriBuilder;
-import javax.persistence.EntityManager;
-import beans.Treatments;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -22,119 +17,55 @@ import java.util.Collection;
  */
 @XmlRootElement(name = "chemicalLevels")
 public class ChemicalLevelsConverter {
-    private ChemicalLevels entity;
+    private Collection<ChemicalLevel> entities;
+    private Collection<ChemicalLevelConverter> items;
     private URI uri;
     private int expandLevel;
 
     /** Creates a new instance of ChemicalLevelsConverter */
     public ChemicalLevelsConverter() {
-        entity = new ChemicalLevels();
     }
 
     /**
      * Creates a new instance of ChemicalLevelsConverter.
      *
-     * @param entity associated entity
-     * @param uri associated uri
-     * @param expandLevel indicates the number of levels the entity graph should be expanded@param isUriExtendable indicates whether the uri can be extended
-     */
-    public ChemicalLevelsConverter(ChemicalLevels entity, URI uri, int expandLevel, boolean isUriExtendable) {
-        this.entity = entity;
-        this.uri = (isUriExtendable) ? UriBuilder.fromUri(uri).path(entity.getChemicalLevelsPK().getExpId() + "," + entity.getChemicalLevelsPK().getCh() + "/").build() : uri;
-        this.expandLevel = expandLevel;
-        getTreatmentsCollection();
-    }
-
-    /**
-     * Creates a new instance of ChemicalLevelsConverter.
-     *
-     * @param entity associated entity
+     * @param entities associated entities
      * @param uri associated uri
      * @param expandLevel indicates the number of levels the entity graph should be expanded
      */
-    public ChemicalLevelsConverter(ChemicalLevels entity, URI uri, int expandLevel) {
-        this(entity, uri, expandLevel, false);
+    public ChemicalLevelsConverter(Collection<ChemicalLevel> entities, URI uri, int expandLevel) {
+        this.entities = entities;
+        this.uri = uri;
+        this.expandLevel = expandLevel;
+        getChemicalLevels();
     }
 
     /**
-     * Getter for chemicalLevelsPK.
+     * Returns a collection of ChemicalLevelConverter.
      *
-     * @return value for chemicalLevelsPK
+     * @return a collection of ChemicalLevelConverter
      */
     @XmlElement
-    public ChemicalLevelsPK getChemicalLevelsPK() {
-        return (expandLevel > 0) ? entity.getChemicalLevelsPK() : null;
-    }
-
-    /**
-     * Setter for chemicalLevelsPK.
-     *
-     * @param value the value to set
-     */
-    public void setChemicalLevelsPK(ChemicalLevelsPK value) {
-        entity.setChemicalLevelsPK(value);
-    }
-
-    /**
-     * Getter for chName.
-     *
-     * @return value for chName
-     */
-    @XmlElement
-    public String getChName() {
-        return (expandLevel > 0) ? entity.getChName() : null;
-    }
-
-    /**
-     * Setter for chName.
-     *
-     * @param value the value to set
-     */
-    public void setChName(String value) {
-        entity.setChName(value);
-    }
-
-    /**
-     * Getter for chNotes.
-     *
-     * @return value for chNotes
-     */
-    @XmlElement
-    public String getChNotes() {
-        return (expandLevel > 0) ? entity.getChNotes() : null;
-    }
-
-    /**
-     * Setter for chNotes.
-     *
-     * @param value the value to set
-     */
-    public void setChNotes(String value) {
-        entity.setChNotes(value);
-    }
-
-    /**
-     * Getter for treatmentsCollection.
-     *
-     * @return value for treatmentsCollection
-     */
-    @XmlElement
-    public TreatmentssConverter getTreatmentsCollection() {
-        if (expandLevel > 0) {
-            if (entity.getTreatmentsCollection() != null) {
-                return new TreatmentssConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
+    public Collection<ChemicalLevelConverter> getChemicalLevels() {
+        if (items == null) {
+            items = new ArrayList<ChemicalLevelConverter>();
+        }
+        if (entities != null) {
+            items.clear();
+            for (ChemicalLevel entity : entities) {
+                items.add(new ChemicalLevelConverter(entity, uri, expandLevel, true));
             }
         }
-        return null;
+        return items;
     }
 
     /**
-     * Setter for treatmentsCollection.
+     * Sets a collection of ChemicalLevelConverter.
      *
-     * @param value the value to set
+     * @param a collection of ChemicalLevelConverter to set
      */
-    public void setTreatmentsCollection(TreatmentssConverter value) {
-        entity.setTreatmentsCollection((value != null) ? value.getEntities() : null);
+    public void setChemicalLevels(Collection<ChemicalLevelConverter> items) {
+        this.items = items;
     }
 
     /**
@@ -148,44 +79,19 @@ public class ChemicalLevelsConverter {
     }
 
     /**
-     * Sets the URI for this reference converter.
+     * Returns a collection ChemicalLevel entities.
      *
-     */
-    public void setUri(URI uri) {
-        this.uri = uri;
-    }
-
-    /**
-     * Returns the ChemicalLevels entity.
-     *
-     * @return an entity
+     * @return a collection of ChemicalLevel entities
      */
     @XmlTransient
-    public ChemicalLevels getEntity() {
-        if (entity.getChemicalLevelsPK() == null) {
-            ChemicalLevelsConverter converter = UriResolver.getInstance().resolve(ChemicalLevelsConverter.class, uri);
-            if (converter != null) {
-                entity = converter.getEntity();
+    public Collection<ChemicalLevel> getEntities() {
+        entities = new ArrayList<ChemicalLevel>();
+        if (items != null) {
+            for (ChemicalLevelConverter item : items) {
+                entities.add(item.getEntity());
             }
         }
-        return entity;
-    }
-
-    /**
-     * Returns the resolved ChemicalLevels entity.
-     *
-     * @return an resolved entity
-     */
-    public ChemicalLevels resolveEntity(EntityManager em) {
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> newtreatmentsCollection = new java.util.ArrayList<Treatments>();
-        if (treatmentsCollection != null) {
-            for (Treatments item : treatmentsCollection) {
-                newtreatmentsCollection.add(em.getReference(Treatments.class, item.getTreatmentsPK()));
-            }
-        }
-        entity.setTreatmentsCollection(newtreatmentsCollection);
-        return entity;
+        return entities;
     }
 
     @Override
@@ -200,10 +106,11 @@ public class ChemicalLevelsConverter {
         if (this.expandLevel != other.expandLevel) {
             return false;
         }
-        if (expandLevel <= 0) {
-            return true;
+        if (this.items.size() != other.items.size()) {
+            return false;
         }
-        if ((this.entity == null && other.entity != null) || (this.entity != null && !this.entity.equals(other.entity))) {
+        Set<ChemicalLevelConverter> itemSet = new HashSet<ChemicalLevelConverter>(this.items);
+        if (!itemSet.containsAll(other.items)) {
             return false;
         }
         return true;
@@ -212,9 +119,10 @@ public class ChemicalLevelsConverter {
     @Override
     public int hashCode() {
         int hash = uri == null ? 0 : uri.hashCode();
-        if (expandLevel <= 0) {
-            return hash + 37 * expandLevel;
+        hash = 37 * hash + expandLevel;
+        for (ChemicalLevelConverter item : this.items) {
+            hash = 37 * hash + item.hashCode();
         }
-        return hash + 37 * (expandLevel + 37 * (entity == null ? 0 : entity.hashCode()));
+        return hash;
     }
 }

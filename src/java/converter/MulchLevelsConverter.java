@@ -1,140 +1,71 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package converter;
 
-import beans.MulchLevels;
-import beans.MulchLevelsPK;
+import beans.MulchLevel;
 import java.net.URI;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.ws.rs.core.UriBuilder;
-import javax.persistence.EntityManager;
-import beans.Treatments;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @XmlRootElement(name = "mulchLevels")
 public class MulchLevelsConverter {
-    private MulchLevels entity;
+    private Collection<MulchLevel> entities;
+    private Collection<MulchLevelConverter> items;
     private URI uri;
     private int expandLevel;
 
     /** Creates a new instance of MulchLevelsConverter */
     public MulchLevelsConverter() {
-        entity = new MulchLevels();
     }
 
     /**
      * Creates a new instance of MulchLevelsConverter.
      *
-     * @param entity associated entity
-     * @param uri associated uri
-     * @param expandLevel indicates the number of levels the entity graph should be expanded@param isUriExtendable indicates whether the uri can be extended
-     */
-    public MulchLevelsConverter(MulchLevels entity, URI uri, int expandLevel, boolean isUriExtendable) {
-        this.entity = entity;
-        this.uri = (isUriExtendable) ? UriBuilder.fromUri(uri).path(entity.getMulchLevelsPK().getExpId() + "," + entity.getMulchLevelsPK().getMl() + "/").build() : uri;
-        this.expandLevel = expandLevel;
-        getTreatmentsCollection();
-    }
-
-    /**
-     * Creates a new instance of MulchLevelsConverter.
-     *
-     * @param entity associated entity
+     * @param entities associated entities
      * @param uri associated uri
      * @param expandLevel indicates the number of levels the entity graph should be expanded
      */
-    public MulchLevelsConverter(MulchLevels entity, URI uri, int expandLevel) {
-        this(entity, uri, expandLevel, false);
+    public MulchLevelsConverter(Collection<MulchLevel> entities, URI uri, int expandLevel) {
+        this.entities = entities;
+        this.uri = uri;
+        this.expandLevel = expandLevel;
+        getMulchLevels();
     }
 
     /**
-     * Getter for mulchLevelsPK.
+     * Returns a collection of MulchLevelConverter.
      *
-     * @return value for mulchLevelsPK
+     * @return a collection of MulchLevelConverter
      */
     @XmlElement
-    public MulchLevelsPK getMulchLevelsPK() {
-        return (expandLevel > 0) ? entity.getMulchLevelsPK() : null;
-    }
-
-    /**
-     * Setter for mulchLevelsPK.
-     *
-     * @param value the value to set
-     */
-    public void setMulchLevelsPK(MulchLevelsPK value) {
-        entity.setMulchLevelsPK(value);
-    }
-
-    /**
-     * Getter for mlName.
-     *
-     * @return value for mlName
-     */
-    @XmlElement
-    public String getMlName() {
-        return (expandLevel > 0) ? entity.getMlName() : null;
-    }
-
-    /**
-     * Setter for mlName.
-     *
-     * @param value the value to set
-     */
-    public void setMlName(String value) {
-        entity.setMlName(value);
-    }
-
-    /**
-     * Getter for mlNotes.
-     *
-     * @return value for mlNotes
-     */
-    @XmlElement
-    public String getMlNotes() {
-        return (expandLevel > 0) ? entity.getMlNotes() : null;
-    }
-
-    /**
-     * Setter for mlNotes.
-     *
-     * @param value the value to set
-     */
-    public void setMlNotes(String value) {
-        entity.setMlNotes(value);
-    }
-
-    /**
-     * Getter for treatmentsCollection.
-     *
-     * @return value for treatmentsCollection
-     */
-    @XmlElement
-    public TreatmentssConverter getTreatmentsCollection() {
-        if (expandLevel > 0) {
-            if (entity.getTreatmentsCollection() != null) {
-                return new TreatmentssConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
+    public Collection<MulchLevelConverter> getMulchLevels() {
+        if (items == null) {
+            items = new ArrayList<MulchLevelConverter>();
+        }
+        if (entities != null) {
+            items.clear();
+            for (MulchLevel entity : entities) {
+                items.add(new MulchLevelConverter(entity, uri, expandLevel, true));
             }
         }
-        return null;
+        return items;
     }
 
     /**
-     * Setter for treatmentsCollection.
+     * Sets a collection of MulchLevelConverter.
      *
-     * @param value the value to set
+     * @param a collection of MulchLevelConverter to set
      */
-    public void setTreatmentsCollection(TreatmentssConverter value) {
-        entity.setTreatmentsCollection((value != null) ? value.getEntities() : null);
+    public void setMulchLevels(Collection<MulchLevelConverter> items) {
+        this.items = items;
     }
 
     /**
@@ -148,44 +79,19 @@ public class MulchLevelsConverter {
     }
 
     /**
-     * Sets the URI for this reference converter.
+     * Returns a collection MulchLevel entities.
      *
-     */
-    public void setUri(URI uri) {
-        this.uri = uri;
-    }
-
-    /**
-     * Returns the MulchLevels entity.
-     *
-     * @return an entity
+     * @return a collection of MulchLevel entities
      */
     @XmlTransient
-    public MulchLevels getEntity() {
-        if (entity.getMulchLevelsPK() == null) {
-            MulchLevelsConverter converter = UriResolver.getInstance().resolve(MulchLevelsConverter.class, uri);
-            if (converter != null) {
-                entity = converter.getEntity();
+    public Collection<MulchLevel> getEntities() {
+        entities = new ArrayList<MulchLevel>();
+        if (items != null) {
+            for (MulchLevelConverter item : items) {
+                entities.add(item.getEntity());
             }
         }
-        return entity;
-    }
-
-    /**
-     * Returns the resolved MulchLevels entity.
-     *
-     * @return an resolved entity
-     */
-    public MulchLevels resolveEntity(EntityManager em) {
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> newtreatmentsCollection = new java.util.ArrayList<Treatments>();
-        if (treatmentsCollection != null) {
-            for (Treatments item : treatmentsCollection) {
-                newtreatmentsCollection.add(em.getReference(Treatments.class, item.getTreatmentsPK()));
-            }
-        }
-        entity.setTreatmentsCollection(newtreatmentsCollection);
-        return entity;
+        return entities;
     }
 
     @Override
@@ -200,10 +106,11 @@ public class MulchLevelsConverter {
         if (this.expandLevel != other.expandLevel) {
             return false;
         }
-        if (expandLevel <= 0) {
-            return true;
+        if (this.items.size() != other.items.size()) {
+            return false;
         }
-        if ((this.entity == null && other.entity != null) || (this.entity != null && !this.entity.equals(other.entity))) {
+        Set<MulchLevelConverter> itemSet = new HashSet<MulchLevelConverter>(this.items);
+        if (!itemSet.containsAll(other.items)) {
             return false;
         }
         return true;
@@ -212,9 +119,10 @@ public class MulchLevelsConverter {
     @Override
     public int hashCode() {
         int hash = uri == null ? 0 : uri.hashCode();
-        if (expandLevel <= 0) {
-            return hash + 37 * expandLevel;
+        hash = 37 * hash + expandLevel;
+        for (MulchLevelConverter item : this.items) {
+            hash = 37 * hash + item.hashCode();
         }
-        return hash + 37 * (expandLevel + 37 * (entity == null ? 0 : entity.hashCode()));
+        return hash;
     }
 }

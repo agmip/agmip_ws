@@ -1,140 +1,71 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package converter;
 
-import beans.FertilizerLevels;
-import beans.FertilizerLevelsPK;
+import beans.FertilizerLevel;
 import java.net.URI;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.ws.rs.core.UriBuilder;
-import javax.persistence.EntityManager;
-import beans.Treatments;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @XmlRootElement(name = "fertilizerLevels")
 public class FertilizerLevelsConverter {
-    private FertilizerLevels entity;
+    private Collection<FertilizerLevel> entities;
+    private Collection<FertilizerLevelConverter> items;
     private URI uri;
     private int expandLevel;
 
     /** Creates a new instance of FertilizerLevelsConverter */
     public FertilizerLevelsConverter() {
-        entity = new FertilizerLevels();
     }
 
     /**
      * Creates a new instance of FertilizerLevelsConverter.
      *
-     * @param entity associated entity
-     * @param uri associated uri
-     * @param expandLevel indicates the number of levels the entity graph should be expanded@param isUriExtendable indicates whether the uri can be extended
-     */
-    public FertilizerLevelsConverter(FertilizerLevels entity, URI uri, int expandLevel, boolean isUriExtendable) {
-        this.entity = entity;
-        this.uri = (isUriExtendable) ? UriBuilder.fromUri(uri).path(entity.getFertilizerLevelsPK().getExpId() + "," + entity.getFertilizerLevelsPK().getFe() + "/").build() : uri;
-        this.expandLevel = expandLevel;
-        getTreatmentsCollection();
-    }
-
-    /**
-     * Creates a new instance of FertilizerLevelsConverter.
-     *
-     * @param entity associated entity
+     * @param entities associated entities
      * @param uri associated uri
      * @param expandLevel indicates the number of levels the entity graph should be expanded
      */
-    public FertilizerLevelsConverter(FertilizerLevels entity, URI uri, int expandLevel) {
-        this(entity, uri, expandLevel, false);
+    public FertilizerLevelsConverter(Collection<FertilizerLevel> entities, URI uri, int expandLevel) {
+        this.entities = entities;
+        this.uri = uri;
+        this.expandLevel = expandLevel;
+        getFertilizerLevels();
     }
 
     /**
-     * Getter for fertilizerLevelsPK.
+     * Returns a collection of FertilizerLevelConverter.
      *
-     * @return value for fertilizerLevelsPK
+     * @return a collection of FertilizerLevelConverter
      */
     @XmlElement
-    public FertilizerLevelsPK getFertilizerLevelsPK() {
-        return (expandLevel > 0) ? entity.getFertilizerLevelsPK() : null;
-    }
-
-    /**
-     * Setter for fertilizerLevelsPK.
-     *
-     * @param value the value to set
-     */
-    public void setFertilizerLevelsPK(FertilizerLevelsPK value) {
-        entity.setFertilizerLevelsPK(value);
-    }
-
-    /**
-     * Getter for feName.
-     *
-     * @return value for feName
-     */
-    @XmlElement
-    public String getFeName() {
-        return (expandLevel > 0) ? entity.getFeName() : null;
-    }
-
-    /**
-     * Setter for feName.
-     *
-     * @param value the value to set
-     */
-    public void setFeName(String value) {
-        entity.setFeName(value);
-    }
-
-    /**
-     * Getter for feComments.
-     *
-     * @return value for feComments
-     */
-    @XmlElement
-    public String getFeComments() {
-        return (expandLevel > 0) ? entity.getFeComments() : null;
-    }
-
-    /**
-     * Setter for feComments.
-     *
-     * @param value the value to set
-     */
-    public void setFeComments(String value) {
-        entity.setFeComments(value);
-    }
-
-    /**
-     * Getter for treatmentsCollection.
-     *
-     * @return value for treatmentsCollection
-     */
-    @XmlElement
-    public TreatmentssConverter getTreatmentsCollection() {
-        if (expandLevel > 0) {
-            if (entity.getTreatmentsCollection() != null) {
-                return new TreatmentssConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
+    public Collection<FertilizerLevelConverter> getFertilizerLevels() {
+        if (items == null) {
+            items = new ArrayList<FertilizerLevelConverter>();
+        }
+        if (entities != null) {
+            items.clear();
+            for (FertilizerLevel entity : entities) {
+                items.add(new FertilizerLevelConverter(entity, uri, expandLevel, true));
             }
         }
-        return null;
+        return items;
     }
 
     /**
-     * Setter for treatmentsCollection.
+     * Sets a collection of FertilizerLevelConverter.
      *
-     * @param value the value to set
+     * @param a collection of FertilizerLevelConverter to set
      */
-    public void setTreatmentsCollection(TreatmentssConverter value) {
-        entity.setTreatmentsCollection((value != null) ? value.getEntities() : null);
+    public void setFertilizerLevels(Collection<FertilizerLevelConverter> items) {
+        this.items = items;
     }
 
     /**
@@ -148,44 +79,19 @@ public class FertilizerLevelsConverter {
     }
 
     /**
-     * Sets the URI for this reference converter.
+     * Returns a collection FertilizerLevel entities.
      *
-     */
-    public void setUri(URI uri) {
-        this.uri = uri;
-    }
-
-    /**
-     * Returns the FertilizerLevels entity.
-     *
-     * @return an entity
+     * @return a collection of FertilizerLevel entities
      */
     @XmlTransient
-    public FertilizerLevels getEntity() {
-        if (entity.getFertilizerLevelsPK() == null) {
-            FertilizerLevelsConverter converter = UriResolver.getInstance().resolve(FertilizerLevelsConverter.class, uri);
-            if (converter != null) {
-                entity = converter.getEntity();
+    public Collection<FertilizerLevel> getEntities() {
+        entities = new ArrayList<FertilizerLevel>();
+        if (items != null) {
+            for (FertilizerLevelConverter item : items) {
+                entities.add(item.getEntity());
             }
         }
-        return entity;
-    }
-
-    /**
-     * Returns the resolved FertilizerLevels entity.
-     *
-     * @return an resolved entity
-     */
-    public FertilizerLevels resolveEntity(EntityManager em) {
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> newtreatmentsCollection = new java.util.ArrayList<Treatments>();
-        if (treatmentsCollection != null) {
-            for (Treatments item : treatmentsCollection) {
-                newtreatmentsCollection.add(em.getReference(Treatments.class, item.getTreatmentsPK()));
-            }
-        }
-        entity.setTreatmentsCollection(newtreatmentsCollection);
-        return entity;
+        return entities;
     }
 
     @Override
@@ -200,10 +106,11 @@ public class FertilizerLevelsConverter {
         if (this.expandLevel != other.expandLevel) {
             return false;
         }
-        if (expandLevel <= 0) {
-            return true;
+        if (this.items.size() != other.items.size()) {
+            return false;
         }
-        if ((this.entity == null && other.entity != null) || (this.entity != null && !this.entity.equals(other.entity))) {
+        Set<FertilizerLevelConverter> itemSet = new HashSet<FertilizerLevelConverter>(this.items);
+        if (!itemSet.containsAll(other.items)) {
             return false;
         }
         return true;
@@ -212,9 +119,10 @@ public class FertilizerLevelsConverter {
     @Override
     public int hashCode() {
         int hash = uri == null ? 0 : uri.hashCode();
-        if (expandLevel <= 0) {
-            return hash + 37 * expandLevel;
+        hash = 37 * hash + expandLevel;
+        for (FertilizerLevelConverter item : this.items) {
+            hash = 37 * hash + item.hashCode();
         }
-        return hash + 37 * (expandLevel + 37 * (entity == null ? 0 : entity.hashCode()));
+        return hash;
     }
 }

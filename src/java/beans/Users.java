@@ -63,7 +63,7 @@ public class Users implements Serializable {
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "updateUserId")
-    private Collection<Treatments> treatmentsCollection;
+    private Collection<Treatment> treatmentsCollection;
 
     public Users() {
     }
@@ -121,11 +121,11 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Treatments> getTreatmentsCollection() {
+    public Collection<Treatment> getTreatmentsCollection() {
         return treatmentsCollection;
     }
 
-    public void setTreatmentsCollection(Collection<Treatments> treatmentsCollection) {
+    public void setTreatmentsCollection(Collection<Treatment> treatmentsCollection) {
         this.treatmentsCollection = treatmentsCollection;
     }
 

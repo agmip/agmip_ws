@@ -18,7 +18,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
-import beans.Treatments;
+import beans.Treatment;
 import java.util.Collection;
 import converter.HarvestLevelsConverter;
 import com.sun.jersey.api.core.ResourceContext;
@@ -128,15 +128,15 @@ public class HarvestLevelsResource {
      */
     private HarvestLevels updateEntity(HarvestLevels entity, HarvestLevels newEntity) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> treatmentsCollectionNew = newEntity.getTreatmentsCollection();
+        Collection<Treatment> treatmentsCollection = entity.getTreatmentsCollection();
+        Collection<Treatment> treatmentsCollectionNew = newEntity.getTreatmentsCollection();
         entity = em.merge(newEntity);
-        for (Treatments value : treatmentsCollection) {
+        for (Treatment value : treatmentsCollection) {
             if (!treatmentsCollectionNew.contains(value)) {
                 throw new WebApplicationException(new Throwable("Cannot remove items from treatmentsCollection"));
             }
         }
-        for (Treatments value : treatmentsCollectionNew) {
+        for (Treatment value : treatmentsCollectionNew) {
             if (!treatmentsCollection.contains(value)) {
                 HarvestLevels oldEntity = value.getHarvestLevels();
                 value.setHarvestLevels(entity);
@@ -162,19 +162,19 @@ public class HarvestLevelsResource {
     }
 
     /**
-     * Returns a dynamic instance of TreatmentssResource used for entity navigation.
+     * Returns a dynamic instance of TreatmentsResource used for entity navigation.
      *
      * @param id identifier for the parent entity
-     * @return an instance of TreatmentssResource
+     * @return an instance of TreatmentsResource
      */
     @Path("treatmentsCollection/")
-    public TreatmentssResource getTreatmentsCollectionResource() {
+    public TreatmentsResource getTreatmentsCollectionResource() {
         TreatmentsCollectionResourceSub treatmentsCollectionResourceSub = resourceContext.getResource(TreatmentsCollectionResourceSub.class);
         treatmentsCollectionResourceSub.setParent(getEntity());
         return treatmentsCollectionResourceSub;
     }
 
-    public static class TreatmentsCollectionResourceSub extends TreatmentssResource {
+    public static class TreatmentsCollectionResourceSub extends TreatmentsResource {
 
         private HarvestLevels parent;
 
@@ -183,10 +183,10 @@ public class HarvestLevelsResource {
         }
 
         @Override
-        protected Collection<Treatments> getEntities(int start, int max, String query) {
-            Collection<Treatments> result = new java.util.ArrayList<Treatments>();
+        protected Collection<Treatment> getEntities(int start, int max, String query) {
+            Collection<Treatment> result = new java.util.ArrayList<Treatment>();
             int index = 0;
-            for (Treatments e : parent.getTreatmentsCollection()) {
+            for (Treatment e : parent.getTreatmentsCollection()) {
                 if (index >= start && (index - start) < max) {
                     result.add(e);
                 }

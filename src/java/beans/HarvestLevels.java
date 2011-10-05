@@ -43,7 +43,7 @@ public class HarvestLevels implements Serializable {
     @Column(name = "ha_notes")
     private String haNotes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "harvestLevels")
-    private Collection<Treatments> treatmentsCollection;
+    private Collection<Treatment> treatmentsCollection;
 
     public HarvestLevels() {
     }
@@ -81,11 +81,11 @@ public class HarvestLevels implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Treatments> getTreatmentsCollection() {
+    public Collection<Treatment> getTreatmentsCollection() {
         return treatmentsCollection;
     }
 
-    public void setTreatmentsCollection(Collection<Treatments> treatmentsCollection) {
+    public void setTreatmentsCollection(Collection<Treatment> treatmentsCollection) {
         this.treatmentsCollection = treatmentsCollection;
     }
 
@@ -113,5 +113,5 @@ public class HarvestLevels implements Serializable {
     public String toString() {
         return "beans.HarvestLevels[ harvestLevelsPK=" + harvestLevelsPK + " ]";
     }
-    
+
 }

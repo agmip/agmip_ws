@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.ws.rs.core.UriBuilder;
 import javax.persistence.EntityManager;
-import beans.Treatments;
+import beans.Treatment;
 import java.util.Collection;
 
 /**
@@ -119,10 +119,10 @@ public class HarvestLevelsConverter {
      * @return value for treatmentsCollection
      */
     @XmlElement
-    public TreatmentssConverter getTreatmentsCollection() {
+    public TreatmentsConverter getTreatmentsCollection() {
         if (expandLevel > 0) {
             if (entity.getTreatmentsCollection() != null) {
-                return new TreatmentssConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
+                return new TreatmentsConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
             }
         }
         return null;
@@ -133,7 +133,7 @@ public class HarvestLevelsConverter {
      *
      * @param value the value to set
      */
-    public void setTreatmentsCollection(TreatmentssConverter value) {
+    public void setTreatmentsCollection(TreatmentsConverter value) {
         entity.setTreatmentsCollection((value != null) ? value.getEntities() : null);
     }
 
@@ -177,11 +177,11 @@ public class HarvestLevelsConverter {
      * @return an resolved entity
      */
     public HarvestLevels resolveEntity(EntityManager em) {
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> newtreatmentsCollection = new java.util.ArrayList<Treatments>();
+        Collection<Treatment> treatmentsCollection = entity.getTreatmentsCollection();
+        Collection<Treatment> newtreatmentsCollection = new java.util.ArrayList<Treatment>();
         if (treatmentsCollection != null) {
-            for (Treatments item : treatmentsCollection) {
-                newtreatmentsCollection.add(em.getReference(Treatments.class, item.getTreatmentsPK()));
+            for (Treatment item : treatmentsCollection) {
+                newtreatmentsCollection.add(em.getReference(Treatment.class, item.getTreatmentPK()));
             }
         }
         entity.setTreatmentsCollection(newtreatmentsCollection);

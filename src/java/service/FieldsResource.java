@@ -1,198 +1,120 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
-import beans.Fields;
+import beans.Field;
+import java.util.Collection;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.WebApplicationException;
-import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
-import beans.Treatments;
-import java.util.Collection;
+import beans.Treatment;
 import converter.FieldsConverter;
+import converter.FieldConverter;
 import com.sun.jersey.api.core.ResourceContext;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
+@Path("/fields/")
 public class FieldsResource {
     @Context
     protected ResourceContext resourceContext;
     @Context
     protected UriInfo uriInfo;
-    protected Integer id2;
-    protected Integer id1;
 
     /** Creates a new instance of FieldsResource */
     public FieldsResource() {
     }
 
-    public void setId1(Integer id1) {
-        this.id1 = id1;
-    }
-
-    public void setId2(Integer id2) {
-        this.id2 = id2;
-    }
-
     /**
-     * Get method for retrieving an instance of Fields identified by id in XML format.
+     * Get method for retrieving a collection of Field instance in XML format.
      *
-     * @param id identifier for the entity
      * @return an instance of FieldsConverter
      */
     @GET
     @Produces({"application/xml", "application/json"})
-    public FieldsConverter get(@QueryParam("expandLevel")
-            @DefaultValue("1") int expandLevel) {
+    public FieldsConverter get(@QueryParam("start")
+            @DefaultValue("0") int start, @QueryParam("max")
+            @DefaultValue("10") int max, @QueryParam("expandLevel")
+            @DefaultValue("1") int expandLevel, @QueryParam("query")
+            @DefaultValue("SELECT e FROM Field e") String query) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
             persistenceSvc.beginTx();
-            return new FieldsConverter(getEntity(), uriInfo.getAbsolutePath(), expandLevel);
+            return new FieldsConverter(getEntities(start, max, query), uriInfo.getAbsolutePath(), expandLevel);
         } finally {
-            PersistenceService.getInstance().close();
+            persistenceSvc.commitTx();
+            persistenceSvc.close();
         }
     }
 
     /**
-     * Put method for updating an instance of Fields identified by id using XML as the input format.
+     * Post method for creating an instance of Field using XML as the input format.
      *
-     * @param id identifier for the entity
-     * @param data an FieldsConverter entity that is deserialized from a XML stream
+     * @param data an FieldConverter entity that is deserialized from an XML stream
+     * @return an instance of FieldConverter
      */
-    @PUT
+    @POST
     @Consumes({"application/xml", "application/json"})
-    public void put(FieldsConverter data) {
+    public Response post(FieldConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
             persistenceSvc.beginTx();
             EntityManager em = persistenceSvc.getEntityManager();
-            updateEntity(getEntity(), data.resolveEntity(em));
+            Field entity = data.resolveEntity(em);
+            createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getFieldPK().getExpId() + "," + entity.getFieldPK().getFl() + "/")).build();
         } finally {
             persistenceSvc.close();
         }
     }
 
     /**
-     * Delete method for deleting an instance of Fields identified by id.
+     * Returns a dynamic instance of FieldResource used for entity navigation.
      *
-     * @param id identifier for the entity
+     * @return an instance of FieldResource
      */
-    @DELETE
-    public void delete() {
-        PersistenceService persistenceSvc = PersistenceService.getInstance();
-        try {
-            persistenceSvc.beginTx();
-            deleteEntity(getEntity());
-            persistenceSvc.commitTx();
-        } finally {
-            persistenceSvc.close();
-        }
+    @Path("{expId},{fl}/")
+    public FieldResource getFieldsResource(@PathParam("expId") Integer id1, @PathParam("fl") Integer id2) {
+        FieldResource fieldsResource = resourceContext.getResource(FieldResource.class);
+        fieldsResource.setId1(id1);
+        fieldsResource.setId2(id2);
+        return fieldsResource;
     }
 
     /**
-     * Returns an instance of Fields identified by id.
+     * Returns all the entities associated with this resource.
      *
-     * @param id identifier for the entity
-     * @return an instance of Fields
+     * @return a collection of Field instances
      */
-    protected Fields getEntity() {
+    protected Collection<Field> getEntities(int start, int max, String query) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
-        try {
-            beans.FieldsPK id = new beans.FieldsPK(id1, id2);
-            return (Fields) em.createQuery("SELECT e FROM Fields e where e.fieldsPK = :fieldsPK").setParameter("fieldsPK", id).getSingleResult();
-        } catch (NoResultException ex) {
-            throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
-        }
+        return em.createQuery(query).setFirstResult(start).setMaxResults(max).getResultList();
     }
 
     /**
-     * Updates entity using data from newEntity.
+     * Persist the given entity.
      *
-     * @param entity the entity to update
-     * @param newEntity the entity containing the new data
-     * @return the updated entity
+     * @param entity the entity to persist
      */
-    private Fields updateEntity(Fields entity, Fields newEntity) {
+    protected void createEntity(Field entity) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> treatmentsCollectionNew = newEntity.getTreatmentsCollection();
-        entity = em.merge(newEntity);
-        for (Treatments value : treatmentsCollection) {
-            if (!treatmentsCollectionNew.contains(value)) {
-                throw new WebApplicationException(new Throwable("Cannot remove items from treatmentsCollection"));
+        em.persist(entity);
+        for (Treatment value : entity.getTreatmentsCollection()) {
+            Field oldEntity = value.getField();
+            value.setField(entity);
+            if (oldEntity != null) {
+                oldEntity.getTreatmentsCollection().remove(value);
             }
-        }
-        for (Treatments value : treatmentsCollectionNew) {
-            if (!treatmentsCollection.contains(value)) {
-                Fields oldEntity = value.getFields();
-                value.setFields(entity);
-                if (oldEntity != null && !oldEntity.equals(entity)) {
-                    oldEntity.getTreatmentsCollection().remove(value);
-                }
-            }
-        }
-        return entity;
-    }
-
-    /**
-     * Deletes the entity.
-     *
-     * @param entity the entity to deletle
-     */
-    private void deleteEntity(Fields entity) {
-        EntityManager em = PersistenceService.getInstance().getEntityManager();
-        if (!entity.getTreatmentsCollection().isEmpty()) {
-            throw new WebApplicationException(new Throwable("Cannot delete entity because treatmentsCollection is not empty."));
-        }
-        em.remove(entity);
-    }
-
-    /**
-     * Returns a dynamic instance of TreatmentssResource used for entity navigation.
-     *
-     * @param id identifier for the parent entity
-     * @return an instance of TreatmentssResource
-     */
-    @Path("treatmentsCollection/")
-    public TreatmentssResource getTreatmentsCollectionResource() {
-        TreatmentsCollectionResourceSub treatmentsCollectionResourceSub = resourceContext.getResource(TreatmentsCollectionResourceSub.class);
-        treatmentsCollectionResourceSub.setParent(getEntity());
-        return treatmentsCollectionResourceSub;
-    }
-
-    public static class TreatmentsCollectionResourceSub extends TreatmentssResource {
-
-        private Fields parent;
-
-        public void setParent(Fields parent) {
-            this.parent = parent;
-        }
-
-        @Override
-        protected Collection<Treatments> getEntities(int start, int max, String query) {
-            Collection<Treatments> result = new java.util.ArrayList<Treatments>();
-            int index = 0;
-            for (Treatments e : parent.getTreatmentsCollection()) {
-                if (index >= start && (index - start) < max) {
-                    result.add(e);
-                }
-                index++;
-            }
-            return result;
         }
     }
 }

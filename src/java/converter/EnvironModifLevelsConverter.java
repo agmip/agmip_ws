@@ -1,140 +1,71 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package converter;
 
-import beans.EnvironModifLevels;
-import beans.EnvironModifLevelsPK;
+import beans.EnvironModifLevel;
 import java.net.URI;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.ws.rs.core.UriBuilder;
-import javax.persistence.EntityManager;
-import beans.Treatments;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @XmlRootElement(name = "environModifLevels")
 public class EnvironModifLevelsConverter {
-    private EnvironModifLevels entity;
+    private Collection<EnvironModifLevel> entities;
+    private Collection<EnvironModifLevelConverter> items;
     private URI uri;
     private int expandLevel;
 
     /** Creates a new instance of EnvironModifLevelsConverter */
     public EnvironModifLevelsConverter() {
-        entity = new EnvironModifLevels();
     }
 
     /**
      * Creates a new instance of EnvironModifLevelsConverter.
      *
-     * @param entity associated entity
-     * @param uri associated uri
-     * @param expandLevel indicates the number of levels the entity graph should be expanded@param isUriExtendable indicates whether the uri can be extended
-     */
-    public EnvironModifLevelsConverter(EnvironModifLevels entity, URI uri, int expandLevel, boolean isUriExtendable) {
-        this.entity = entity;
-        this.uri = (isUriExtendable) ? UriBuilder.fromUri(uri).path(entity.getEnvironModifLevelsPK().getExpId() + "," + entity.getEnvironModifLevelsPK().getEm() + "/").build() : uri;
-        this.expandLevel = expandLevel;
-        getTreatmentsCollection();
-    }
-
-    /**
-     * Creates a new instance of EnvironModifLevelsConverter.
-     *
-     * @param entity associated entity
+     * @param entities associated entities
      * @param uri associated uri
      * @param expandLevel indicates the number of levels the entity graph should be expanded
      */
-    public EnvironModifLevelsConverter(EnvironModifLevels entity, URI uri, int expandLevel) {
-        this(entity, uri, expandLevel, false);
+    public EnvironModifLevelsConverter(Collection<EnvironModifLevel> entities, URI uri, int expandLevel) {
+        this.entities = entities;
+        this.uri = uri;
+        this.expandLevel = expandLevel;
+        getEnvironModifLevels();
     }
 
     /**
-     * Getter for environModifLevelsPK.
+     * Returns a collection of EnvironModifLevelConverter.
      *
-     * @return value for environModifLevelsPK
+     * @return a collection of EnvironModifLevelConverter
      */
     @XmlElement
-    public EnvironModifLevelsPK getEnvironModifLevelsPK() {
-        return (expandLevel > 0) ? entity.getEnvironModifLevelsPK() : null;
-    }
-
-    /**
-     * Setter for environModifLevelsPK.
-     *
-     * @param value the value to set
-     */
-    public void setEnvironModifLevelsPK(EnvironModifLevelsPK value) {
-        entity.setEnvironModifLevelsPK(value);
-    }
-
-    /**
-     * Getter for emName.
-     *
-     * @return value for emName
-     */
-    @XmlElement
-    public String getEmName() {
-        return (expandLevel > 0) ? entity.getEmName() : null;
-    }
-
-    /**
-     * Setter for emName.
-     *
-     * @param value the value to set
-     */
-    public void setEmName(String value) {
-        entity.setEmName(value);
-    }
-
-    /**
-     * Getter for emNotes.
-     *
-     * @return value for emNotes
-     */
-    @XmlElement
-    public String getEmNotes() {
-        return (expandLevel > 0) ? entity.getEmNotes() : null;
-    }
-
-    /**
-     * Setter for emNotes.
-     *
-     * @param value the value to set
-     */
-    public void setEmNotes(String value) {
-        entity.setEmNotes(value);
-    }
-
-    /**
-     * Getter for treatmentsCollection.
-     *
-     * @return value for treatmentsCollection
-     */
-    @XmlElement
-    public TreatmentssConverter getTreatmentsCollection() {
-        if (expandLevel > 0) {
-            if (entity.getTreatmentsCollection() != null) {
-                return new TreatmentssConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
+    public Collection<EnvironModifLevelConverter> getEnvironModifLevels() {
+        if (items == null) {
+            items = new ArrayList<EnvironModifLevelConverter>();
+        }
+        if (entities != null) {
+            items.clear();
+            for (EnvironModifLevel entity : entities) {
+                items.add(new EnvironModifLevelConverter(entity, uri, expandLevel, true));
             }
         }
-        return null;
+        return items;
     }
 
     /**
-     * Setter for treatmentsCollection.
+     * Sets a collection of EnvironModifLevelConverter.
      *
-     * @param value the value to set
+     * @param a collection of EnvironModifLevelConverter to set
      */
-    public void setTreatmentsCollection(TreatmentssConverter value) {
-        entity.setTreatmentsCollection((value != null) ? value.getEntities() : null);
+    public void setEnvironModifLevels(Collection<EnvironModifLevelConverter> items) {
+        this.items = items;
     }
 
     /**
@@ -148,44 +79,19 @@ public class EnvironModifLevelsConverter {
     }
 
     /**
-     * Sets the URI for this reference converter.
+     * Returns a collection EnvironModifLevel entities.
      *
-     */
-    public void setUri(URI uri) {
-        this.uri = uri;
-    }
-
-    /**
-     * Returns the EnvironModifLevels entity.
-     *
-     * @return an entity
+     * @return a collection of EnvironModifLevel entities
      */
     @XmlTransient
-    public EnvironModifLevels getEntity() {
-        if (entity.getEnvironModifLevelsPK() == null) {
-            EnvironModifLevelsConverter converter = UriResolver.getInstance().resolve(EnvironModifLevelsConverter.class, uri);
-            if (converter != null) {
-                entity = converter.getEntity();
+    public Collection<EnvironModifLevel> getEntities() {
+        entities = new ArrayList<EnvironModifLevel>();
+        if (items != null) {
+            for (EnvironModifLevelConverter item : items) {
+                entities.add(item.getEntity());
             }
         }
-        return entity;
-    }
-
-    /**
-     * Returns the resolved EnvironModifLevels entity.
-     *
-     * @return an resolved entity
-     */
-    public EnvironModifLevels resolveEntity(EntityManager em) {
-        Collection<Treatments> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatments> newtreatmentsCollection = new java.util.ArrayList<Treatments>();
-        if (treatmentsCollection != null) {
-            for (Treatments item : treatmentsCollection) {
-                newtreatmentsCollection.add(em.getReference(Treatments.class, item.getTreatmentsPK()));
-            }
-        }
-        entity.setTreatmentsCollection(newtreatmentsCollection);
-        return entity;
+        return entities;
     }
 
     @Override
@@ -200,10 +106,11 @@ public class EnvironModifLevelsConverter {
         if (this.expandLevel != other.expandLevel) {
             return false;
         }
-        if (expandLevel <= 0) {
-            return true;
+        if (this.items.size() != other.items.size()) {
+            return false;
         }
-        if ((this.entity == null && other.entity != null) || (this.entity != null && !this.entity.equals(other.entity))) {
+        Set<EnvironModifLevelConverter> itemSet = new HashSet<EnvironModifLevelConverter>(this.items);
+        if (!itemSet.containsAll(other.items)) {
             return false;
         }
         return true;
@@ -212,9 +119,10 @@ public class EnvironModifLevelsConverter {
     @Override
     public int hashCode() {
         int hash = uri == null ? 0 : uri.hashCode();
-        if (expandLevel <= 0) {
-            return hash + 37 * expandLevel;
+        hash = 37 * hash + expandLevel;
+        for (EnvironModifLevelConverter item : this.items) {
+            hash = 37 * hash + item.hashCode();
         }
-        return hash + 37 * (expandLevel + 37 * (entity == null ? 0 : entity.hashCode()));
+        return hash;
     }
 }

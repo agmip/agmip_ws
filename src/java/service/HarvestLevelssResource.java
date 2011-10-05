@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
-import beans.Treatments;
+import beans.Treatment;
 import converter.HarvestLevelssConverter;
 import converter.HarvestLevelsConverter;
 import com.sun.jersey.api.core.ResourceContext;
@@ -113,7 +113,7 @@ public class HarvestLevelssResource {
     protected void createEntity(HarvestLevels entity) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         em.persist(entity);
-        for (Treatments value : entity.getTreatmentsCollection()) {
+        for (Treatment value : entity.getTreatmentsCollection()) {
             HarvestLevels oldEntity = value.getHarvestLevels();
             value.setHarvestLevels(entity);
             if (oldEntity != null) {

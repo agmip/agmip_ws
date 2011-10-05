@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
-import beans.Treatments;
+import beans.Treatment;
 import converter.UserssConverter;
 import converter.UsersConverter;
 import com.sun.jersey.api.core.ResourceContext;
@@ -124,7 +124,7 @@ public class UserssResource {
         entity.setUserId(null);
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         em.persist(entity);
-        for (Treatments value : entity.getTreatmentsCollection()) {
+        for (Treatment value : entity.getTreatmentsCollection()) {
             Users oldEntity = value.getUpdateUserId();
             value.setUpdateUserId(entity);
             if (oldEntity != null) {
