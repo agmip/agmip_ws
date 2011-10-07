@@ -1,5 +1,9 @@
 nbproject/private
 nbproject/private/*
 setup/glassfish-resources.xml
+build
+build/*
+dist
+dist/*
 
 .DS_Store
