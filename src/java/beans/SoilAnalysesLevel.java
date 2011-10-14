@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @Entity
 @Table(name = "soil_analyses_levels")

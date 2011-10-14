@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fonini
  */
 @Entity
-@Table(name = "weather_daily", catalog = "agmipapi", schema = "")
+@Table(name = "weather_daily")
 @XmlRootElement
 public class WeatherDaily implements Serializable {
 	private static final long serialVersionUID = 1L;

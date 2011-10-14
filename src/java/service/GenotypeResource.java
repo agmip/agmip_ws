@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import beans.Genotype;
@@ -25,7 +21,7 @@ import com.sun.jersey.api.core.ResourceContext;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 public class GenotypeResource {
     @Context
@@ -116,7 +112,7 @@ public class GenotypeResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         try {
             beans.GenotypePK id = new beans.GenotypePK(id1, id2);
-            return (Genotype) em.createQuery("SELECT e FROM Genotype e where e.genotypesPK = :genotypesPK").setParameter("genotypesPK", id).getSingleResult();
+            return (Genotype) em.createQuery("SELECT e FROM Genotype e where e.genotypePK = :genotypePK").setParameter("genotypePK", id).getSingleResult();
         } catch (NoResultException ex) {
             throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
         }

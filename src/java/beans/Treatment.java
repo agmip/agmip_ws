@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fonini
  */
 @Entity
-@Table(name = "treatments", catalog = "agmipapi", schema = "")
+@Table(name = "treatments")
 @XmlRootElement
 public class Treatment implements Serializable {
 	private static final long serialVersionUID = 1L;

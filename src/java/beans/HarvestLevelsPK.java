@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import java.io.Serializable;
@@ -12,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @Embeddable
 public class HarvestLevelsPK implements Serializable {
@@ -77,5 +73,5 @@ public class HarvestLevelsPK implements Serializable {
     public String toString() {
         return "beans.HarvestLevelsPK[ expId=" + expId + ", ha=" + ha + " ]";
     }
-    
+
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import javax.ws.rs.Consumes;
@@ -15,24 +11,24 @@ import javax.ws.rs.DELETE;
  *
  * @author fonini
  */
-public class SaveWeatherDailyResource {
+public class WeatherDailyServiceResource {
 
 	private String id;
 
-	/** Creates a new instance of SaveWeatherDailyResource */
-	private SaveWeatherDailyResource(String id) {
+	/** Creates a new instance of WeatherDailyServiceResource */
+	private WeatherDailyServiceResource(String id) {
 		this.id = id;
 	}
 
-	/** Get instance of the SaveWeatherDailyResource */
-	public static SaveWeatherDailyResource getInstance(String id) {
+	/** Get instance of the WeatherDailyServiceResource */
+	public static WeatherDailyServiceResource getInstance(String id) {
 		// The user may use some kind of persistence mechanism
-		// to store and restore instances of SaveWeatherDailyResource class.
-		return new SaveWeatherDailyResource(id);
+		// to store and restore instances of WeatherDailyServiceResource class.
+		return new WeatherDailyServiceResource(id);
 	}
 
 	/**
-	 * Retrieves representation of an instance of service.SaveWeatherDailyResource
+	 * Retrieves representation of an instance of service.WeatherDailyServiceResource
 	 * @return an instance of java.lang.String
 	 */
 	@GET
@@ -44,7 +40,7 @@ public class SaveWeatherDailyResource {
 	}
 
 	/**
-	 * PUT method for updating or creating an instance of SaveWeatherDailyResource
+	 * PUT method for updating or creating an instance of WeatherDailyServiceResource
 	 * @param content representation for the resource
 	 * @return an HTTP response with content of the updated or created resource.
 	 */
@@ -54,7 +50,7 @@ public class SaveWeatherDailyResource {
 	}
 
 	/**
-	 * DELETE method for resource SaveWeatherDailyResource
+	 * DELETE method for resource WeatherDailyServiceResource
 	 */
 	@DELETE
 	public void delete() {

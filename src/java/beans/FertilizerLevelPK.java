@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import java.io.Serializable;
@@ -12,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @Embeddable
 public class FertilizerLevelPK implements Serializable {

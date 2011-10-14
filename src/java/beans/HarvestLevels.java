@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import java.io.Serializable;
@@ -21,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @Entity
 @Table(name = "harvest_levels")
