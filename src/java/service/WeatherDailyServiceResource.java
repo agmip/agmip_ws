@@ -35,8 +35,7 @@ public class WeatherDailyServiceResource {
     @Produces("application/json")
 	public String getJson() {
 		//TODO return proper representation object
-		//throw new UnsupportedOperationException();
-		return "Teste";
+		return "Use the weatherDaily web service to get data";
 	}
 
 	/**
