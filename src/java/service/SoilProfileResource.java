@@ -47,7 +47,7 @@ public class SoilProfileResource {
 	@GET
     @Produces({"application/xml", "application/json"})
 	public SoilProfileConverter get(@QueryParam("expandLevel")
-            @DefaultValue("2") int expandLevel) {
+            @DefaultValue("1") int expandLevel) {
 		PersistenceService persistenceSvc = PersistenceService.getInstance();
 		try {
 			persistenceSvc.beginTx();
