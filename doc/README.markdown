@@ -1,7 +1,7 @@
 # Accessing the Web Service through the PHP tool #
 
 The AgMIP Web Service allows data sending through the PHP tool, in JSON format, only making a few changes in the array keys.
-At the moment, the Web Service suports directly sending from the PHP tool of the soil and weather files. The experimental files can be sent in XML or JSON formats, previously converted, through a HTTP request or from the [Web Service Interface](http://java.open.agmip.org/AgMIPWS).
+At the moment, the Web Service supports directly sending from the PHP tool of the soil and weather files. The experimental files can be sent in XML or JSON formats, previously converted, through a HTTP request or from the [Web Service Interface](http://java.open.agmip.org/AgMIPWS).
 
 
 ## Weather Files ##
