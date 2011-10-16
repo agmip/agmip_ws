@@ -73,11 +73,16 @@ $path = 'java.open.agmip.org/AgMIPWS2/';
 			foreach ($ret['site'] as $site){
 				// Profile
 				$profile = array();
-				$profile['people'] = $site['pedon'];
+				
+				$profile['soilId'] = $site['pedon'];
+				$profile['address'] = $ret['address'];
 				$profile['site'] = $site['ssite'];
 				$profile['soillat'] = $site['slat'];
 				$profile['soillong'] = $site['slong'];
 				$profile['salb'] = $site['salb'];
+				$profile['slu1'] = $site['u'];
+				$profile['sldr'] = $site['swcon'];
+				$profile['slro'] = $site['cn2'];
 				$profile['slnf'] = $site['slnf'];
 				$profile['smhb'] = $site['smhb'];
 				$profile['smpx'] = $site['smpx'];
@@ -85,23 +90,60 @@ $path = 'java.open.agmip.org/AgMIPWS2/';
 				
 				// Layers
 				foreach ($site['layer1'] as $lay){
-					$layerPK = array();
+					$layer1PK = array();
 					// Start temp
-					$layerPK['soilId'] = 'aa';
-					$layerPK['soilFileId'] = 'aa';
-					$layerPK['sllb'] = ++$c;
+					$layer1PK['soilId'] = $site['pedon'];
+					$layer1PK['soilFileId'] = 'aa';
+					$layer1PK['sllb'] = ++$c;
 					// End temp
 				
-					$layer['soilProfileLayerPK'] = $layerPK;
+					$layer1['soilProfileLayerPK'] = $layer1PK;
 					
-					$layer['slmh'] = $lay['mh'];
-					$layer['slll'] = $lay['ll'];
-					$layer['sldul'] = $lay['dul'];
-					$layer['slsat'] = $lay['sat'];
-					$layer['slcec'] = $lay['cec'];
-					$layer['sadc'] = $lay['sadc'];
+					$layer1['slmh'] = $lay['mh'];
+					$layer1['slll'] = $lay['ll'];
+					$layer1['sldul'] = $lay['dul'];
+					$layer1['slsat'] = $lay['sat'];
+					$layer1['slrgf'] = $lay['rgf'];
+					$layer1['sbdm'] = $lay['db'];
+					$layer1['sloc'] = $lay['oc'];
+					$layer1['slcl'] = $lay['clay'];
+					$layer1['slsi'] = $lay['silt'];
+					$layer1['slcf'] = $lay['stones'];
+					$layer1['slni'] = $lay['totn'];
+					$layer1['slcec'] = $lay['cec'];
+					$layer1['sadc'] = $lay['sadc'];
 				
-					$profile['soilProfileLayerCollection'][] = $layer;
+					$profile['soilProfileLayerCollection'][] = $layer1;
+				}
+				
+				foreach ($site['layer2'] as $lay){
+					$layer2PK = array();
+					// Start temp
+					$layer2PK['soildId'] = $site['pedon'];
+					$layer2PK['soilFileId'] = 'bb';
+					$layer2PK['sllb'] = ++$c;
+					// End temp
+					
+					$layer2['soilProfilePK'] = $layer2PK;
+					
+					$layer2['slpx'] = $lay['extp'];
+					$layer2['slpt'] = $lay['totp'];
+					$layer2['slpo'] = $lay['orgp'];
+					$layer2['slca'] = $lay['caco'];
+					$layer2['slal'] = $lay['extal'];
+					$layer2['slfe'] = $lay['extfe'];
+					$layer2['slmn'] = $lay['extmn'];
+					$layer2['slbs'] = $lay['totbas'];
+					$layer2['slpa'] = $lay['pterma'];
+					$layer2['slpb'] = $lay['ptermb'];
+					$layer2['slke'] = $lay['exk'];
+					$layer2['slmg'] = $lay['exmg'];
+					$layer2['slna'] = $lay['exna'];
+					$layer2['slsu'] = $lay['exts'];
+					$layer2['slec'] = $lay['slec'];
+					$layer2['slca'] = $lay['slca'];
+					
+					$profile['soilProfileLayerCollection'][] = $layer2;
 				}
 				
 				$profiles[] = json_encode($profile);
