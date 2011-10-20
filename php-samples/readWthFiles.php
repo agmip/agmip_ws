@@ -73,6 +73,7 @@ $path = 'java.open.agmip.org/AgMIPWS2/';
 			
 			// TODO The Weather Source has a primary key (WID). I've generated it with an auto-increment in the web service, i don't now if this is right
 			$source['fdName'] = $ret['inste'];
+			$source['wstaId'] = $ret['inste'].$ret['sitee'];
 			$source['site'] = $ret['sitee'];
 			$source['lat'] = $ret['xlat'];
 			$source['lon'] = $ret['xlong'];
