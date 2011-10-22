@@ -1,13 +1,17 @@
 package converter;
 
+import beans.WeatherDaily;
 import beans.WeatherSource;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.ws.rs.core.UriBuilder;
 import javax.persistence.EntityManager;
+import service.PersistenceService;
 
 /**
  *
@@ -18,6 +22,8 @@ public class WeatherSourceConverter {
 	private WeatherSource entity;
 	private URI uri;
 	private int expandLevel;
+
+	private Collection<WeatherDaily> teste;
 
 	/** Creates a new instance of WeatherSourceConverter */
 	public WeatherSourceConverter() {

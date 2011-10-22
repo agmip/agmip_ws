@@ -89,6 +89,7 @@ public class WeatherSourcesResource {
 	public WeatherSourceResource getWeatherSourcesResource(@PathParam("wid") Integer id) {
 		WeatherSourceResource weatherSourcesResource = resourceContext.getResource(WeatherSourceResource.class);
 		weatherSourcesResource.setId(id);
+		System.out.println("chamou");
 		return weatherSourcesResource;
 	}
 
