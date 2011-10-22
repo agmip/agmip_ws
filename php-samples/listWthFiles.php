@@ -1,6 +1,6 @@
 <?php include("parts_checkSession.php"); 
 include('RestRequest.php');
-$path = 'java.open.agmip.org/AgMIPWS2/AgMIPWS2/';
+$path = 'java.open.agmip.org/AgMIPWS2/';
 
 function formatStr($format, $str) {
 	// check if is not unuse value; if so, change to text format output

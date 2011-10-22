@@ -126,11 +126,9 @@ public class ExperimentsResource {
      */
     protected void createEntity(Experiment entity) {
         entity.setExpId(null);
-		System.out.println("chamou antes");
         EntityManager em = PersistenceService.getInstance().getEntityManager();
 
         em.persist(entity);
-		System.out.println("chamou depois");
 
 		Collection<Treatment> treatments = new ArrayList<Treatment>();
 
@@ -138,8 +136,6 @@ public class ExperimentsResource {
 		for (Treatment treatment : entity.getTreatmentsCollection()){
 			treatment.getTreatmentPK().setExpId(entity.getExpId());
 			treatment.setExperiment(entity);
-
-
 
 			if (treatment.getField() != null){
 				System.out.println("FIELDS");
@@ -259,7 +255,7 @@ public class ExperimentsResource {
 				treatment.setSoilAnalysesLevel(soilAnalyses);
 			}
 
-		
+
 
 
 
