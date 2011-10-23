@@ -45,7 +45,7 @@ function writeSoilFile($profile){
 	$smke = str_pad($profile->smke, 6, " ", 0);
 
 	$str .= $scom . $salb . $slu1 . $sldr . $slro . $slnf . $slpf . $smhb . $smpx . $smke . "\r\n";
-	$str .= '@  SLB  SLMH  SLLL  SDUL  SSAT  SRGF  SSKS  SBDM  SLOC  SLCL  SLSI  SLCF  SLNI  SLHW  SLHB  SCEC  SADC'."\r\n";
+	$str .= '@  SLB  SLMH  SLLL  SDUL  SSAT  SRGF  SSKS  SBDM  SLOC  SLCL  SLSI  SLCF  SLNI  SLHW  SLHB  SCEC  SADC';
 	
 	foreach ($profile->soilProfileLayerCollection->soilProfileLayer as $layer){
 		$slb = str_pad('8', 6, " ", 0);
@@ -66,7 +66,7 @@ function writeSoilFile($profile){
 		$scec = str_pad(formatStr(" %3.1f", "61.7"), 6, " ", 0);
 		$sadc = str_pad('-99', 6, " ", 0);
 	
-		$str .= $slb . $slmh . $slll . $sdul . $ssat . $srgf . $ssks . $sbdm . $sloc . $slcl . $slsi . $slcf . $slni . $slhw . $slhb . $scec . $sadc . "\r\n";
+		$str .= "\r\n".$slb . $slmh . $slll . $sdul . $ssat . $srgf . $ssks . $sbdm . $sloc . $slcl . $slsi . $slcf . $slni . $slhw . $slhb . $scec . $sadc;
 	}
 
 	echo $str;
@@ -87,7 +87,7 @@ if (isset($_POST['sid'])){
 	
 	header('Content-type:application/force-download');
 	header('Content-Transfer-Encoding:Binary');
-	header('Content-Disposition:attachment;filename=test.soil');
+	header('Content-Disposition:attachment;filename=test.sol');
 	
 	echo writeSoilFile($profile);
 	die();
@@ -133,7 +133,7 @@ if (isset($_POST['sid'])){
 	<?php include("parts_header.php"); ?>
 	<div id="content">
 		<p class="style5">
-			<span><input id="addNewFile" name="addNewFile" type="button" value="Add New File" onclick="goto('inputWthFiles.php')"/></span>
+			<span><input id="addNewFile" name="addNewFile" type="button" value="Add New File" onclick="goto('inputSoilFiles.php')"/></span>
 			<span><input id="backToMenu" name="backToMenu" type="button" value="Back To Menu" onclick="goto('menu.php')"/></span>
 			<span><input id="GoToMap" name="GoToMap" type="button" value="Switch To Map" onclick="goto('listByMap.php')"/></span>
 		</p>

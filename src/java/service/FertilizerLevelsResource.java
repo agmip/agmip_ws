@@ -64,6 +64,7 @@ public class FertilizerLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(FertilizerLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class FertilizerLevelsResource {
             FertilizerLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getFertilizerLevelPK().getExpId() + "," + entity.getFertilizerLevelPK().getFe() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getFertilizerLevelPK().getExpId() + "," + entity.getFertilizerLevelPK().getFe() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

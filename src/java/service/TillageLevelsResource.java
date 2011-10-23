@@ -64,6 +64,7 @@ public class TillageLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(TillageLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class TillageLevelsResource {
             TillageLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getTillageLevelPK().getExpId() + "," + entity.getTillageLevelPK().getTi() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getTillageLevelPK().getExpId() + "," + entity.getTillageLevelPK().getTi() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

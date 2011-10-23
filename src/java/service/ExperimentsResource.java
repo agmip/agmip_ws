@@ -77,6 +77,7 @@ public class ExperimentsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(ExperimentConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -86,7 +87,7 @@ public class ExperimentsResource {
 			createEntity(entity);
 			persistenceSvc.commitTx();
 
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getExpId() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getExpId() + "/")).entity(entity).build();
         }
 		catch(ConstraintViolationException e){
 			System.out.println(e.getConstraintViolations());
@@ -133,135 +134,133 @@ public class ExperimentsResource {
 		Collection<Treatment> treatments = new ArrayList<Treatment>();
 
 		// Iterate over the treatments setting the PK
-		for (Treatment treatment : entity.getTreatmentsCollection()){
-			treatment.getTreatmentPK().setExpId(entity.getExpId());
-			treatment.setExperiment(entity);
+		if (entity.getTreatmentsCollection() != null){
+			for (Treatment treatment : entity.getTreatmentsCollection()){
+				treatment.getTreatmentPK().setExpId(entity.getExpId());
+				treatment.setExperiment(entity);
 
-			if (treatment.getField() != null){
-				System.out.println("FIELDS");
-				// Set the Experiment ID to the Field
-				treatment.getField().getFieldPK().setExpId(entity.getExpId());
-				// Persists the Field
-				Field field = treatment.getField();
-				em.persist(field);
-				treatment.setField(field);
+				if (treatment.getField() != null){
+					System.out.println("FIELDS");
+					// Set the Experiment ID to the Field
+					treatment.getField().getFieldPK().setExpId(entity.getExpId());
+					// Persists the Field
+					Field field = treatment.getField();
+					em.persist(field);
+					treatment.setField(field);
+				}
+
+				if (treatment.getGenotype() != null){
+					System.out.println(treatment.getGenotype());
+					System.out.println(treatment.getGenotype().getClass());
+					System.out.println("GENOTYPES");
+					// Set the Experiment ID to the Genotype
+					treatment.getGenotype().getGenotypePK().setExpId(entity.getExpId());
+					// Persists the Genotype
+					Genotype genotype = treatment.getGenotype();
+					em.persist(genotype);
+					treatment.setGenotype(genotype);
+				}
+
+				if (treatment.getTillageLevels() != null){
+					System.out.println("TILLAGE LEVELS");
+					// Set the Experiment ID to the TillageLevel
+					treatment.getTillageLevels().getTillageLevelPK().setExpId(entity.getExpId());
+					// Persists the TillageLevel
+					TillageLevel tillageLevel = treatment.getTillageLevels();
+					em.persist(tillageLevel);
+					treatment.setTillageLevels(tillageLevel);
+				}
+
+				if (treatment.getEnvironModifLevels() != null){
+					System.out.println("ENVIRON MODIF LEVELS");
+					// Set the Experiment ID to the EnvironModifLevel
+					treatment.getEnvironModifLevels().getEnvironModifLevelPK().setExpId(entity.getExpId());
+					// Persists the EnvironModifLevel
+					EnvironModifLevel environModifLevel = treatment.getEnvironModifLevels();
+					em.persist(environModifLevel);
+					treatment.setEnvironModifLevels(environModifLevel);
+				}
+
+
+				if (treatment.getFertilizerLevels() != null){
+					System.out.println("FERTILIZER LEVELS");
+					// Set the Experiment ID to the FertilizerLevel
+					treatment.getFertilizerLevels().getFertilizerLevelPK().setExpId(entity.getExpId());
+					// Persists the FertilizerLevel
+					FertilizerLevel fertilizerLevel = treatment.getFertilizerLevels();
+					em.persist(fertilizerLevel);
+					treatment.setFertilizerLevels(fertilizerLevel);
+				}
+
+				if (treatment.getInitialConditionLevel() != null){
+					System.out.println("INITIAL CONDITION LEVELS");
+					// Set the Experiment ID to the InitialConditionLevel
+					treatment.getInitialConditionLevel().getInitialConditionLevelPK().setExpId(entity.getExpId());
+					// Persists the InitialConditionLevel
+					InitialConditionLevel initialConditionLevel = treatment.getInitialConditionLevel();
+					em.persist(initialConditionLevel);
+					treatment.setInitialConditionLevel(initialConditionLevel);
+				}
+
+
+				if (treatment.getIrrigationLevel() != null){
+					System.out.println("IRRIGATION LEVELS");
+					// Set the Experiment ID to the IrrigationLevel
+					treatment.getIrrigationLevel().getIrrigationLevelPK().setExpId(entity.getExpId());
+					// Persists the IrrigationLevel
+					IrrigationLevel irrigationLevel = treatment.getIrrigationLevel();
+					em.persist(irrigationLevel);
+					treatment.setIrrigationLevel(irrigationLevel);
+				}
+
+
+				if (treatment.getMulchLevels() != null){
+					System.out.println("MULCH LEVELS");
+					// Set the Experiment ID to the MulchLevel
+					treatment.getMulchLevels().getMulchLevelsPK().setExpId(entity.getExpId());
+					// Persists the MulchLevel
+					MulchLevel mulchLevel= treatment.getMulchLevels();
+					em.persist(mulchLevel);
+					treatment.setMulchLevels(mulchLevel);
+				}
+
+
+				if (treatment.getOrganicMaterialLevel() != null){
+					System.out.println("ORGANIC MATERIAL LEVELS");
+					// Set the Experiment ID to the OrganicMaterialLevel
+					treatment.getOrganicMaterialLevel().getOrganicMaterialLevelPK().setExpId(entity.getExpId());
+					// Persists the OrganicMaterialLevel
+					OrganicMaterialLevel organicMaterialLevel = treatment.getOrganicMaterialLevel();
+					em.persist(organicMaterialLevel);
+					treatment.setOrganicMaterialLevel(organicMaterialLevel);
+				}
+
+
+				if (treatment.getPlanting() != null){
+					System.out.println("PLANTINGS");
+					// Set the Experiment ID to the Plantings
+					treatment.getPlanting().getPlantingPK().setExpId(entity.getExpId());
+					// Persists the Plantings
+					Planting planting = treatment.getPlanting();
+					em.persist(planting);
+					treatment.setPlanting(planting);
+				}
+
+
+				if (treatment.getSoilAnalysesLevel() != null){
+					System.out.println("SOIL ANALYSES");
+					// Set the Experiment ID to the SoilAnalysesLevels
+					treatment.getSoilAnalysesLevel().getSoilAnalysesLevelPK().setExpId(entity.getExpId());
+					// Persists the SoilAnalysesLevels
+					SoilAnalysesLevel soilAnalyses = treatment.getSoilAnalysesLevel();
+					em.persist(soilAnalyses);
+					treatment.setSoilAnalysesLevel(soilAnalyses);
+				}
+
+				treatments.add(treatment);
 			}
 
-			if (treatment.getGenotype() != null){
-				System.out.println(treatment.getGenotype());
-				System.out.println(treatment.getGenotype().getClass());
-				System.out.println("GENOTYPES");
-				// Set the Experiment ID to the Genotype
-				treatment.getGenotype().getGenotypePK().setExpId(entity.getExpId());
-				// Persists the Genotype
-				Genotype genotype = treatment.getGenotype();
-				em.persist(genotype);
-				treatment.setGenotype(genotype);
-			}
-
-			if (treatment.getTillageLevels() != null){
-				System.out.println("TILLAGE LEVELS");
-				// Set the Experiment ID to the TillageLevel
-				treatment.getTillageLevels().getTillageLevelPK().setExpId(entity.getExpId());
-				// Persists the TillageLevel
-				TillageLevel tillageLevel = treatment.getTillageLevels();
-				em.persist(tillageLevel);
-				treatment.setTillageLevels(tillageLevel);
-			}
-
-			if (treatment.getEnvironModifLevels() != null){
-				System.out.println("ENVIRON MODIF LEVELS");
-				// Set the Experiment ID to the EnvironModifLevel
-				treatment.getEnvironModifLevels().getEnvironModifLevelPK().setExpId(entity.getExpId());
-				// Persists the EnvironModifLevel
-				EnvironModifLevel environModifLevel = treatment.getEnvironModifLevels();
-				em.persist(environModifLevel);
-				treatment.setEnvironModifLevels(environModifLevel);
-			}
-
-
-			if (treatment.getFertilizerLevels() != null){
-				System.out.println("FERTILIZER LEVELS");
-				// Set the Experiment ID to the FertilizerLevel
-				treatment.getFertilizerLevels().getFertilizerLevelPK().setExpId(entity.getExpId());
-				// Persists the FertilizerLevel
-				FertilizerLevel fertilizerLevel = treatment.getFertilizerLevels();
-				em.persist(fertilizerLevel);
-				treatment.setFertilizerLevels(fertilizerLevel);
-			}
-
-			if (treatment.getInitialConditionLevel() != null){
-				System.out.println("INITIAL CONDITION LEVELS");
-				// Set the Experiment ID to the InitialConditionLevel
-				treatment.getInitialConditionLevel().getInitialConditionLevelPK().setExpId(entity.getExpId());
-				// Persists the InitialConditionLevel
-				InitialConditionLevel initialConditionLevel = treatment.getInitialConditionLevel();
-				em.persist(initialConditionLevel);
-				treatment.setInitialConditionLevel(initialConditionLevel);
-			}
-
-
-			if (treatment.getIrrigationLevel() != null){
-				System.out.println("IRRIGATION LEVELS");
-				// Set the Experiment ID to the IrrigationLevel
-				treatment.getIrrigationLevel().getIrrigationLevelPK().setExpId(entity.getExpId());
-				// Persists the IrrigationLevel
-				IrrigationLevel irrigationLevel = treatment.getIrrigationLevel();
-				em.persist(irrigationLevel);
-				treatment.setIrrigationLevel(irrigationLevel);
-			}
-
-
-			if (treatment.getMulchLevels() != null){
-				System.out.println("MULCH LEVELS");
-				// Set the Experiment ID to the MulchLevel
-				treatment.getMulchLevels().getMulchLevelsPK().setExpId(entity.getExpId());
-				// Persists the MulchLevel
-				MulchLevel mulchLevel= treatment.getMulchLevels();
-				em.persist(mulchLevel);
-				treatment.setMulchLevels(mulchLevel);
-			}
-
-
-			if (treatment.getOrganicMaterialLevel() != null){
-				System.out.println("ORGANIC MATERIAL LEVELS");
-				// Set the Experiment ID to the OrganicMaterialLevel
-				treatment.getOrganicMaterialLevel().getOrganicMaterialLevelPK().setExpId(entity.getExpId());
-				// Persists the OrganicMaterialLevel
-				OrganicMaterialLevel organicMaterialLevel = treatment.getOrganicMaterialLevel();
-				em.persist(organicMaterialLevel);
-				treatment.setOrganicMaterialLevel(organicMaterialLevel);
-			}
-
-
-			if (treatment.getPlanting() != null){
-				System.out.println("PLANTINGS");
-				// Set the Experiment ID to the Plantings
-				treatment.getPlanting().getPlantingPK().setExpId(entity.getExpId());
-				// Persists the Plantings
-				Planting planting = treatment.getPlanting();
-				em.persist(planting);
-				treatment.setPlanting(planting);
-			}
-
-
-			if (treatment.getSoilAnalysesLevel() != null){
-				System.out.println("SOIL ANALYSES");
-				// Set the Experiment ID to the SoilAnalysesLevels
-				treatment.getSoilAnalysesLevel().getSoilAnalysesLevelPK().setExpId(entity.getExpId());
-				// Persists the SoilAnalysesLevels
-				SoilAnalysesLevel soilAnalyses = treatment.getSoilAnalysesLevel();
-				em.persist(soilAnalyses);
-				treatment.setSoilAnalysesLevel(soilAnalyses);
-			}
-
-
-
-
-
-			treatments.add(treatment);
+			entity.setTreatmentsCollection(treatments);
 		}
-
-		entity.setTreatmentsCollection(treatments);
     }
 }

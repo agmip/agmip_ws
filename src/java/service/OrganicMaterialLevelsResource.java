@@ -64,6 +64,7 @@ public class OrganicMaterialLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(OrganicMaterialLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class OrganicMaterialLevelsResource {
             OrganicMaterialLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getOrganicMaterialLevelPK().getExpId() + "," + entity.getOrganicMaterialLevelPK().getOm() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getOrganicMaterialLevelPK().getExpId() + "," + entity.getOrganicMaterialLevelPK().getOm() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

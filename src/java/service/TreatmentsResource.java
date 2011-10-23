@@ -77,6 +77,7 @@ public class TreatmentsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(TreatmentConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -85,7 +86,7 @@ public class TreatmentsResource {
             Treatment entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getTreatmentPK().getExpId() + "," + entity.getTreatmentPK().getTrno() + "," + entity.getTreatmentPK().getRp() + "," + entity.getTreatmentPK().getSq() + "," + entity.getTreatmentPK().getOp() + "," + entity.getTreatmentPK().getCo() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getTreatmentPK().getExpId() + "," + entity.getTreatmentPK().getTrno() + "," + entity.getTreatmentPK().getRp() + "," + entity.getTreatmentPK().getSq() + "," + entity.getTreatmentPK().getOp() + "," + entity.getTreatmentPK().getCo() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

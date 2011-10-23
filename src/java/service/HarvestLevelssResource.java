@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import beans.HarvestLevels;
@@ -25,7 +21,7 @@ import com.sun.jersey.api.core.ResourceContext;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @Path("/harvestLevelss/")
 public class HarvestLevelssResource {
@@ -68,6 +64,7 @@ public class HarvestLevelssResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(HarvestLevelsConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -76,7 +73,7 @@ public class HarvestLevelssResource {
             HarvestLevels entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getHarvestLevelsPK().getExpId() + "," + entity.getHarvestLevelsPK().getHa() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getHarvestLevelsPK().getExpId() + "," + entity.getHarvestLevelsPK().getHa() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

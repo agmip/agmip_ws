@@ -64,6 +64,7 @@ public class ChemicalLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(ChemicalLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class ChemicalLevelsResource {
             ChemicalLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getChemicalLevelPK().getExpId() + "," + entity.getChemicalLevelPK().getCh() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getChemicalLevelPK().getExpId() + "," + entity.getChemicalLevelPK().getCh() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

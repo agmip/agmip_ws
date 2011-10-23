@@ -64,6 +64,7 @@ public class FieldsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(FieldConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class FieldsResource {
             Field entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getFieldPK().getExpId() + "," + entity.getFieldPK().getFl() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getFieldPK().getExpId() + "," + entity.getFieldPK().getFl() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

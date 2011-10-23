@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import beans.Users;
@@ -26,7 +22,7 @@ import javax.validation.ConstraintViolationException;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
 @Path("/userss/")
 public class UserssResource {
@@ -69,20 +65,17 @@ public class UserssResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(UsersConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
             persistenceSvc.beginTx();
-			System.out.println("passou 1");
             EntityManager em = persistenceSvc.getEntityManager();
-			System.out.println("passou 2");
             Users entity = data.resolveEntity(em);
-			System.out.println("passou 3");
             createEntity(data.resolveEntity(em));
-			System.out.println("passou 4");
             persistenceSvc.commitTx();
-			System.out.println("passou 5");
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getUserId() + "/")).build();
+
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getUserId() + "/")).entity(entity).build();
         }
 		catch(ConstraintViolationException e){
 			System.out.println(e.getConstraintViolations());

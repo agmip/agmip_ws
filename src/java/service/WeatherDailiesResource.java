@@ -64,6 +64,7 @@ public class WeatherDailiesResource {
 	 */
 	@POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
 	public Response post(WeatherDailyConverter data) {
 		PersistenceService persistenceSvc = PersistenceService.getInstance();
 		try {
@@ -72,7 +73,7 @@ public class WeatherDailiesResource {
 			WeatherDaily entity = data.resolveEntity(em);
 			createEntity(data.resolveEntity(em));
 			persistenceSvc.commitTx();
-			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getWeatherDailyPK().getWid() + "," + entity.getWeatherDailyPK().getWtyr() + "," + entity.getWeatherDailyPK().getWtday() + "/")).build();
+			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getWeatherDailyPK().getWid() + "," + entity.getWeatherDailyPK().getWtyr() + "," + entity.getWeatherDailyPK().getWtday() + "/")).entity(entity).build();
 		}
 		finally {
 			persistenceSvc.close();

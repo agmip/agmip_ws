@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import javax.naming.InitialContext;
@@ -12,7 +8,7 @@ import javax.transaction.UserTransaction;
 /**
  * Utility class for dealing with persistence.
  *
- * @author wpavan
+ * @author fonini
  */
 public class PersistenceService {
 
@@ -26,8 +22,8 @@ public class PersistenceService {
     };
     private EntityManager em;
     private UserTransaction utx;
-    
-    private PersistenceService() {        
+
+    private PersistenceService() {
         try {
             this.em = (EntityManager) new InitialContext().lookup("java:comp/env/persistence/" + DEFAULT_PU);
             this.utx = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
@@ -38,13 +34,13 @@ public class PersistenceService {
 
     /**
      * Returns an instance of PersistenceService.
-     * 
+     *
      * @return an instance of PersistenceService
      */
     public static PersistenceService getInstance() {
         return instance.get();
     }
-    
+
     private static void removeInstance() {
         instance.remove();
     }

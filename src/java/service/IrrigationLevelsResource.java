@@ -64,6 +64,7 @@ public class IrrigationLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(IrrigationLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class IrrigationLevelsResource {
             IrrigationLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getIrrigationLevelPK().getExpId() + "," + entity.getIrrigationLevelPK().getIr() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getIrrigationLevelPK().getExpId() + "," + entity.getIrrigationLevelPK().getIr() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

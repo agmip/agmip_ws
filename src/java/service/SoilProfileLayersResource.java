@@ -65,6 +65,7 @@ public class SoilProfileLayersResource {
 	 */
 	@POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
 	public Response post(SoilProfileLayerConverter data) {
 		PersistenceService persistenceSvc = PersistenceService.getInstance();
 		try {
@@ -73,7 +74,7 @@ public class SoilProfileLayersResource {
 			SoilProfileLayer entity = data.resolveEntity(em);
 			createEntity(data.resolveEntity(em));
 			persistenceSvc.commitTx();
-			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getSoilProfileLayerPK().getSid() + "," + entity.getSoilProfileLayerPK().getSoilId() + "," + entity.getSoilProfileLayerPK().getSoilFileId() + "," + entity.getSoilProfileLayerPK().getSllb() + "/")).build();
+			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getSoilProfileLayerPK().getSid() + "," + entity.getSoilProfileLayerPK().getSoilId() + "," + entity.getSoilProfileLayerPK().getSoilFileId() + "," + entity.getSoilProfileLayerPK().getSllb() + "/")).entity(entity).build();
 		}
 		finally {
 			persistenceSvc.close();

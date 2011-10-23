@@ -65,6 +65,7 @@ public class GenotypesResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(GenotypeConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -74,7 +75,7 @@ public class GenotypesResource {
 			System.out.println(entity.getCulName());
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getGenotypePK().getExpId() + "," + entity.getGenotypePK().getGe() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getGenotypePK().getExpId() + "," + entity.getGenotypePK().getGe() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

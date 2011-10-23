@@ -64,6 +64,7 @@ public class EnvironModifLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(EnvironModifLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class EnvironModifLevelsResource {
             EnvironModifLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getEnvironModifLevelPK().getExpId() + "," + entity.getEnvironModifLevelPK().getEm() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getEnvironModifLevelPK().getExpId() + "," + entity.getEnvironModifLevelPK().getEm() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

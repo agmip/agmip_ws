@@ -64,6 +64,7 @@ public class SoilAnalysesLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(SoilAnalysesLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class SoilAnalysesLevelsResource {
             SoilAnalysesLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getSoilAnalysesLevelPK().getExpId() + "," + entity.getSoilAnalysesLevelPK().getSa() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getSoilAnalysesLevelPK().getExpId() + "," + entity.getSoilAnalysesLevelPK().getSa() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

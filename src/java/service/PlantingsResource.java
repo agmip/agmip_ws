@@ -64,6 +64,7 @@ public class PlantingsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(PlantingConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class PlantingsResource {
             Planting entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getPlantingPK().getExpId() + "," + entity.getPlantingPK().getPl() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getPlantingPK().getExpId() + "," + entity.getPlantingPK().getPl() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }

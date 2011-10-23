@@ -64,6 +64,7 @@ public class WeatherSourcesResource {
 	 */
 	@POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
 	public Response post(WeatherSourceConverter data) {
 		PersistenceService persistenceSvc = PersistenceService.getInstance();
 		try {
@@ -73,7 +74,7 @@ public class WeatherSourcesResource {
 
 			createEntity(data.resolveEntity(em));
 			persistenceSvc.commitTx();
-			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getWid() + "/")).build();
+			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getWid() + "/")).entity(entity).build();
 		}
 		finally {
 			persistenceSvc.close();

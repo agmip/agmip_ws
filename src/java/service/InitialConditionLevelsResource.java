@@ -64,6 +64,7 @@ public class InitialConditionLevelsResource {
      */
     @POST
     @Consumes({"application/xml", "application/json"})
+	@Produces({"application/xml", "application/json"})
     public Response post(InitialConditionLevelConverter data) {
         PersistenceService persistenceSvc = PersistenceService.getInstance();
         try {
@@ -72,7 +73,7 @@ public class InitialConditionLevelsResource {
             InitialConditionLevel entity = data.resolveEntity(em);
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getInitialConditionLevelPK().getExpId() + "," + entity.getInitialConditionLevelPK().getIc() + "/")).build();
+            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getInitialConditionLevelPK().getExpId() + "," + entity.getInitialConditionLevelPK().getIc() + "/")).entity(entity).build();
         } finally {
             persistenceSvc.close();
         }
