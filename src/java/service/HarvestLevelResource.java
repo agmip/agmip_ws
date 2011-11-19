@@ -156,8 +156,8 @@ public class HarvestLevelResource {
 		}
 		for (Treatment value : treatmentsCollectionNew) {
 			if (!treatmentsCollection.contains(value)) {
-				HarvestLevel oldEntity = value.getHarvestLevels();
-				value.setHarvestLevels(entity);
+				HarvestLevel oldEntity = value.getHarvestLevel();
+				value.setHarvestLevel(entity);
 				if (oldEntity != null && !oldEntity.equals(entity)) {
 					oldEntity.getTreatmentsCollection().remove(value);
 				}

@@ -112,8 +112,8 @@ public class FertilizerLevelsResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         em.persist(entity);
         for (Treatment value : entity.getTreatmentsCollection()) {
-            FertilizerLevel oldEntity = value.getFertilizerLevels();
-            value.setFertilizerLevels(entity);
+            FertilizerLevel oldEntity = value.getFertilizerLevel();
+            value.setFertilizerLevel(entity);
             if (oldEntity != null) {
                 oldEntity.getTreatmentsCollection().remove(value);
             }

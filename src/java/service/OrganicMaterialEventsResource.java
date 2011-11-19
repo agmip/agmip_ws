@@ -1,7 +1,6 @@
 package service;
 
 import beans.OrganicMaterialEvent;
-import beans.OrganicMaterialLevel;
 import java.util.Collection;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
@@ -16,10 +15,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.OrganicMaterialLevel;
-import converter.OrganicMaterialEventsConverter;
-import converter.OrganicMaterialEventConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.OrganicMaterialEventConverter;
+import converter.OrganicMaterialEventsConverter;
 
 /**
  *
@@ -62,8 +60,8 @@ public class OrganicMaterialEventsResource {
 	/**
 	 * Post method for creating an instance of OrganicMaterialEvents using XML as the input format.
 	 *
-	 * @param data an OrganicMaterialEventsConverter entity that is deserialized from an XML stream
-	 * @return an instance of OrganicMaterialEventsConverter
+	 * @param data an OrganicMaterialEventConverter entity that is deserialized from an XML stream
+	 * @return an instance of OrganicMaterialEventConverter
 	 */
 	@POST
     @Consumes({"application/xml", "application/json"})

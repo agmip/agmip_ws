@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -91,7 +89,6 @@ public class OrganicMaterialLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof OrganicMaterialLevel)) {
             return false;
         }
@@ -115,5 +112,4 @@ public class OrganicMaterialLevel implements Serializable {
 	public void setOrganicMaterialEventsCollection(Collection<OrganicMaterialEvent> organicMaterialEventsCollection) {
 		this.organicMaterialEventsCollection = organicMaterialEventsCollection;
 	}
-
 }

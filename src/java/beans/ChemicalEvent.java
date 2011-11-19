@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,7 +34,6 @@ public class ChemicalEvent implements Serializable {
 	@Size(max = 255)
     @Column(name = "chacd")
 	private String chacd;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "chdep")
 	private Float chdep;
 	@Column(name = "chamt")
@@ -134,7 +131,6 @@ public class ChemicalEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof ChemicalEvent)) {
 			return false;
 		}
@@ -147,7 +143,6 @@ public class ChemicalEvent implements Serializable {
 
 	@Override
 	public String toString() {
-		return "beans.ChemicalEvents[ chemicalEventPK=" + chemicalEventPK + " ]";
+		return "beans.ChemicalEvent[ chemicalEventPK=" + chemicalEventPK + " ]";
 	}
-
 }

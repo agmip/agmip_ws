@@ -134,8 +134,8 @@ public class EnvironModifLevelResource {
         }
         for (Treatment value : treatmentsCollectionNew) {
             if (!treatmentsCollection.contains(value)) {
-                EnvironModifLevel oldEntity = value.getEnvironModifLevels();
-                value.setEnvironModifLevels(entity);
+                EnvironModifLevel oldEntity = value.getEnvironModifLevel();
+                value.setEnvironModifLevel(entity);
                 if (oldEntity != null && !oldEntity.equals(entity)) {
                     oldEntity.getTreatmentsCollection().remove(value);
                 }

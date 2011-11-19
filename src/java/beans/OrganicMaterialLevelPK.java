@@ -55,7 +55,6 @@ public class OrganicMaterialLevelPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof OrganicMaterialLevelPK)) {
             return false;
         }
@@ -71,7 +70,6 @@ public class OrganicMaterialLevelPK implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.OrganicMaterialLevelsPK[ expId=" + expId + ", om=" + om + " ]";
+        return "beans.OrganicMaterialLevelPK[ expId=" + expId + ", om=" + om + " ]";
     }
-
 }

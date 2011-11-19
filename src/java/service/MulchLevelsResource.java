@@ -120,8 +120,8 @@ public class MulchLevelsResource {
 			}
 		}
 		for (Treatment value : entity.getTreatmentsCollection()) {
-			MulchLevel oldEntity = value.getMulchLevels();
-			value.setMulchLevels(entity);
+			MulchLevel oldEntity = value.getMulchLevel();
+			value.setMulchLevel(entity);
 			if (oldEntity != null) {
 				oldEntity.getTreatmentsCollection().remove(value);
 			}

@@ -161,35 +161,35 @@ public class ExperimentsResource {
 					treatment.setGenotype(genotype);
 				}
 
-				if (treatment.getTillageLevels() != null){
+				if (treatment.getTillageLevel() != null){
 					System.out.println("TILLAGE LEVELS");
 					// Set the Experiment ID to the TillageLevel
-					treatment.getTillageLevels().getTillageLevelPK().setExpId(entity.getExpId());
+					treatment.getTillageLevel().getTillageLevelPK().setExpId(entity.getExpId());
 					// Persists the TillageLevel
-					TillageLevel tillageLevel = treatment.getTillageLevels();
+					TillageLevel tillageLevel = treatment.getTillageLevel();
 					em.persist(tillageLevel);
-					treatment.setTillageLevels(tillageLevel);
+					treatment.setTillageLevel(tillageLevel);
 				}
 
-				if (treatment.getEnvironModifLevels() != null){
+				if (treatment.getEnvironModifLevel() != null){
 					System.out.println("ENVIRON MODIF LEVELS");
 					// Set the Experiment ID to the EnvironModifLevel
-					treatment.getEnvironModifLevels().getEnvironModifLevelPK().setExpId(entity.getExpId());
+					treatment.getEnvironModifLevel().getEnvironModifLevelPK().setExpId(entity.getExpId());
 					// Persists the EnvironModifLevel
-					EnvironModifLevel environModifLevel = treatment.getEnvironModifLevels();
+					EnvironModifLevel environModifLevel = treatment.getEnvironModifLevel();
 					em.persist(environModifLevel);
-					treatment.setEnvironModifLevels(environModifLevel);
+					treatment.setEnvironModifLevel(environModifLevel);
 				}
 
 
-				if (treatment.getFertilizerLevels() != null){
+				if (treatment.getFertilizerLevel() != null){
 					System.out.println("FERTILIZER LEVELS");
 					// Set the Experiment ID to the FertilizerLevel
-					treatment.getFertilizerLevels().getFertilizerLevelPK().setExpId(entity.getExpId());
+					treatment.getFertilizerLevel().getFertilizerLevelPK().setExpId(entity.getExpId());
 					// Persists the FertilizerLevel
-					FertilizerLevel fertilizerLevel = treatment.getFertilizerLevels();
+					FertilizerLevel fertilizerLevel = treatment.getFertilizerLevel();
 					em.persist(fertilizerLevel);
-					treatment.setFertilizerLevels(fertilizerLevel);
+					treatment.setFertilizerLevel(fertilizerLevel);
 				}
 
 				if (treatment.getInitialConditionLevel() != null){
@@ -214,14 +214,14 @@ public class ExperimentsResource {
 				}
 
 
-				if (treatment.getMulchLevels() != null){
+				if (treatment.getMulchLevel() != null){
 					System.out.println("MULCH LEVELS");
 					// Set the Experiment ID to the MulchLevel
-					treatment.getMulchLevels().getMulchLevelPK().setExpId(entity.getExpId());
+					treatment.getMulchLevel().getMulchLevelPK().setExpId(entity.getExpId());
 					// Persists the MulchLevel
-					MulchLevel mulchLevel= treatment.getMulchLevels();
+					MulchLevel mulchLevel= treatment.getMulchLevel();
 					em.persist(mulchLevel);
-					treatment.setMulchLevels(mulchLevel);
+					treatment.setMulchLevel(mulchLevel);
 				}
 
 

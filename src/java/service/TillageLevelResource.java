@@ -155,8 +155,8 @@ public class TillageLevelResource {
 		}
 		for (Treatment value : treatmentsCollectionNew) {
 			if (!treatmentsCollection.contains(value)) {
-				TillageLevel oldEntity = value.getTillageLevels();
-				value.setTillageLevels(entity);
+				TillageLevel oldEntity = value.getTillageLevel();
+				value.setTillageLevel(entity);
 				if (oldEntity != null && !oldEntity.equals(entity)) {
 					oldEntity.getTreatmentsCollection().remove(value);
 				}

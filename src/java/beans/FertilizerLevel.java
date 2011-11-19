@@ -33,7 +33,7 @@ public class FertilizerLevel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "fe_comments")
     private String feComments;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fertilizerLevels")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fertilizerLevel")
     private Collection<Treatment> treatmentsCollection;
 
     public FertilizerLevel() {
@@ -89,7 +89,6 @@ public class FertilizerLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof FertilizerLevel)) {
             return false;
         }
@@ -102,7 +101,7 @@ public class FertilizerLevel implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.FertilizerLevels[ fertilizerLevelPK=" + fertilizerLevelPK + " ]";
+        return "beans.FertilizerLevel[ fertilizerLevelPK=" + fertilizerLevelPK + " ]";
     }
 
 	@XmlTransient
@@ -113,5 +112,4 @@ public class FertilizerLevel implements Serializable {
 	public void setFertilizerEventsCollection(Collection<FertilizerEvent> fertilizerEventsCollection) {
 		this.fertilizerEventsCollection = fertilizerEventsCollection;
 	}
-
 }

@@ -16,7 +16,6 @@ import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.Treatment;
 import converter.ChemicalLevelConverter;
-import converter.ChemicalLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.ChemicalLevelsConverter;
 
@@ -112,8 +111,8 @@ public class ChemicalLevelsResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         em.persist(entity);
         for (Treatment value : entity.getTreatmentsCollection()) {
-            ChemicalLevel oldEntity = value.getChemicalLevels();
-            value.setChemicalLevels(entity);
+            ChemicalLevel oldEntity = value.getChemicalLevel();
+            value.setChemicalLevel(entity);
             if (oldEntity != null) {
                 oldEntity.getTreatmentsCollection().remove(value);
             }

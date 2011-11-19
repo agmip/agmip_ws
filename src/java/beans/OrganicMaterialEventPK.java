@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import java.io.Serializable;
@@ -73,7 +69,6 @@ public class OrganicMaterialEventPK implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof OrganicMaterialEventPK)) {
 			return false;
 		}
@@ -92,7 +87,6 @@ public class OrganicMaterialEventPK implements Serializable {
 
 	@Override
 	public String toString() {
-		return "beans.OrganicMaterialEventsPK[ expId=" + expId + ", om=" + om + ", omOpsNo=" + omOpsNo + " ]";
+		return "beans.OrganicMaterialEventPK[ expId=" + expId + ", om=" + om + ", omOpsNo=" + omOpsNo + " ]";
 	}
-
 }

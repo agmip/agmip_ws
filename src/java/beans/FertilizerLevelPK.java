@@ -55,7 +55,6 @@ public class FertilizerLevelPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof FertilizerLevelPK)) {
             return false;
         }
@@ -71,7 +70,6 @@ public class FertilizerLevelPK implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.FertilizerLevelsPK[ expId=" + expId + ", fe=" + fe + " ]";
+        return "beans.FertilizerLevelPK[ expId=" + expId + ", fe=" + fe + " ]";
     }
-
 }

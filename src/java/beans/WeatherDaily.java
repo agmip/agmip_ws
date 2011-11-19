@@ -19,7 +19,6 @@ public class WeatherDaily implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId
 	protected WeatherDailyPK weatherDailyPK;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "srad", precision = 12)
 	private Float srad;
 	@Column(name = "tmax", precision = 12)
@@ -440,7 +439,6 @@ public class WeatherDaily implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof WeatherDaily)) {
 			return false;
 		}
@@ -455,5 +453,4 @@ public class WeatherDaily implements Serializable {
 	public String toString() {
 		return "beans.WeatherDaily[ weatherDailyPK=" + weatherDailyPK + " ]";
 	}
-
 }

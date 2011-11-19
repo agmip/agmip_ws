@@ -17,7 +17,7 @@ import javax.persistence.EntityManager;
 import beans.Treatment;
 import beans.OrganicMaterialEvent;
 import java.util.Collection;
-import converter.OrganicMaterialLevelsConverter;
+import converter.OrganicMaterialLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.OrganicMaterialLevelConverter;
 
@@ -49,7 +49,7 @@ public class OrganicMaterialLevelResource {
 	 * Get method for retrieving an instance of OrganicMaterialLevels identified by id in XML format.
 	 *
 	 * @param id identifier for the entity
-	 * @return an instance of OrganicMaterialLevelsConverter
+	 * @return an instance of OrganicMaterialLevelConverter
 	 */
 	@GET
     @Produces({"application/xml", "application/json"})
@@ -69,7 +69,7 @@ public class OrganicMaterialLevelResource {
 	 * Put method for updating an instance of OrganicMaterialLevels identified by id using XML as the input format.
 	 *
 	 * @param id identifier for the entity
-	 * @param data an OrganicMaterialLevelsConverter entity that is deserialized from a XML stream
+	 * @param data an OrganicMaterialLevelConverter entity that is deserialized from a XML stream
 	 */
 	@PUT
     @Consumes({"application/xml", "application/json"})

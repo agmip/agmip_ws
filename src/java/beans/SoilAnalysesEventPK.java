@@ -69,7 +69,6 @@ public class SoilAnalysesEventPK implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof SoilAnalysesEventPK)) {
 			return false;
 		}
@@ -90,5 +89,4 @@ public class SoilAnalysesEventPK implements Serializable {
 	public String toString() {
 		return "beans.SoilAnalysesEventPK[ expId=" + expId + ", sa=" + sa + ", saApplNo=" + saApplNo + " ]";
 	}
-
 }

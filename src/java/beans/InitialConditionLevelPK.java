@@ -55,7 +55,6 @@ public class InitialConditionLevelPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof InitialConditionLevelPK)) {
             return false;
         }
@@ -71,7 +70,6 @@ public class InitialConditionLevelPK implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.InitialConditionLevelsPK[ expId=" + expId + ", ic=" + ic + " ]";
+        return "beans.InitialConditionLevelPK[ expId=" + expId + ", ic=" + ic + " ]";
     }
-
 }

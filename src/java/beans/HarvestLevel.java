@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -35,7 +33,7 @@ public class HarvestLevel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "ha_notes")
     private String haNotes;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "harvestLevels")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "harvestLevel")
     private Collection<Treatment> treatmentsCollection;
 
     public HarvestLevel() {
@@ -91,7 +89,6 @@ public class HarvestLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof HarvestLevel)) {
             return false;
         }
@@ -115,5 +112,4 @@ public class HarvestLevel implements Serializable {
 	public void setHarvestEventsCollection(Collection<HarvestEvent> harvestEventsCollection) {
 		this.harvestEventsCollection = harvestEventsCollection;
 	}
-
 }

@@ -29,7 +29,6 @@ public class IrrigationLevel implements Serializable {
     @Size(max = 255)
     @Column(name = "iame")
     private String iame;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "iamt")
     private Float iamt;
     @Column(name = "ireff")
@@ -162,7 +161,6 @@ public class IrrigationLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof IrrigationLevel)) {
             return false;
         }
@@ -186,5 +184,4 @@ public class IrrigationLevel implements Serializable {
 	public void setIrrigationEventsCollection(Collection<IrrigationEvent> irrigationEventsCollection) {
 		this.irrigationEventsCollection = irrigationEventsCollection;
 	}
-
 }

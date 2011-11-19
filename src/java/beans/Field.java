@@ -26,7 +26,6 @@ public class Field implements Serializable {
     protected FieldPK fieldPK;
     @Column(name = "sid")
     private Integer sid;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "fl_loc")
     private Float flLoc;
     @Column(name = "fl_lat")
@@ -378,7 +377,6 @@ public class Field implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Field)) {
             return false;
         }
@@ -391,7 +389,6 @@ public class Field implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.Fields[ fieldsPK=" + fieldPK + " ]";
+        return "beans.Field[ fieldPK=" + fieldPK + " ]";
     }
-
 }

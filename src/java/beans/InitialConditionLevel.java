@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,7 +31,6 @@ public class InitialConditionLevel implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InitialConditionLevelPK initialConditionLevelPK;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "icyr")
     private Float icyr;
     @Column(name = "icday")
@@ -287,7 +284,6 @@ public class InitialConditionLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof InitialConditionLevel)) {
             return false;
         }
@@ -319,5 +315,4 @@ public class InitialConditionLevel implements Serializable {
 	public void setInitialConditionEventsCollection(Collection<InitialConditionEvent> initialConditionEventsCollection) {
 		this.initialConditionEventsCollection = initialConditionEventsCollection;
 	}
-
 }

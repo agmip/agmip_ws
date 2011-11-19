@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.ws.rs.core.UriBuilder;
 import javax.persistence.EntityManager;
-import beans.OrganicMaterialLevelPK;
 import beans.OrganicMaterialLevel;
 
 /**
@@ -303,20 +302,20 @@ public class OrganicMaterialEventConverter {
 	/**
 	 * Getter for organicMaterialLevels.
 	 *
-	 * @return value for organicMaterialLevels
+	 * @return value for organicMaterialLevel
 	 */
 	@XmlElement
 	public OrganicMaterialLevelConverter getOrganicMaterialLevel() {
 		if (expandLevel > 0) {
 			if (entity.getOrganicMaterialLevel() != null) {
-				return new OrganicMaterialLevelConverter(entity.getOrganicMaterialLevel(), uri.resolve("organicMaterialLevel/"), expandLevel - 1, false);
+				return new OrganicMaterialLevelConverter(entity.getOrganicMaterialLevel(), uri.resolve("organicMaterialLevels/"), expandLevel - 1, false);
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * Setter for organicMaterialLevels.
+	 * Setter for organicMaterialLevel.
 	 *
 	 * @param value the value to set
 	 */

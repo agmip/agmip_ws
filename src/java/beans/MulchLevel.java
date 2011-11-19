@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -35,7 +33,7 @@ public class MulchLevel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "ml_notes")
     private String mlNotes;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mulchLevels")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mulchLevel")
     private Collection<Treatment> treatmentsCollection;
 
     public MulchLevel() {
@@ -91,7 +89,6 @@ public class MulchLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MulchLevel)) {
             return false;
         }

@@ -155,8 +155,8 @@ public class MulchLevelResource {
 		}
 		for (Treatment value : treatmentsCollectionNew) {
 			if (!treatmentsCollection.contains(value)) {
-				MulchLevel oldEntity = value.getMulchLevels();
-				value.setMulchLevels(entity);
+				MulchLevel oldEntity = value.getMulchLevel();
+				value.setMulchLevel(entity);
 				if (oldEntity != null && !oldEntity.equals(entity)) {
 					oldEntity.getTreatmentsCollection().remove(value);
 				}

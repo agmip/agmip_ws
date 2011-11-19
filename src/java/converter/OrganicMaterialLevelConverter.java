@@ -60,7 +60,7 @@ public class OrganicMaterialLevelConverter {
 	 * @return value for organicMaterialLevelsPK
 	 */
 	@XmlElement
-	public OrganicMaterialLevelPK getOrganicMaterialLevelsPK() {
+	public OrganicMaterialLevelPK getOrganicMaterialLevelPK() {
 		return (expandLevel > 0) ? entity.getOrganicMaterialLevelPK() : null;
 	}
 

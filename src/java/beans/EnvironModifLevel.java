@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -35,7 +33,7 @@ public class EnvironModifLevel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "em_notes")
     private String emNotes;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "environModifLevels")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "environModifLevel")
     private Collection<Treatment> treatmentsCollection;
 
     public EnvironModifLevel() {
@@ -91,7 +89,6 @@ public class EnvironModifLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof EnvironModifLevel)) {
             return false;
         }
@@ -115,5 +112,4 @@ public class EnvironModifLevel implements Serializable {
 	public void setEnvironModifEventsCollection(Collection<EnvironModifEvent> environModifEventsCollection) {
 		this.environModifEventsCollection = environModifEventsCollection;
 	}
-
 }

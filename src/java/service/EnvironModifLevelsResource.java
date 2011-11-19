@@ -16,7 +16,6 @@ import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.Treatment;
 import converter.EnvironModifLevelConverter;
-import converter.EnvironModifLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.EnvironModifLevelsConverter;
 
@@ -112,8 +111,8 @@ public class EnvironModifLevelsResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         em.persist(entity);
         for (Treatment value : entity.getTreatmentsCollection()) {
-            EnvironModifLevel oldEntity = value.getEnvironModifLevels();
-            value.setEnvironModifLevels(entity);
+            EnvironModifLevel oldEntity = value.getEnvironModifLevel();
+            value.setEnvironModifLevel(entity);
             if (oldEntity != null) {
                 oldEntity.getTreatmentsCollection().remove(value);
             }

@@ -135,11 +135,11 @@ public class TreatmentsResource {
         if (planting != null) {
             planting.getTreatmentsCollection().add(entity);
         }
-        ChemicalLevel chemicalLevels = entity.getChemicalLevels();
+        ChemicalLevel chemicalLevels = entity.getChemicalLevel();
         if (chemicalLevels != null) {
             chemicalLevels.getTreatmentsCollection().add(entity);
         }
-        EnvironModifLevel environModifLevels = entity.getEnvironModifLevels();
+        EnvironModifLevel environModifLevels = entity.getEnvironModifLevel();
         if (environModifLevels != null) {
             environModifLevels.getTreatmentsCollection().add(entity);
         }
@@ -147,7 +147,7 @@ public class TreatmentsResource {
         if (experimentalDescrips != null) {
             experimentalDescrips.getTreatmentsCollection().add(entity);
         }
-        FertilizerLevel fertilizerLevels = entity.getFertilizerLevels();
+        FertilizerLevel fertilizerLevels = entity.getFertilizerLevel();
         if (fertilizerLevels != null) {
             fertilizerLevels.getTreatmentsCollection().add(entity);
         }
@@ -159,7 +159,7 @@ public class TreatmentsResource {
         if (genotype != null) {
             genotype.getTreatmentsCollection().add(entity);
         }
-        HarvestLevel harvestLevels = entity.getHarvestLevels();
+        HarvestLevel harvestLevels = entity.getHarvestLevel();
         if (harvestLevels != null) {
             harvestLevels.getTreatmentsCollection().add(entity);
         }
@@ -171,7 +171,7 @@ public class TreatmentsResource {
         if (irrigationLevel != null) {
             irrigationLevel.getTreatmentsCollection().add(entity);
         }
-        MulchLevel mulchLevels = entity.getMulchLevels();
+        MulchLevel mulchLevels = entity.getMulchLevel();
         if (mulchLevels != null) {
             mulchLevels.getTreatmentsCollection().add(entity);
         }
@@ -179,11 +179,11 @@ public class TreatmentsResource {
         if (organicMaterialLevel != null) {
             organicMaterialLevel.getTreatmentsCollection().add(entity);
         }
-        /*SoilAnalysesLevel soilAnalysesLevel = entity.getSoilAnalysesLevel();
+        SoilAnalysesLevel soilAnalysesLevel = entity.getSoilAnalysesLevel();
         if (soilAnalysesLevel != null) {
             soilAnalysesLevel.getTreatmentsCollection().add(entity);
-        }*/
-        TillageLevel tillageLevels = entity.getTillageLevels();
+        }
+        TillageLevel tillageLevels = entity.getTillageLevel();
         if (tillageLevels != null) {
             tillageLevels.getTreatmentsCollection().add(entity);
         }

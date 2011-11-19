@@ -134,8 +134,8 @@ public class ChemicalLevelResource {
         }
         for (Treatment value : treatmentsCollectionNew) {
             if (!treatmentsCollection.contains(value)) {
-                ChemicalLevel oldEntity = value.getChemicalLevels();
-                value.setChemicalLevels(entity);
+                ChemicalLevel oldEntity = value.getChemicalLevel();
+                value.setChemicalLevel(entity);
                 if (oldEntity != null && !oldEntity.equals(entity)) {
                     oldEntity.getTreatmentsCollection().remove(value);
                 }

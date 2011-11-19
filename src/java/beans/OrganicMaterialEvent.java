@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fonini
  */
 @Entity
-@Table(name = "organic_material_events", catalog = "agmipapi", schema = "")
+@Table(name = "organic_material_events")
 @XmlRootElement
 public class OrganicMaterialEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,7 +34,6 @@ public class OrganicMaterialEvent implements Serializable {
 	@Size(max = 255)
     @Column(name = "omacd", length = 255)
 	private String omacd;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "omdep", precision = 12)
 	private Float omdep;
 	@Column(name = "ominp", precision = 12)
@@ -193,7 +190,6 @@ public class OrganicMaterialEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof OrganicMaterialEvent)) {
 			return false;
 		}
@@ -208,5 +204,4 @@ public class OrganicMaterialEvent implements Serializable {
 	public String toString() {
 		return "beans.OrganicMaterialEvent[ organicMaterialEventPK=" + organicMaterialEventPK + " ]";
 	}
-
 }

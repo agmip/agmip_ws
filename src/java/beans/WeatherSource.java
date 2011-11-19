@@ -38,7 +38,6 @@ public class WeatherSource implements Serializable {
 	@Size(max = 255)
     @Column(name = "source", length = 255)
 	private String source;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "lat", precision = 12)
 	private Float lat;
 	@Column(name = "lon", precision = 12)
@@ -318,7 +317,6 @@ public class WeatherSource implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof WeatherSource)) {
 			return false;
 		}
@@ -331,7 +329,6 @@ public class WeatherSource implements Serializable {
 
 	@Override
 	public String toString() {
-		return "beans.WeatherSources[ wid=" + wid + " ]";
+		return "beans.WeatherSource[ wid=" + wid + " ]";
 	}
-
 }

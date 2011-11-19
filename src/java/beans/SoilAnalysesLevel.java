@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author fonini
  */
 @Entity
-@Table(name = "soil_analyses_levels", catalog = "agmipapi", schema = "", uniqueConstraints = {
+@Table(name = "soil_analyses_levels", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"exp_id", "sa"})})
 @XmlRootElement
 public class SoilAnalysesLevel implements Serializable {
@@ -46,7 +46,6 @@ public class SoilAnalysesLevel implements Serializable {
 	@Size(max = 255)
     @Column(name = "samke", length = 255)
 	private String samke;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "sadr", precision = 12)
 	private Float sadr;
 	@Column(name = "saro", precision = 12)
@@ -181,7 +180,6 @@ public class SoilAnalysesLevel implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof SoilAnalysesLevel)) {
 			return false;
 		}
@@ -196,5 +194,4 @@ public class SoilAnalysesLevel implements Serializable {
 	public String toString() {
 		return "beans.SoilAnalysesLevel[ soilAnalysesLevelPK=" + soilAnalysesLevelPK + " ]";
 	}
-
 }

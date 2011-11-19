@@ -54,7 +54,7 @@ public class TreatmentConverter {
         this.expandLevel = expandLevel;
         getUpdateUserId();
         getPlanting();
-        getChemicalLevels();
+        getChemicalLevel();
         getEnvironModifLevel();
         getExperimentalDescrips();
         getFertilizerLevel();
@@ -63,7 +63,7 @@ public class TreatmentConverter {
         getHarvestLevels();
         getInitialConditionLevel();
         getIrrigationLevel();
-        getMulchLevels();
+        getMulchLevel();
         getOrganicMaterialLevel();
         getSoilAnalysesLevel();
         getTillageLevel();
@@ -267,10 +267,10 @@ public class TreatmentConverter {
      * @return value for chemicalLevels
      */
     @XmlElement
-    public ChemicalLevelConverter getChemicalLevels() {
+    public ChemicalLevelConverter getChemicalLevel() {
         if (expandLevel > 0) {
-            if (entity.getChemicalLevels() != null) {
-                return new ChemicalLevelConverter(entity.getChemicalLevels(), uri.resolve("chemicalLevels/"), expandLevel - 1, false);
+            if (entity.getChemicalLevel() != null) {
+                return new ChemicalLevelConverter(entity.getChemicalLevel(), uri.resolve("chemicalLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -281,8 +281,8 @@ public class TreatmentConverter {
      *
      * @param value the value to set
      */
-    public void setChemicalLevels(ChemicalLevelConverter value) {
-        entity.setChemicalLevels((value != null) ? value.getEntity() : null);
+    public void setChemicalLevel(ChemicalLevelConverter value) {
+        entity.setChemicalLevel((value != null) ? value.getEntity() : null);
     }
 
     /**
@@ -293,8 +293,8 @@ public class TreatmentConverter {
     @XmlElement
     public EnvironModifLevelConverter getEnvironModifLevel() {
         if (expandLevel > 0) {
-            if (entity.getEnvironModifLevels() != null) {
-                return new EnvironModifLevelConverter(entity.getEnvironModifLevels(), uri.resolve("environModifLevels/"), expandLevel - 1, false);
+            if (entity.getEnvironModifLevel() != null) {
+                return new EnvironModifLevelConverter(entity.getEnvironModifLevel(), uri.resolve("environModifLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -306,7 +306,7 @@ public class TreatmentConverter {
      * @param value the value to set
      */
     public void setEnvironModifLevel(EnvironModifLevelConverter value) {
-        entity.setEnvironModifLevels((value != null) ? value.getEntity() : null);
+        entity.setEnvironModifLevel((value != null) ? value.getEntity() : null);
     }
 
     /**
@@ -341,8 +341,8 @@ public class TreatmentConverter {
     @XmlElement
     public FertilizerLevelConverter getFertilizerLevel() {
         if (expandLevel > 0) {
-            if (entity.getFertilizerLevels() != null) {
-                return new FertilizerLevelConverter(entity.getFertilizerLevels(), uri.resolve("fertilizerLevels/"), expandLevel - 1, false);
+            if (entity.getFertilizerLevel() != null) {
+                return new FertilizerLevelConverter(entity.getFertilizerLevel(), uri.resolve("fertilizerLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -354,7 +354,7 @@ public class TreatmentConverter {
      * @param value the value to set
      */
     public void setFertilizerLevel(FertilizerLevelConverter value) {
-        entity.setFertilizerLevels((value != null) ? value.getEntity() : null);
+        entity.setFertilizerLevel((value != null) ? value.getEntity() : null);
     }
 
     /**
@@ -388,7 +388,6 @@ public class TreatmentConverter {
      */
     @XmlElement
     public GenotypeConverter getGenotype() {
-		System.out.println("entrou");
         if (expandLevel > 0) {
             if (entity.getGenotype() != null) {
                 return new GenotypeConverter(entity.getGenotype(), uri.resolve("genotypes/"), expandLevel - 1, false);
@@ -414,8 +413,8 @@ public class TreatmentConverter {
     @XmlElement
     public HarvestLevelConverter getHarvestLevels() {
         if (expandLevel > 0) {
-            if (entity.getHarvestLevels() != null) {
-                return new HarvestLevelConverter(entity.getHarvestLevels(), uri.resolve("harvestLevels/"), expandLevel - 1, false);
+            if (entity.getHarvestLevel() != null) {
+                return new HarvestLevelConverter(entity.getHarvestLevel(), uri.resolve("harvestLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -427,7 +426,7 @@ public class TreatmentConverter {
      * @param value the value to set
      */
     public void setHarvestLevels(HarvestLevelConverter value) {
-        entity.setHarvestLevels((value != null) ? value.getEntity() : null);
+        entity.setHarvestLevel((value != null) ? value.getEntity() : null);
     }
 
     /**
@@ -484,10 +483,10 @@ public class TreatmentConverter {
      * @return value for mulchLevels
      */
     @XmlElement
-    public MulchLevelConverter getMulchLevels() {
+    public MulchLevelConverter getMulchLevel() {
         if (expandLevel > 0) {
-            if (entity.getMulchLevels() != null) {
-                return new MulchLevelConverter(entity.getMulchLevels(), uri.resolve("mulchLevels/"), expandLevel - 1, false);
+            if (entity.getMulchLevel() != null) {
+                return new MulchLevelConverter(entity.getMulchLevel(), uri.resolve("mulchLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -498,8 +497,8 @@ public class TreatmentConverter {
      *
      * @param value the value to set
      */
-    public void setMulchLevels(MulchLevelConverter value) {
-        entity.setMulchLevels((value != null) ? value.getEntity() : null);
+    public void setMulchLevel(MulchLevelConverter value) {
+        entity.setMulchLevel((value != null) ? value.getEntity() : null);
     }
 
     /**
@@ -558,8 +557,8 @@ public class TreatmentConverter {
     @XmlElement
     public TillageLevelConverter getTillageLevel() {
         if (expandLevel > 0) {
-            if (entity.getTillageLevels() != null) {
-                return new TillageLevelConverter(entity.getTillageLevels(), uri.resolve("tillageLevels/"), expandLevel - 1, false);
+            if (entity.getTillageLevel() != null) {
+                return new TillageLevelConverter(entity.getTillageLevel(), uri.resolve("tillageLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -571,7 +570,7 @@ public class TreatmentConverter {
      * @param value the value to set
      */
     public void setTillageLevel(TillageLevelConverter value) {
-        entity.setTillageLevels((value != null) ? value.getEntity() : null);
+        entity.setTillageLevel((value != null) ? value.getEntity() : null);
     }
 
     /**
@@ -622,21 +621,21 @@ public class TreatmentConverter {
         if (planting != null) {
             entity.setPlanting(em.getReference(Planting.class, planting.getPlantingPK()));
         }
-        ChemicalLevel chemicalLevels = entity.getChemicalLevels();
+        ChemicalLevel chemicalLevels = entity.getChemicalLevel();
         if (chemicalLevels != null) {
-            entity.setChemicalLevels(em.getReference(ChemicalLevel.class, chemicalLevels.getChemicalLevelPK()));
+            entity.setChemicalLevel(em.getReference(ChemicalLevel.class, chemicalLevels.getChemicalLevelPK()));
         }
-        EnvironModifLevel environModifLevels = entity.getEnvironModifLevels();
+        EnvironModifLevel environModifLevels = entity.getEnvironModifLevel();
         if (environModifLevels != null) {
-            entity.setEnvironModifLevels(em.getReference(EnvironModifLevel.class, environModifLevels.getEnvironModifLevelPK()));
+            entity.setEnvironModifLevel(em.getReference(EnvironModifLevel.class, environModifLevels.getEnvironModifLevelPK()));
         }
         Experiment experimentalDescrips = entity.getExperiment();
         if (experimentalDescrips != null) {
             entity.setExperiment(em.getReference(Experiment.class, experimentalDescrips.getExpId()));
         }
-        FertilizerLevel fertilizerLevels = entity.getFertilizerLevels();
+        FertilizerLevel fertilizerLevels = entity.getFertilizerLevel();
         if (fertilizerLevels != null) {
-            entity.setFertilizerLevels(em.getReference(FertilizerLevel.class, fertilizerLevels.getFertilizerLevelPK()));
+            entity.setFertilizerLevel(em.getReference(FertilizerLevel.class, fertilizerLevels.getFertilizerLevelPK()));
         }
         Field fields = entity.getField();
         if (fields != null) {
@@ -646,9 +645,9 @@ public class TreatmentConverter {
         if (genotype != null) {
             entity.setGenotype(em.getReference(Genotype.class, genotype.getGenotypePK()));
         }
-        HarvestLevel harvestLevels = entity.getHarvestLevels();
+        HarvestLevel harvestLevels = entity.getHarvestLevel();
         if (harvestLevels != null) {
-            entity.setHarvestLevels(em.getReference(HarvestLevel.class, harvestLevels.getHarvestLevelPK()));
+            entity.setHarvestLevel(em.getReference(HarvestLevel.class, harvestLevels.getHarvestLevelPK()));
         }
         InitialConditionLevel initialConditionLevels = entity.getInitialConditionLevel();
         if (initialConditionLevels != null) {
@@ -658,9 +657,9 @@ public class TreatmentConverter {
         if (irrigationLevel != null) {
             entity.setIrrigationLevel(em.getReference(IrrigationLevel.class, irrigationLevel.getIrrigationLevelPK()));
         }
-        MulchLevel mulchLevels = entity.getMulchLevels();
+        MulchLevel mulchLevels = entity.getMulchLevel();
         if (mulchLevels != null) {
-            entity.setMulchLevels(em.getReference(MulchLevel.class, mulchLevels.getMulchLevelPK()));
+            entity.setMulchLevel(em.getReference(MulchLevel.class, mulchLevels.getMulchLevelPK()));
         }
         OrganicMaterialLevel organicMaterialLevel = entity.getOrganicMaterialLevel();
         if (organicMaterialLevel != null) {
@@ -670,9 +669,9 @@ public class TreatmentConverter {
         if (soilAnalysesLevel != null) {
             entity.setSoilAnalysesLevel(em.getReference(SoilAnalysesLevel.class, soilAnalysesLevel.getSoilAnalysesLevelPK()));
         }
-        TillageLevel tillageLevels = entity.getTillageLevels();
+        TillageLevel tillageLevels = entity.getTillageLevel();
         if (tillageLevels != null) {
-            entity.setTillageLevels(em.getReference(TillageLevel.class, tillageLevels.getTillageLevelPK()));
+            entity.setTillageLevel(em.getReference(TillageLevel.class, tillageLevels.getTillageLevelPK()));
         }
         return entity;
     }

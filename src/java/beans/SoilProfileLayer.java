@@ -24,7 +24,6 @@ public class SoilProfileLayer implements Serializable {
 	@Size(max = 255)
     @Column(name = "slmh", length = 255)
 	private String slmh;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "slll", precision = 12)
 	private Float slll;
 	@Column(name = "sldul", precision = 12)
@@ -464,7 +463,6 @@ public class SoilProfileLayer implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof SoilProfileLayer)) {
 			return false;
 		}
@@ -479,5 +477,4 @@ public class SoilProfileLayer implements Serializable {
 	public String toString() {
 		return "beans.SoilProfileLayer[ soilProfileLayerPK=" + soilProfileLayerPK + " ]";
 	}
-
 }

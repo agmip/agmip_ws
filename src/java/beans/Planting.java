@@ -32,7 +32,6 @@ public class Planting implements Serializable {
     @Column(name = "pldae")
     @Temporal(TemporalType.TIMESTAMP)
     private Date pldae;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "plpop")
     private Float plpop;
     @Column(name = "plpoe")
@@ -335,7 +334,6 @@ public class Planting implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Planting)) {
             return false;
         }
@@ -350,5 +348,4 @@ public class Planting implements Serializable {
     public String toString() {
         return "beans.Planting[ plantingPK=" + plantingPK + " ]";
     }
-
 }

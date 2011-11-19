@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import java.io.Serializable;
@@ -12,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fonini
  */
 @Entity
-@Table(name = "mulch_events", catalog = "agmipapi", schema = "")
+@Table(name = "mulch_events")
 @XmlRootElement
 public class MulchEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -40,7 +34,6 @@ public class MulchEvent implements Serializable {
 	@Size(max = 255)
     @Column(name = "mltp", length = 255)
 	private String mltp;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "mlthk", precision = 12)
 	private Float mlthk;
 	@Size(max = 255)
@@ -128,7 +121,6 @@ public class MulchEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof MulchEvent)) {
 			return false;
 		}
@@ -143,5 +135,4 @@ public class MulchEvent implements Serializable {
 	public String toString() {
 		return "beans.MulchEvent[ mulchEventPK=" + mulchEventPK + " ]";
 	}
-
 }

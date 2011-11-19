@@ -52,17 +52,17 @@ public class Treatment implements Serializable {
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ti", referencedColumnName = "ti", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private TillageLevel tillageLevels;
+	private TillageLevel tillageLevel;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ch", referencedColumnName = "ch", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private ChemicalLevel chemicalLevels;
+	private ChemicalLevel chemicalLevel;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "em", referencedColumnName = "em", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private EnvironModifLevel environModifLevels;
+	private EnvironModifLevel environModifLevel;
 	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
 	private Experiment experiment;
@@ -70,7 +70,7 @@ public class Treatment implements Serializable {
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "fe", referencedColumnName = "fe", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private FertilizerLevel fertilizerLevels;
+	private FertilizerLevel fertilizerLevel;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "fl", referencedColumnName = "fl", nullable = false, insertable = false, updatable = false)})
@@ -85,7 +85,7 @@ public class Treatment implements Serializable {
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ha", referencedColumnName = "ha", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private HarvestLevel harvestLevels;
+	private HarvestLevel harvestLevel;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ic", referencedColumnName = "ic", nullable = false, insertable = false, updatable = false)})
@@ -100,7 +100,7 @@ public class Treatment implements Serializable {
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ml", referencedColumnName = "ml", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private MulchLevel mulchLevels;
+	private MulchLevel mulchLevel;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "om", referencedColumnName = "om", nullable = false, insertable = false, updatable = false)})
@@ -192,28 +192,28 @@ public class Treatment implements Serializable {
 		this.updateUserId = updateUserId;
 	}
 
-	public TillageLevel getTillageLevels() {
-		return tillageLevels;
+	public TillageLevel getTillageLevel() {
+		return tillageLevel;
 	}
 
-	public void setTillageLevels(TillageLevel tillageLevels) {
-		this.tillageLevels = tillageLevels;
+	public void setTillageLevel(TillageLevel tillageLevels) {
+		this.tillageLevel = tillageLevels;
 	}
 
-	public ChemicalLevel getChemicalLevels() {
-		return chemicalLevels;
+	public ChemicalLevel getChemicalLevel() {
+		return chemicalLevel;
 	}
 
-	public void setChemicalLevels(ChemicalLevel chemicalLevels) {
-		this.chemicalLevels = chemicalLevels;
+	public void setChemicalLevel(ChemicalLevel chemicalLevel) {
+		this.chemicalLevel = chemicalLevel;
 	}
 
-	public EnvironModifLevel getEnvironModifLevels() {
-		return environModifLevels;
+	public EnvironModifLevel getEnvironModifLevel() {
+		return environModifLevel;
 	}
 
-	public void setEnvironModifLevels(EnvironModifLevel environModifLevels) {
-		this.environModifLevels = environModifLevels;
+	public void setEnvironModifLevel(EnvironModifLevel environModifLevel) {
+		this.environModifLevel = environModifLevel;
 	}
 
 	public Experiment getExperiment() {
@@ -224,12 +224,12 @@ public class Treatment implements Serializable {
 		this.experiment = experimentalDescrips;
 	}
 
-	public FertilizerLevel getFertilizerLevels() {
-		return fertilizerLevels;
+	public FertilizerLevel getFertilizerLevel() {
+		return fertilizerLevel;
 	}
 
-	public void setFertilizerLevels(FertilizerLevel fertilizerLevels) {
-		this.fertilizerLevels = fertilizerLevels;
+	public void setFertilizerLevel(FertilizerLevel fertilizerLevel) {
+		this.fertilizerLevel = fertilizerLevel;
 	}
 
 	public Field getField() {
@@ -248,12 +248,12 @@ public class Treatment implements Serializable {
 		this.genotype = genotype;
 	}
 
-	public HarvestLevel getHarvestLevels() {
-		return harvestLevels;
+	public HarvestLevel getHarvestLevel() {
+		return harvestLevel;
 	}
 
-	public void setHarvestLevels(HarvestLevel harvestLevels) {
-		this.harvestLevels = harvestLevels;
+	public void setHarvestLevel(HarvestLevel harvestLevel) {
+		this.harvestLevel = harvestLevel;
 	}
 
 	public InitialConditionLevel getInitialConditionLevel() {
@@ -272,12 +272,12 @@ public class Treatment implements Serializable {
 		this.irrigationLevel = irrigationLevel;
 	}
 
-	public MulchLevel getMulchLevels() {
-		return mulchLevels;
+	public MulchLevel getMulchLevel() {
+		return mulchLevel;
 	}
 
-	public void setMulchLevels(MulchLevel mulchLevels) {
-		this.mulchLevels = mulchLevels;
+	public void setMulchLevel(MulchLevel mulchLevel) {
+		this.mulchLevel = mulchLevel;
 	}
 
 	public OrganicMaterialLevel getOrganicMaterialLevel() {
@@ -313,7 +313,6 @@ public class Treatment implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof Treatment)) {
 			return false;
 		}
@@ -328,5 +327,4 @@ public class Treatment implements Serializable {
 	public String toString() {
 		return "beans.Treatment[ treatmentPK=" + treatmentPK + " ]";
 	}
-
 }

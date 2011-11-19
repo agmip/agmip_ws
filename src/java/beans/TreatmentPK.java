@@ -111,7 +111,6 @@ public class TreatmentPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof TreatmentPK)) {
             return false;
         }
@@ -141,5 +140,4 @@ public class TreatmentPK implements Serializable {
     public String toString() {
         return "beans.TreatmentPK[ expId=" + expId + ", trno=" + trno + ", rp=" + rp + ", sq=" + sq + ", op=" + op + ", co=" + co + " ]";
     }
-
 }

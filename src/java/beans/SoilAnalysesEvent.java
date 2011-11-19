@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,7 +21,6 @@ public class SoilAnalysesEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId
 	protected SoilAnalysesEventPK soilAnalysesEventPK;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "satl", precision = 12)
 	private Float satl;
 	@Column(name = "sabl")
@@ -186,7 +183,6 @@ public class SoilAnalysesEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof SoilAnalysesEvent)) {
 			return false;
 		}
@@ -201,5 +197,4 @@ public class SoilAnalysesEvent implements Serializable {
 	public String toString() {
 		return "beans.SoilAnalysesEvent[ soilAnalysesEventPK=" + soilAnalysesEventPK + " ]";
 	}
-
 }

@@ -55,7 +55,6 @@ public class FieldPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof FieldPK)) {
             return false;
         }
@@ -71,7 +70,6 @@ public class FieldPK implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.FieldsPK[ expId=" + expId + ", fl=" + fl + " ]";
+        return "beans.FieldPK[ expId=" + expId + ", fl=" + fl + " ]";
     }
-
 }

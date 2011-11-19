@@ -33,7 +33,7 @@ public class ChemicalLevel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "ch_notes")
     private String chNotes;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chemicalLevels")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chemicalLevel")
     private Collection<Treatment> treatmentsCollection;
 
     public ChemicalLevel() {
@@ -89,7 +89,6 @@ public class ChemicalLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ChemicalLevel)) {
             return false;
         }
@@ -113,5 +112,4 @@ public class ChemicalLevel implements Serializable {
 	public void setChemicalEventsCollection(Collection<ChemicalEvent> chemicalEventsCollection) {
 		this.chemicalEventsCollection = chemicalEventsCollection;
 	}
-
 }

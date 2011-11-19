@@ -9,11 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -61,7 +58,6 @@ public class SoilProfile implements Serializable {
 	@Size(max = 255)
     @Column(name = "site", length = 255)
 	private String site;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "soillat", precision = 12)
 	private Float soillat;
 	@Lob
@@ -377,7 +373,6 @@ public class SoilProfile implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof SoilProfile)) {
 			return false;
 		}
@@ -401,5 +396,4 @@ public class SoilProfile implements Serializable {
 	public void setSoilProfileLayerCollection(Collection<SoilProfileLayer> soilProfileLayerCollection) {
 		this.soilProfileLayerCollection = soilProfileLayerCollection;
 	}
-
 }

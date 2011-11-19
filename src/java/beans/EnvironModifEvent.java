@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,7 +31,6 @@ public class EnvironModifEvent implements Serializable {
 	@Size(max = 255)
     @Column(name = "ecdyl")
 	private String ecdyl;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "emdyl")
 	private Float emdyl;
 	@Size(max = 255)
@@ -249,7 +246,6 @@ public class EnvironModifEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof EnvironModifEvent)) {
 			return false;
 		}
@@ -262,7 +258,6 @@ public class EnvironModifEvent implements Serializable {
 
 	@Override
 	public String toString() {
-		return "beans.EnvironModifEvents[ environModifEventPK=" + environModifEventPK + " ]";
+		return "beans.EnvironModifEvent[ environModifEventPK=" + environModifEventPK + " ]";
 	}
-
 }

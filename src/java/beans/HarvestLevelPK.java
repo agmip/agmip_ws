@@ -55,7 +55,6 @@ public class HarvestLevelPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof HarvestLevelPK)) {
             return false;
         }
@@ -71,7 +70,6 @@ public class HarvestLevelPK implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.HarvestLevelsPK[ expId=" + expId + ", ha=" + ha + " ]";
+        return "beans.HarvestLevelPK[ expId=" + expId + ", ha=" + ha + " ]";
     }
-
 }

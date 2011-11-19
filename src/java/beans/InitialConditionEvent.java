@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fonini
  */
 @Entity
-@Table(name = "initial_condition_events", catalog = "agmipapi", schema = "")
+@Table(name = "initial_condition_events")
 @XmlRootElement
 public class InitialConditionEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +23,6 @@ public class InitialConditionEvent implements Serializable {
 	protected InitialConditionEventPK initialConditionEventPK;
 	@Column(name = "icbl")
 	private Integer icbl;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "ich2o", precision = 12)
 	private Float ich2o;
 	@Column(name = "icnh4", precision = 12)
@@ -106,7 +103,6 @@ public class InitialConditionEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof InitialConditionEvent)) {
 			return false;
 		}
@@ -121,5 +117,4 @@ public class InitialConditionEvent implements Serializable {
 	public String toString() {
 		return "beans.InitialConditionEvent[ initialConditionEventPK=" + initialConditionEventPK + " ]";
 	}
-
 }

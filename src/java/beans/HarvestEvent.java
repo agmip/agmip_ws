@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fonini
  */
 @Entity
-@Table(name = "harvest_events", catalog = "agmipapi", schema = "")
+@Table(name = "harvest_events")
 @XmlRootElement
 public class HarvestEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -39,7 +37,6 @@ public class HarvestEvent implements Serializable {
 	@Size(max = 255)
     @Column(name = "harm", length = 255)
 	private String harm;
-	// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	@Column(name = "harea", precision = 12)
 	private Float harea;
 	@Size(max = 255)
@@ -155,7 +152,6 @@ public class HarvestEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
 		if (!(object instanceof HarvestEvent)) {
 			return false;
 		}
@@ -170,5 +166,4 @@ public class HarvestEvent implements Serializable {
 	public String toString() {
 		return "beans.HarvestEvent[ harvestEventPK=" + harvestEventPK + " ]";
 	}
-
 }

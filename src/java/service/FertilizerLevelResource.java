@@ -134,8 +134,8 @@ public class FertilizerLevelResource {
         }
         for (Treatment value : treatmentsCollectionNew) {
             if (!treatmentsCollection.contains(value)) {
-                FertilizerLevel oldEntity = value.getFertilizerLevels();
-                value.setFertilizerLevels(entity);
+                FertilizerLevel oldEntity = value.getFertilizerLevel();
+                value.setFertilizerLevel(entity);
                 if (oldEntity != null && !oldEntity.equals(entity)) {
                     oldEntity.getTreatmentsCollection().remove(value);
                 }

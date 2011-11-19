@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -35,7 +33,7 @@ public class TillageLevel implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "ti_notes")
     private String tiNotes;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tillageLevels")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tillageLevel")
     private Collection<Treatment> treatmentsCollection;
 
     public TillageLevel() {
@@ -91,7 +89,6 @@ public class TillageLevel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof TillageLevel)) {
             return false;
         }
@@ -104,7 +101,7 @@ public class TillageLevel implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.TillageLevels[ tillageLevelsPK=" + tillageLevelPK + " ]";
+        return "beans.TillageLevel[ tillageLevelPK=" + tillageLevelPK + " ]";
     }
 
 	@XmlTransient
@@ -115,5 +112,4 @@ public class TillageLevel implements Serializable {
 	public void setTillageEventsCollection(Collection<TillageEvent> tillageEventsCollection) {
 		this.tillageEventsCollection = tillageEventsCollection;
 	}
-
 }
