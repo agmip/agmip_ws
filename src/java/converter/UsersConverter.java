@@ -1,19 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package converter;
 
-import beans.Users;
+import beans.User;
 import java.net.URI;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.ws.rs.core.UriBuilder;
-import javax.persistence.EntityManager;
-import beans.Treatment;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -21,157 +17,55 @@ import java.util.Collection;
  */
 @XmlRootElement(name = "users")
 public class UsersConverter {
-    private Users entity;
+    private Collection<User> entities;
+    private Collection<UserConverter> items;
     private URI uri;
     private int expandLevel;
 
     /** Creates a new instance of UsersConverter */
     public UsersConverter() {
-        entity = new Users();
     }
 
     /**
      * Creates a new instance of UsersConverter.
      *
-     * @param entity associated entity
-     * @param uri associated uri
-     * @param expandLevel indicates the number of levels the entity graph should be expanded@param isUriExtendable indicates whether the uri can be extended
-     */
-    public UsersConverter(Users entity, URI uri, int expandLevel, boolean isUriExtendable) {
-        this.entity = entity;
-        this.uri = (isUriExtendable) ? UriBuilder.fromUri(uri).path(entity.getUserId() + "/").build() : uri;
-        this.expandLevel = expandLevel;
-        getTreatmentsCollection();
-    }
-
-    /**
-     * Creates a new instance of UsersConverter.
-     *
-     * @param entity associated entity
+     * @param entities associated entities
      * @param uri associated uri
      * @param expandLevel indicates the number of levels the entity graph should be expanded
      */
-    public UsersConverter(Users entity, URI uri, int expandLevel) {
-        this(entity, uri, expandLevel, false);
+    public UsersConverter(Collection<User> entities, URI uri, int expandLevel) {
+        this.entities = entities;
+        this.uri = uri;
+        this.expandLevel = expandLevel;
+        getUsers();
     }
 
     /**
-     * Getter for userId.
+     * Returns a collection of UserConverter.
      *
-     * @return value for userId
+     * @return a collection of UserConverter
      */
     @XmlElement
-    public Integer getUserId() {
-        return (expandLevel > 0) ? entity.getUserId() : null;
-    }
-
-    /**
-     * Setter for userId.
-     *
-     * @param value the value to set
-     */
-    public void setUserId(Integer value) {
-        entity.setUserId(value);
-    }
-
-    /**
-     * Getter for firstName.
-     *
-     * @return value for firstName
-     */
-    @XmlElement
-    public String getFirstName() {
-        return (expandLevel > 0) ? entity.getFirstName() : null;
-    }
-
-    /**
-     * Setter for firstName.
-     *
-     * @param value the value to set
-     */
-    public void setFirstName(String value) {
-        entity.setFirstName(value);
-    }
-
-    /**
-     * Getter for lastName.
-     *
-     * @return value for lastName
-     */
-    @XmlElement
-    public String getLastName() {
-        return (expandLevel > 0) ? entity.getLastName() : null;
-    }
-
-    /**
-     * Setter for lastName.
-     *
-     * @param value the value to set
-     */
-    public void setLastName(String value) {
-        entity.setLastName(value);
-    }
-
-    /**
-     * Getter for email.
-     *
-     * @return value for email
-     */
-    @XmlElement
-    public String getEmail() {
-        return (expandLevel > 0) ? entity.getEmail() : null;
-    }
-
-    /**
-     * Setter for email.
-     *
-     * @param value the value to set
-     */
-    public void setEmail(String value) {
-        entity.setEmail(value);
-    }
-
-    /**
-     * Getter for password.
-     *
-     * @return value for password
-     */
-    @XmlElement
-    public String getPassword() {
-        return (expandLevel > 0) ? entity.getPassword() : null;
-    }
-
-    /**
-     * Setter for password.
-     *
-     * @param value the value to set
-     */
-    public void setPassword(String value) {
-        entity.setPassword(value);
-    }
-
-    /**
-     * Getter for treatmentsCollection.
-     *
-     * @return value for treatmentsCollection
-     */
-    @XmlElement
-    public TreatmentsConverter getTreatmentsCollection() {
-        if (expandLevel > 0) {
-            if (entity.getTreatmentsCollection() != null) {
-                return new TreatmentsConverter(entity.getTreatmentsCollection(), uri.resolve("treatmentsCollection/"), expandLevel - 1);
+    public Collection<UserConverter> getUsers() {
+        if (items == null) {
+            items = new ArrayList<UserConverter>();
+        }
+        if (entities != null) {
+            items.clear();
+            for (User entity : entities) {
+                items.add(new UserConverter(entity, uri, expandLevel, true));
             }
         }
-        return null;
+        return items;
     }
 
     /**
-     * Setter for treatmentsCollection.
+     * Sets a collection of UserConverter.
      *
-     * @param value the value to set
+     * @param a collection of UserConverter to set
      */
-    public void setTreatmentsCollection(TreatmentsConverter value) {
-        entity.setTreatmentsCollection((value != null) ? value.getEntities() : null);
+    public void setUsers(Collection<UserConverter> items) {
+        this.items = items;
     }
 
     /**
@@ -185,44 +79,19 @@ public class UsersConverter {
     }
 
     /**
-     * Sets the URI for this reference converter.
+     * Returns a collection User entities.
      *
-     */
-    public void setUri(URI uri) {
-        this.uri = uri;
-    }
-
-    /**
-     * Returns the Users entity.
-     *
-     * @return an entity
+     * @return a collection of User entities
      */
     @XmlTransient
-    public Users getEntity() {
-        if (entity.getUserId() == null) {
-            UsersConverter converter = UriResolver.getInstance().resolve(UsersConverter.class, uri);
-            if (converter != null) {
-                entity = converter.getEntity();
+    public Collection<User> getEntities() {
+        entities = new ArrayList<User>();
+        if (items != null) {
+            for (UserConverter item : items) {
+                entities.add(item.getEntity());
             }
         }
-        return entity;
-    }
-
-    /**
-     * Returns the resolved Users entity.
-     *
-     * @return an resolved entity
-     */
-    public Users resolveEntity(EntityManager em) {
-        Collection<Treatment> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatment> newtreatmentsCollection = new java.util.ArrayList<Treatment>();
-        if (treatmentsCollection != null) {
-            for (Treatment item : treatmentsCollection) {
-                newtreatmentsCollection.add(em.getReference(Treatment.class, item.getTreatmentPK()));
-            }
-        }
-        entity.setTreatmentsCollection(newtreatmentsCollection);
-        return entity;
+        return entities;
     }
 
     @Override
@@ -237,10 +106,11 @@ public class UsersConverter {
         if (this.expandLevel != other.expandLevel) {
             return false;
         }
-        if (expandLevel <= 0) {
-            return true;
+        if (this.items.size() != other.items.size()) {
+            return false;
         }
-        if ((this.entity == null && other.entity != null) || (this.entity != null && !this.entity.equals(other.entity))) {
+        Set<UserConverter> itemSet = new HashSet<UserConverter>(this.items);
+        if (!itemSet.containsAll(other.items)) {
             return false;
         }
         return true;
@@ -249,9 +119,10 @@ public class UsersConverter {
     @Override
     public int hashCode() {
         int hash = uri == null ? 0 : uri.hashCode();
-        if (expandLevel <= 0) {
-            return hash + 37 * expandLevel;
+        hash = 37 * hash + expandLevel;
+        for (UserConverter item : this.items) {
+            hash = 37 * hash + item.hashCode();
         }
-        return hash + 37 * (expandLevel + 37 * (entity == null ? 0 : entity.hashCode()));
+        return hash;
     }
 }

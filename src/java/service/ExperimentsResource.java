@@ -217,7 +217,7 @@ public class ExperimentsResource {
 				if (treatment.getMulchLevels() != null){
 					System.out.println("MULCH LEVELS");
 					// Set the Experiment ID to the MulchLevel
-					treatment.getMulchLevels().getMulchLevelsPK().setExpId(entity.getExpId());
+					treatment.getMulchLevels().getMulchLevelPK().setExpId(entity.getExpId());
 					// Persists the MulchLevel
 					MulchLevel mulchLevel= treatment.getMulchLevels();
 					em.persist(mulchLevel);

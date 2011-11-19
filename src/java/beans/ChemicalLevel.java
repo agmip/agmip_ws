@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "chemical_levels")
 @XmlRootElement
 public class ChemicalLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "chemicalLevel")
+	private Collection<ChemicalEvent> chemicalEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ChemicalLevelPK chemicalLevelPK;
@@ -102,5 +104,14 @@ public class ChemicalLevel implements Serializable {
     public String toString() {
         return "beans.ChemicalLevel[ chemicalLevelPK=" + chemicalLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<ChemicalEvent> getChemicalEventsCollection() {
+		return chemicalEventsCollection;
+	}
+
+	public void setChemicalEventsCollection(Collection<ChemicalEvent> chemicalEventsCollection) {
+		this.chemicalEventsCollection = chemicalEventsCollection;
+	}
 
 }

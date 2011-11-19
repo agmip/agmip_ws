@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
-import beans.Users;
+import beans.User;
 import beans.IrrigationLevel;
 import beans.Field;
 import beans.MulchLevel;
@@ -24,7 +24,7 @@ import beans.Genotype;
 import beans.SoilAnalysesLevel;
 import beans.InitialConditionLevel;
 import beans.TillageLevel;
-import beans.HarvestLevels;
+import beans.HarvestLevel;
 import beans.ChemicalLevel;
 import beans.FertilizerLevel;
 import beans.Planting;
@@ -127,7 +127,7 @@ public class TreatmentsResource {
     protected void createEntity(Treatment entity) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         em.persist(entity);
-        Users updateUserId = entity.getUpdateUserId();
+        User updateUserId = entity.getUpdateUserId();
         if (updateUserId != null) {
             updateUserId.getTreatmentsCollection().add(entity);
         }
@@ -159,7 +159,7 @@ public class TreatmentsResource {
         if (genotype != null) {
             genotype.getTreatmentsCollection().add(entity);
         }
-        HarvestLevels harvestLevels = entity.getHarvestLevels();
+        HarvestLevel harvestLevels = entity.getHarvestLevels();
         if (harvestLevels != null) {
             harvestLevels.getTreatmentsCollection().add(entity);
         }
@@ -179,10 +179,10 @@ public class TreatmentsResource {
         if (organicMaterialLevel != null) {
             organicMaterialLevel.getTreatmentsCollection().add(entity);
         }
-        SoilAnalysesLevel soilAnalysesLevel = entity.getSoilAnalysesLevel();
+        /*SoilAnalysesLevel soilAnalysesLevel = entity.getSoilAnalysesLevel();
         if (soilAnalysesLevel != null) {
             soilAnalysesLevel.getTreatmentsCollection().add(entity);
-        }
+        }*/
         TillageLevel tillageLevels = entity.getTillageLevels();
         if (tillageLevels != null) {
             tillageLevels.getTreatmentsCollection().add(entity);

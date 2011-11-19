@@ -109,7 +109,7 @@ public class FertilizerLevelResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         try {
             beans.FertilizerLevelPK id = new beans.FertilizerLevelPK(id1, id2);
-            return (FertilizerLevel) em.createQuery("SELECT e FROM FertilizerLevel e where e.fertilizerLevelsPK = :fertilizerLevelsPK").setParameter("fertilizerLevelsPK", id).getSingleResult();
+            return (FertilizerLevel) em.createQuery("SELECT e FROM FertilizerLevel e where e.fertilizerLevelPK = :fertilizerLevelPK").setParameter("fertilizerLevelPK", id).getSingleResult();
         } catch (NoResultException ex) {
             throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
         }

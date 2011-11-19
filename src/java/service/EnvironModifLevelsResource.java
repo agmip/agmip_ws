@@ -15,9 +15,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.Treatment;
-import converter.EnvironModifLevelsConverter;
+import converter.EnvironModifLevelConverter;
 import converter.EnvironModifLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
+import converter.EnvironModifLevelsConverter;
 
 /**
  *
@@ -37,7 +38,7 @@ public class EnvironModifLevelsResource {
     /**
      * Get method for retrieving a collection of EnvironModifLevel instance in XML format.
      *
-     * @return an instance of EnvironModifLevelsConverter
+     * @return an instance of EnvironModifLevelConverter
      */
     @GET
     @Produces({"application/xml", "application/json"})

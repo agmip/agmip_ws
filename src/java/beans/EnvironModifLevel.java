@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "environ_modif_levels")
 @XmlRootElement
 public class EnvironModifLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "environModifLevel")
+	private Collection<EnvironModifEvent> environModifEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EnvironModifLevelPK environModifLevelPK;
@@ -104,5 +106,14 @@ public class EnvironModifLevel implements Serializable {
     public String toString() {
         return "beans.EnvironModifLevel[ environModifLevelPK=" + environModifLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<EnvironModifEvent> getEnvironModifEventsCollection() {
+		return environModifEventsCollection;
+	}
+
+	public void setEnvironModifEventsCollection(Collection<EnvironModifEvent> environModifEventsCollection) {
+		this.environModifEventsCollection = environModifEventsCollection;
+	}
 
 }

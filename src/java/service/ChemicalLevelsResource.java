@@ -15,9 +15,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.Treatment;
-import converter.ChemicalLevelsConverter;
+import converter.ChemicalLevelConverter;
 import converter.ChemicalLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
+import converter.ChemicalLevelsConverter;
 
 /**
  *
@@ -37,7 +38,7 @@ public class ChemicalLevelsResource {
     /**
      * Get method for retrieving a collection of ChemicalLevel instance in XML format.
      *
-     * @return an instance of ChemicalLevelsConverter
+     * @return an instance of ChemicalLevelConverter
      */
     @GET
     @Produces({"application/xml", "application/json"})

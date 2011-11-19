@@ -25,12 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "initial_condition_levels")
 @XmlRootElement
 public class InitialConditionLevel implements Serializable {
+	@Column(name = "icdat")
+    @Temporal(TemporalType.TIMESTAMP)
+	private Date icdat;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "initialConditionLevel")
+	private Collection<InitialConditionEvent> initialConditionEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected InitialConditionLevelPK initialConditionLevelPK;
-    @Column(name = "icdat")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date icdat;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "icyr")
     private Float icyr;
@@ -97,14 +99,6 @@ public class InitialConditionLevel implements Serializable {
 
     public void setInitialConditionLevelPK(InitialConditionLevelPK initialConditionLevelPK) {
         this.initialConditionLevelPK = initialConditionLevelPK;
-    }
-
-    public Date getIcdat() {
-        return icdat;
-    }
-
-    public void setIcdat(Date icdat) {
-        this.icdat = icdat;
     }
 
     public Float getIcyr() {
@@ -308,5 +302,22 @@ public class InitialConditionLevel implements Serializable {
     public String toString() {
         return "beans.InitialConditionLevel[ initialConditionLevelPK=" + initialConditionLevelPK + " ]";
     }
+
+	public Date getIcdat() {
+		return icdat;
+	}
+
+	public void setIcdat(Date icdat) {
+		this.icdat = icdat;
+	}
+
+	@XmlTransient
+	public Collection<InitialConditionEvent> getInitialConditionEventsCollection() {
+		return initialConditionEventsCollection;
+	}
+
+	public void setInitialConditionEventsCollection(Collection<InitialConditionEvent> initialConditionEventsCollection) {
+		this.initialConditionEventsCollection = initialConditionEventsCollection;
+	}
 
 }

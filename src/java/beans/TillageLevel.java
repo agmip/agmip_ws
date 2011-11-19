@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tillage_levels")
 @XmlRootElement
 public class TillageLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tillageLevel")
+	private Collection<TillageEvent> tillageEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected TillageLevelPK tillageLevelPK;
@@ -104,5 +106,14 @@ public class TillageLevel implements Serializable {
     public String toString() {
         return "beans.TillageLevels[ tillageLevelsPK=" + tillageLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<TillageEvent> getTillageEventsCollection() {
+		return tillageEventsCollection;
+	}
+
+	public void setTillageEventsCollection(Collection<TillageEvent> tillageEventsCollection) {
+		this.tillageEventsCollection = tillageEventsCollection;
+	}
 
 }

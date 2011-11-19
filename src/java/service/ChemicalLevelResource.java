@@ -109,7 +109,7 @@ public class ChemicalLevelResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         try {
             beans.ChemicalLevelPK id = new beans.ChemicalLevelPK(id1, id2);
-            return (ChemicalLevel) em.createQuery("SELECT e FROM ChemicalLevel e where e.chemicalLevelsPK = :chemicalLevelsPK").setParameter("chemicalLevelsPK", id).getSingleResult();
+            return (ChemicalLevel) em.createQuery("SELECT e FROM ChemicalLevel e where e.chemicalLevelPK = :chemicalLevelPK").setParameter("chemicalLevelPK", id).getSingleResult();
         } catch (NoResultException ex) {
             throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
         }

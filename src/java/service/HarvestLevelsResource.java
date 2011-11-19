@@ -1,198 +1,130 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
-import beans.HarvestLevels;
+import beans.HarvestLevel;
+import java.util.Collection;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.WebApplicationException;
-import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
 import beans.Treatment;
-import java.util.Collection;
+import beans.HarvestEvent;
 import converter.HarvestLevelsConverter;
+import converter.HarvestLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
 
 /**
  *
- * @author wpavan
+ * @author fonini
  */
+@Path("/harvestLevels/")
 public class HarvestLevelsResource {
-    @Context
-    protected ResourceContext resourceContext;
-    @Context
-    protected UriInfo uriInfo;
-    protected Integer id2;
-    protected Integer id1;
+	@Context
+	protected ResourceContext resourceContext;
+	@Context
+	protected UriInfo uriInfo;
 
-    /** Creates a new instance of HarvestLevelsResource */
-    public HarvestLevelsResource() {
-    }
+	/** Creates a new instance of HarvestLevelsResource */
+	public HarvestLevelsResource() {
+	}
 
-    public void setId1(Integer id1) {
-        this.id1 = id1;
-    }
-
-    public void setId2(Integer id2) {
-        this.id2 = id2;
-    }
-
-    /**
-     * Get method for retrieving an instance of HarvestLevels identified by id in XML format.
-     *
-     * @param id identifier for the entity
-     * @return an instance of HarvestLevelsConverter
-     */
-    @GET
+	/**
+	 * Get method for retrieving a collection of HarvestLevels instance in XML format.
+	 *
+	 * @return an instance of HarvestLevelssConverter
+	 */
+	@GET
     @Produces({"application/xml", "application/json"})
-    public HarvestLevelsConverter get(@QueryParam("expandLevel")
-            @DefaultValue("1") int expandLevel) {
-        PersistenceService persistenceSvc = PersistenceService.getInstance();
-        try {
-            persistenceSvc.beginTx();
-            return new HarvestLevelsConverter(getEntity(), uriInfo.getAbsolutePath(), expandLevel);
-        } finally {
-            PersistenceService.getInstance().close();
-        }
-    }
+	public HarvestLevelsConverter get(@QueryParam("start")
+            @DefaultValue("0") int start, @QueryParam("max")
+            @DefaultValue("10") int max, @QueryParam("expandLevel")
+            @DefaultValue("1") int expandLevel, @QueryParam("query")
+            @DefaultValue("SELECT e FROM HarvestLevel e") String query) {
+		PersistenceService persistenceSvc = PersistenceService.getInstance();
+		try {
+			persistenceSvc.beginTx();
+			return new HarvestLevelsConverter(getEntities(start, max, query), uriInfo.getAbsolutePath(), expandLevel);
+		}
+		finally {
+			persistenceSvc.commitTx();
+			persistenceSvc.close();
+		}
+	}
 
-    /**
-     * Put method for updating an instance of HarvestLevels identified by id using XML as the input format.
-     *
-     * @param id identifier for the entity
-     * @param data an HarvestLevelsConverter entity that is deserialized from a XML stream
-     */
-    @PUT
+	/**
+	 * Post method for creating an instance of HarvestLevels using XML as the input format.
+	 *
+	 * @param data an HarvestLevelsConverter entity that is deserialized from an XML stream
+	 * @return an instance of HarvestLevelsConverter
+	 */
+	@POST
     @Consumes({"application/xml", "application/json"})
-    public void put(HarvestLevelsConverter data) {
-        PersistenceService persistenceSvc = PersistenceService.getInstance();
-        try {
-            persistenceSvc.beginTx();
-            EntityManager em = persistenceSvc.getEntityManager();
-            updateEntity(getEntity(), data.resolveEntity(em));
-            persistenceSvc.commitTx();
-        } finally {
-            persistenceSvc.close();
-        }
-    }
+	public Response post(HarvestLevelConverter data) {
+		PersistenceService persistenceSvc = PersistenceService.getInstance();
+		try {
+			persistenceSvc.beginTx();
+			EntityManager em = persistenceSvc.getEntityManager();
+			HarvestLevel entity = data.resolveEntity(em);
+			createEntity(data.resolveEntity(em));
+			persistenceSvc.commitTx();
+			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getHarvestLevelPK().getExpId() + "," + entity.getHarvestLevelPK().getHa() + "/")).build();
+		}
+		finally {
+			persistenceSvc.close();
+		}
+	}
 
-    /**
-     * Delete method for deleting an instance of HarvestLevels identified by id.
-     *
-     * @param id identifier for the entity
-     */
-    @DELETE
-    public void delete() {
-        PersistenceService persistenceSvc = PersistenceService.getInstance();
-        try {
-            persistenceSvc.beginTx();
-            deleteEntity(getEntity());
-            persistenceSvc.commitTx();
-        } finally {
-            persistenceSvc.close();
-        }
-    }
+	/**
+	 * Returns a dynamic instance of HarvestLevelResource used for entity navigation.
+	 *
+	 * @return an instance of HarvestLevelResource
+	 */
+	@Path("{expId},{ha}/")
+	public HarvestLevelResource getHarvestLevelsResource(@PathParam("expId") Integer id1, @PathParam("ha") Integer id2) {
+		HarvestLevelResource harvestLevelsResource = resourceContext.getResource(HarvestLevelResource.class);
+		harvestLevelsResource.setId1(id1);
+		harvestLevelsResource.setId2(id2);
+		return harvestLevelsResource;
+	}
 
-    /**
-     * Returns an instance of HarvestLevels identified by id.
-     *
-     * @param id identifier for the entity
-     * @return an instance of HarvestLevels
-     */
-    protected HarvestLevels getEntity() {
-        EntityManager em = PersistenceService.getInstance().getEntityManager();
-        try {
-            beans.HarvestLevelsPK id = new beans.HarvestLevelsPK(id1, id2);
-            return (HarvestLevels) em.createQuery("SELECT e FROM HarvestLevels e where e.harvestLevelsPK = :harvestLevelsPK").setParameter("harvestLevelsPK", id).getSingleResult();
-        } catch (NoResultException ex) {
-            throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
-        }
-    }
+	/**
+	 * Returns all the entities associated with this resource.
+	 *
+	 * @return a collection of HarvestLevels instances
+	 */
+	protected Collection<HarvestLevel> getEntities(int start, int max, String query) {
+		EntityManager em = PersistenceService.getInstance().getEntityManager();
+		return em.createQuery(query).setFirstResult(start).setMaxResults(max).getResultList();
+	}
 
-    /**
-     * Updates entity using data from newEntity.
-     *
-     * @param entity the entity to update
-     * @param newEntity the entity containing the new data
-     * @return the updated entity
-     */
-    private HarvestLevels updateEntity(HarvestLevels entity, HarvestLevels newEntity) {
-        EntityManager em = PersistenceService.getInstance().getEntityManager();
-        Collection<Treatment> treatmentsCollection = entity.getTreatmentsCollection();
-        Collection<Treatment> treatmentsCollectionNew = newEntity.getTreatmentsCollection();
-        entity = em.merge(newEntity);
-        for (Treatment value : treatmentsCollection) {
-            if (!treatmentsCollectionNew.contains(value)) {
-                throw new WebApplicationException(new Throwable("Cannot remove items from treatmentsCollection"));
-            }
-        }
-        for (Treatment value : treatmentsCollectionNew) {
-            if (!treatmentsCollection.contains(value)) {
-                HarvestLevels oldEntity = value.getHarvestLevels();
-                value.setHarvestLevels(entity);
-                if (oldEntity != null && !oldEntity.equals(entity)) {
-                    oldEntity.getTreatmentsCollection().remove(value);
-                }
-            }
-        }
-        return entity;
-    }
-
-    /**
-     * Deletes the entity.
-     *
-     * @param entity the entity to deletle
-     */
-    private void deleteEntity(HarvestLevels entity) {
-        EntityManager em = PersistenceService.getInstance().getEntityManager();
-        if (!entity.getTreatmentsCollection().isEmpty()) {
-            throw new WebApplicationException(new Throwable("Cannot delete entity because treatmentsCollection is not empty."));
-        }
-        em.remove(entity);
-    }
-
-    /**
-     * Returns a dynamic instance of TreatmentsResource used for entity navigation.
-     *
-     * @param id identifier for the parent entity
-     * @return an instance of TreatmentsResource
-     */
-    @Path("treatmentsCollection/")
-    public TreatmentsResource getTreatmentsCollectionResource() {
-        TreatmentsCollectionResourceSub treatmentsCollectionResourceSub = resourceContext.getResource(TreatmentsCollectionResourceSub.class);
-        treatmentsCollectionResourceSub.setParent(getEntity());
-        return treatmentsCollectionResourceSub;
-    }
-
-    public static class TreatmentsCollectionResourceSub extends TreatmentsResource {
-
-        private HarvestLevels parent;
-
-        public void setParent(HarvestLevels parent) {
-            this.parent = parent;
-        }
-
-        @Override
-        protected Collection<Treatment> getEntities(int start, int max, String query) {
-            Collection<Treatment> result = new java.util.ArrayList<Treatment>();
-            int index = 0;
-            for (Treatment e : parent.getTreatmentsCollection()) {
-                if (index >= start && (index - start) < max) {
-                    result.add(e);
-                }
-                index++;
-            }
-            return result;
-        }
-    }
+	/**
+	 * Persist the given entity.
+	 *
+	 * @param entity the entity to persist
+	 */
+	protected void createEntity(HarvestLevel entity) {
+		EntityManager em = PersistenceService.getInstance().getEntityManager();
+		em.persist(entity);
+		for (HarvestEvent value : entity.getHarvestEventsCollection()) {
+			HarvestLevel oldEntity = value.getHarvestLevel();
+			value.setHarvestLevel(entity);
+			if (oldEntity != null) {
+				oldEntity.getHarvestEventsCollection().remove(value);
+			}
+		}
+		for (Treatment value : entity.getTreatmentsCollection()) {
+			HarvestLevel oldEntity = value.getHarvestLevels();
+			value.setHarvestLevels(entity);
+			if (oldEntity != null) {
+				oldEntity.getTreatmentsCollection().remove(value);
+			}
+		}
+	}
 }

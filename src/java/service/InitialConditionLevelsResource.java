@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.Treatment;
+import beans.InitialConditionEvent;
 import converter.InitialConditionLevelsConverter;
 import converter.InitialConditionLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
@@ -25,97 +26,105 @@ import com.sun.jersey.api.core.ResourceContext;
  */
 @Path("/initialConditionLevels/")
 public class InitialConditionLevelsResource {
-    @Context
-    protected ResourceContext resourceContext;
-    @Context
-    protected UriInfo uriInfo;
+	@Context
+	protected ResourceContext resourceContext;
+	@Context
+	protected UriInfo uriInfo;
 
-    /** Creates a new instance of InitialConditionLevelsResource */
-    public InitialConditionLevelsResource() {
-    }
+	/** Creates a new instance of InitialConditionLevelsResource */
+	public InitialConditionLevelsResource() {
+	}
 
-    /**
-     * Get method for retrieving a collection of InitialConditionLevel instance in XML format.
-     *
-     * @return an instance of InitialConditionLevelsConverter
-     */
-    @GET
+	/**
+	 * Get method for retrieving a collection of InitialConditionLevels instance in XML format.
+	 *
+	 * @return an instance of InitialConditionLevelssConverter
+	 */
+	@GET
     @Produces({"application/xml", "application/json"})
-    public InitialConditionLevelsConverter get(@QueryParam("start")
+	public InitialConditionLevelsConverter get(@QueryParam("start")
             @DefaultValue("0") int start, @QueryParam("max")
             @DefaultValue("10") int max, @QueryParam("expandLevel")
             @DefaultValue("1") int expandLevel, @QueryParam("query")
             @DefaultValue("SELECT e FROM InitialConditionLevel e") String query) {
-        PersistenceService persistenceSvc = PersistenceService.getInstance();
-        try {
-            persistenceSvc.beginTx();
-            return new InitialConditionLevelsConverter(getEntities(start, max, query), uriInfo.getAbsolutePath(), expandLevel);
-        } finally {
-            persistenceSvc.commitTx();
-            persistenceSvc.close();
-        }
-    }
+		PersistenceService persistenceSvc = PersistenceService.getInstance();
+		try {
+			persistenceSvc.beginTx();
+			return new InitialConditionLevelsConverter(getEntities(start, max, query), uriInfo.getAbsolutePath(), expandLevel);
+		}
+		finally {
+			persistenceSvc.commitTx();
+			persistenceSvc.close();
+		}
+	}
 
-    /**
-     * Post method for creating an instance of InitialConditionLevel using XML as the input format.
-     *
-     * @param data an InitialConditionLevelConverter entity that is deserialized from an XML stream
-     * @return an instance of InitialConditionLevelConverter
-     */
-    @POST
+	/**
+	 * Post method for creating an instance of InitialConditionLevels using XML as the input format.
+	 *
+	 * @param data an InitialConditionLevelsConverter entity that is deserialized from an XML stream
+	 * @return an instance of InitialConditionLevelsConverter
+	 */
+	@POST
     @Consumes({"application/xml", "application/json"})
-	@Produces({"application/xml", "application/json"})
-    public Response post(InitialConditionLevelConverter data) {
-        PersistenceService persistenceSvc = PersistenceService.getInstance();
-        try {
-            persistenceSvc.beginTx();
-            EntityManager em = persistenceSvc.getEntityManager();
-            InitialConditionLevel entity = data.resolveEntity(em);
-            createEntity(data.resolveEntity(em));
-            persistenceSvc.commitTx();
-            return Response.created(uriInfo.getAbsolutePath().resolve(entity.getInitialConditionLevelPK().getExpId() + "," + entity.getInitialConditionLevelPK().getIc() + "/")).entity(entity).build();
-        } finally {
-            persistenceSvc.close();
-        }
-    }
+	public Response post(InitialConditionLevelConverter data) {
+		PersistenceService persistenceSvc = PersistenceService.getInstance();
+		try {
+			persistenceSvc.beginTx();
+			EntityManager em = persistenceSvc.getEntityManager();
+			InitialConditionLevel entity = data.resolveEntity(em);
+			createEntity(data.resolveEntity(em));
+			persistenceSvc.commitTx();
+			return Response.created(uriInfo.getAbsolutePath().resolve(entity.getInitialConditionLevelPK().getExpId() + "," + entity.getInitialConditionLevelPK().getIc() + "/")).build();
+		}
+		finally {
+			persistenceSvc.close();
+		}
+	}
 
-    /**
-     * Returns a dynamic instance of InitialConditionLevelResource used for entity navigation.
-     *
-     * @return an instance of InitialConditionLevelResource
-     */
-    @Path("{expId},{ic}/")
-    public InitialConditionLevelResource getInitialConditionLevelsResource(@PathParam("expId") Integer id1, @PathParam("ic") Integer id2) {
-        InitialConditionLevelResource initialConditionLevelsResource = resourceContext.getResource(InitialConditionLevelResource.class);
-        initialConditionLevelsResource.setId1(id1);
-        initialConditionLevelsResource.setId2(id2);
-        return initialConditionLevelsResource;
-    }
+	/**
+	 * Returns a dynamic instance of InitialConditionLevelResource used for entity navigation.
+	 *
+	 * @return an instance of InitialConditionLevelResource
+	 */
+	@Path("{expId},{ic}/")
+	public InitialConditionLevelResource getInitialConditionLevelsResource(@PathParam("expId") Integer id1, @PathParam("ic") Integer id2) {
+		InitialConditionLevelResource initialConditionLevelsResource = resourceContext.getResource(InitialConditionLevelResource.class);
+		initialConditionLevelsResource.setId1(id1);
+		initialConditionLevelsResource.setId2(id2);
+		return initialConditionLevelsResource;
+	}
 
-    /**
-     * Returns all the entities associated with this resource.
-     *
-     * @return a collection of InitialConditionLevel instances
-     */
-    protected Collection<InitialConditionLevel> getEntities(int start, int max, String query) {
-        EntityManager em = PersistenceService.getInstance().getEntityManager();
-        return em.createQuery(query).setFirstResult(start).setMaxResults(max).getResultList();
-    }
+	/**
+	 * Returns all the entities associated with this resource.
+	 *
+	 * @return a collection of InitialConditionLevels instances
+	 */
+	protected Collection<InitialConditionLevel> getEntities(int start, int max, String query) {
+		EntityManager em = PersistenceService.getInstance().getEntityManager();
+		return em.createQuery(query).setFirstResult(start).setMaxResults(max).getResultList();
+	}
 
-    /**
-     * Persist the given entity.
-     *
-     * @param entity the entity to persist
-     */
-    protected void createEntity(InitialConditionLevel entity) {
-        EntityManager em = PersistenceService.getInstance().getEntityManager();
-        em.persist(entity);
-        for (Treatment value : entity.getTreatmentsCollection()) {
-            InitialConditionLevel oldEntity = value.getInitialConditionLevel();
-            value.setInitialConditionLevel(entity);
-            if (oldEntity != null) {
-                oldEntity.getTreatmentsCollection().remove(value);
-            }
-        }
-    }
+	/**
+	 * Persist the given entity.
+	 *
+	 * @param entity the entity to persist
+	 */
+	protected void createEntity(InitialConditionLevel entity) {
+		EntityManager em = PersistenceService.getInstance().getEntityManager();
+		em.persist(entity);
+		for (InitialConditionEvent value : entity.getInitialConditionEventsCollection()) {
+			InitialConditionLevel oldEntity = value.getInitialConditionLevel();
+			value.setInitialConditionLevel(entity);
+			if (oldEntity != null) {
+				oldEntity.getInitialConditionEventsCollection().remove(value);
+			}
+		}
+		for (Treatment value : entity.getTreatmentsCollection()) {
+			InitialConditionLevel oldEntity = value.getInitialConditionLevel();
+			value.setInitialConditionLevel(entity);
+			if (oldEntity != null) {
+				oldEntity.getTreatmentsCollection().remove(value);
+			}
+		}
+	}
 }

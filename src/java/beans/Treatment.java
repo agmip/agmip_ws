@@ -47,7 +47,7 @@ public class Treatment implements Serializable {
 	private Integer updateStatus;
 	@JoinColumn(name = "update_user_id", referencedColumnName = "user_id")
     @ManyToOne
-	private Users updateUserId;
+	private User updateUserId;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ti", referencedColumnName = "ti", nullable = false, insertable = false, updatable = false)})
@@ -85,7 +85,7 @@ public class Treatment implements Serializable {
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ha", referencedColumnName = "ha", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-	private HarvestLevels harvestLevels;
+	private HarvestLevel harvestLevels;
 	@JoinColumns({
     	@JoinColumn(name = "exp_id", referencedColumnName = "exp_id", nullable = false, insertable = false, updatable = false),
     	@JoinColumn(name = "ic", referencedColumnName = "ic", nullable = false, insertable = false, updatable = false)})
@@ -184,11 +184,11 @@ public class Treatment implements Serializable {
 		this.updateStatus = updateStatus;
 	}
 
-	public Users getUpdateUserId() {
+	public User getUpdateUserId() {
 		return updateUserId;
 	}
 
-	public void setUpdateUserId(Users updateUserId) {
+	public void setUpdateUserId(User updateUserId) {
 		this.updateUserId = updateUserId;
 	}
 
@@ -248,11 +248,11 @@ public class Treatment implements Serializable {
 		this.genotype = genotype;
 	}
 
-	public HarvestLevels getHarvestLevels() {
+	public HarvestLevel getHarvestLevels() {
 		return harvestLevels;
 	}
 
-	public void setHarvestLevels(HarvestLevels harvestLevels) {
+	public void setHarvestLevels(HarvestLevel harvestLevels) {
 		this.harvestLevels = harvestLevels;
 	}
 

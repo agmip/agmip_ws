@@ -46,6 +46,13 @@ public class SoilProfilesServiceResource {
 		throw new UnsupportedOperationException();
 	}
 
+	@Path("/teste/")
+	public String teste(){
+		//return "jonnas";
+		System.out.println("aaaaaaaaaaaaaaaaaaaaa");
+		throw new UnsupportedOperationException();
+	}
+
 	/**
 	 * POST method for creating an instance of WeatherDailyServiceResource
 	 * @param content representation for the new resource

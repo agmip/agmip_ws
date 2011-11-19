@@ -23,9 +23,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "mulch_levels")
 @XmlRootElement
 public class MulchLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mulchLevel")
+	private Collection<MulchEvent> mulchEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected MulchLevelPK mulchLevelsPK;
+    protected MulchLevelPK mulchLevelPK;
     @Size(max = 255)
     @Column(name = "ml_name")
     private String mlName;
@@ -39,20 +41,20 @@ public class MulchLevel implements Serializable {
     public MulchLevel() {
     }
 
-    public MulchLevel(MulchLevelPK mulchLevelsPK) {
-        this.mulchLevelsPK = mulchLevelsPK;
+    public MulchLevel(MulchLevelPK mulchLevelPK) {
+        this.mulchLevelPK = mulchLevelPK;
     }
 
     public MulchLevel(int expId, int ml) {
-        this.mulchLevelsPK = new MulchLevelPK(expId, ml);
+        this.mulchLevelPK = new MulchLevelPK(expId, ml);
     }
 
-    public MulchLevelPK getMulchLevelsPK() {
-        return mulchLevelsPK;
+    public MulchLevelPK getMulchLevelPK() {
+        return mulchLevelPK;
     }
 
-    public void setMulchLevelsPK(MulchLevelPK mulchLevelsPK) {
-        this.mulchLevelsPK = mulchLevelsPK;
+    public void setMulchLevelPK(MulchLevelPK mulchLevelPK) {
+        this.mulchLevelPK = mulchLevelPK;
     }
 
     public String getMlName() {
@@ -83,7 +85,7 @@ public class MulchLevel implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (mulchLevelsPK != null ? mulchLevelsPK.hashCode() : 0);
+        hash += (mulchLevelPK != null ? mulchLevelPK.hashCode() : 0);
         return hash;
     }
 
@@ -94,7 +96,7 @@ public class MulchLevel implements Serializable {
             return false;
         }
         MulchLevel other = (MulchLevel) object;
-        if ((this.mulchLevelsPK == null && other.mulchLevelsPK != null) || (this.mulchLevelsPK != null && !this.mulchLevelsPK.equals(other.mulchLevelsPK))) {
+        if ((this.mulchLevelPK == null && other.mulchLevelPK != null) || (this.mulchLevelPK != null && !this.mulchLevelPK.equals(other.mulchLevelPK))) {
             return false;
         }
         return true;
@@ -102,7 +104,16 @@ public class MulchLevel implements Serializable {
 
     @Override
     public String toString() {
-        return "beans.MulchLevels[ mulchLevelsPK=" + mulchLevelsPK + " ]";
+        return "beans.MulchLevel[ mulchLevelPK=" + mulchLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<MulchEvent> getMulchEventsCollection() {
+		return mulchEventsCollection;
+	}
+
+	public void setMulchEventsCollection(Collection<MulchEvent> mulchEventsCollection) {
+		this.mulchEventsCollection = mulchEventsCollection;
+	}
 
 }

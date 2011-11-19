@@ -10,13 +10,13 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.ws.rs.core.UriBuilder;
 import javax.persistence.EntityManager;
-import beans.Users;
+import beans.User;
 import beans.MulchLevel;
 import beans.EnvironModifLevel;
 import beans.SoilAnalysesLevel;
 import beans.InitialConditionLevel;
 import beans.TillageLevel;
-import beans.HarvestLevels;
+import beans.HarvestLevel;
 import beans.ChemicalLevel;
 import beans.Experiment;
 import beans.IrrigationLevel;
@@ -219,10 +219,10 @@ public class TreatmentConverter {
      * @return value for updateUserId
      */
     @XmlElement
-    public UsersConverter getUpdateUserId() {
+    public UserConverter getUpdateUserId() {
         if (expandLevel > 0) {
             if (entity.getUpdateUserId() != null) {
-                return new UsersConverter(entity.getUpdateUserId(), uri.resolve("updateUserId/"), expandLevel - 1, false);
+                return new UserConverter(entity.getUpdateUserId(), uri.resolve("updateUserId/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -233,7 +233,7 @@ public class TreatmentConverter {
      *
      * @param value the value to set
      */
-    public void setUpdateUserId(UsersConverter value) {
+    public void setUpdateUserId(UserConverter value) {
         entity.setUpdateUserId((value != null) ? value.getEntity() : null);
     }
 
@@ -412,10 +412,10 @@ public class TreatmentConverter {
      * @return value for harvestLevels
      */
     @XmlElement
-    public HarvestLevelsConverter getHarvestLevels() {
+    public HarvestLevelConverter getHarvestLevels() {
         if (expandLevel > 0) {
             if (entity.getHarvestLevels() != null) {
-                return new HarvestLevelsConverter(entity.getHarvestLevels(), uri.resolve("harvestLevels/"), expandLevel - 1, false);
+                return new HarvestLevelConverter(entity.getHarvestLevels(), uri.resolve("harvestLevels/"), expandLevel - 1, false);
             }
         }
         return null;
@@ -426,7 +426,7 @@ public class TreatmentConverter {
      *
      * @param value the value to set
      */
-    public void setHarvestLevels(HarvestLevelsConverter value) {
+    public void setHarvestLevels(HarvestLevelConverter value) {
         entity.setHarvestLevels((value != null) ? value.getEntity() : null);
     }
 
@@ -614,9 +614,9 @@ public class TreatmentConverter {
      * @return an resolved entity
      */
     public Treatment resolveEntity(EntityManager em) {
-        Users updateUserId = entity.getUpdateUserId();
+        User updateUserId = entity.getUpdateUserId();
         if (updateUserId != null) {
-            entity.setUpdateUserId(em.getReference(Users.class, updateUserId.getUserId()));
+            entity.setUpdateUserId(em.getReference(User.class, updateUserId.getUserId()));
         }
         Planting planting = entity.getPlanting();
         if (planting != null) {
@@ -646,9 +646,9 @@ public class TreatmentConverter {
         if (genotype != null) {
             entity.setGenotype(em.getReference(Genotype.class, genotype.getGenotypePK()));
         }
-        HarvestLevels harvestLevels = entity.getHarvestLevels();
+        HarvestLevel harvestLevels = entity.getHarvestLevels();
         if (harvestLevels != null) {
-            entity.setHarvestLevels(em.getReference(HarvestLevels.class, harvestLevels.getHarvestLevelsPK()));
+            entity.setHarvestLevels(em.getReference(HarvestLevel.class, harvestLevels.getHarvestLevelPK()));
         }
         InitialConditionLevel initialConditionLevels = entity.getInitialConditionLevel();
         if (initialConditionLevels != null) {
@@ -660,7 +660,7 @@ public class TreatmentConverter {
         }
         MulchLevel mulchLevels = entity.getMulchLevels();
         if (mulchLevels != null) {
-            entity.setMulchLevels(em.getReference(MulchLevel.class, mulchLevels.getMulchLevelsPK()));
+            entity.setMulchLevels(em.getReference(MulchLevel.class, mulchLevels.getMulchLevelPK()));
         }
         OrganicMaterialLevel organicMaterialLevel = entity.getOrganicMaterialLevel();
         if (organicMaterialLevel != null) {

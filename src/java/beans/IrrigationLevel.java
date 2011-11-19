@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "irrigation_levels")
 @XmlRootElement
 public class IrrigationLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "irrigationLevel")
+	private Collection<IrrigationEvent> irrigationEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected IrrigationLevelPK irrigationLevelPK;
@@ -175,5 +177,14 @@ public class IrrigationLevel implements Serializable {
     public String toString() {
         return "beans.IrrigationLevel[ irrigationLevelPK=" + irrigationLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<IrrigationEvent> getIrrigationEventsCollection() {
+		return irrigationEventsCollection;
+	}
+
+	public void setIrrigationEventsCollection(Collection<IrrigationEvent> irrigationEventsCollection) {
+		this.irrigationEventsCollection = irrigationEventsCollection;
+	}
 
 }

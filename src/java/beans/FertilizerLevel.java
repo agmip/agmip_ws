@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "fertilizer_levels")
 @XmlRootElement
 public class FertilizerLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "fertilizerLevel")
+	private Collection<FertilizerEvent> fertilizerEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected FertilizerLevelPK fertilizerLevelPK;
@@ -102,5 +104,14 @@ public class FertilizerLevel implements Serializable {
     public String toString() {
         return "beans.FertilizerLevels[ fertilizerLevelPK=" + fertilizerLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<FertilizerEvent> getFertilizerEventsCollection() {
+		return fertilizerEventsCollection;
+	}
+
+	public void setFertilizerEventsCollection(Collection<FertilizerEvent> fertilizerEventsCollection) {
+		this.fertilizerEventsCollection = fertilizerEventsCollection;
+	}
 
 }

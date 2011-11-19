@@ -14,13 +14,13 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
-import beans.Users;
+import beans.User;
 import beans.MulchLevel;
 import beans.EnvironModifLevel;
 import beans.SoilAnalysesLevel;
 import beans.InitialConditionLevel;
 import beans.TillageLevel;
-import beans.HarvestLevels;
+import beans.HarvestLevel;
 import beans.ChemicalLevel;
 import beans.Experiment;
 import beans.IrrigationLevel;
@@ -157,8 +157,8 @@ public class TreatmentResource {
      */
     private Treatment updateEntity(Treatment entity, Treatment newEntity) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
-        Users updateUserId = entity.getUpdateUserId();
-        Users updateUserIdNew = newEntity.getUpdateUserId();
+        User updateUserId = entity.getUpdateUserId();
+        User updateUserIdNew = newEntity.getUpdateUserId();
         Planting planting = entity.getPlanting();
         Planting plantingNew = newEntity.getPlanting();
         ChemicalLevel chemicalLevels = entity.getChemicalLevels();
@@ -173,8 +173,8 @@ public class TreatmentResource {
         Field fieldsNew = newEntity.getField();
         Genotype genotype = entity.getGenotype();
         Genotype genotypeNew = newEntity.getGenotype();
-        HarvestLevels harvestLevels = entity.getHarvestLevels();
-        HarvestLevels harvestLevelsNew = newEntity.getHarvestLevels();
+        HarvestLevel harvestLevels = entity.getHarvestLevels();
+        HarvestLevel harvestLevelsNew = newEntity.getHarvestLevels();
         InitialConditionLevel initialConditionLevel = entity.getInitialConditionLevel();
         InitialConditionLevel initialConditionLevelNew = newEntity.getInitialConditionLevel();
         IrrigationLevel irrigationLevel = entity.getIrrigationLevel();
@@ -266,12 +266,12 @@ public class TreatmentResource {
         if (organicMaterialLevelNew != null && !organicMaterialLevelNew.equals(organicMaterialLevel)) {
             organicMaterialLevelNew.getTreatmentsCollection().add(entity);
         }
-        if (soilAnalysesLevel != null && !soilAnalysesLevel.equals(soilAnalysesLevelNew)) {
+        /*if (soilAnalysesLevel != null && !soilAnalysesLevel.equals(soilAnalysesLevelNew)) {
             soilAnalysesLevel.getTreatmentsCollection().remove(entity);
         }
         if (soilAnalysesLevelNew != null && !soilAnalysesLevelNew.equals(soilAnalysesLevel)) {
             soilAnalysesLevelNew.getTreatmentsCollection().add(entity);
-        }
+        }*/
         if (tillageLevels != null && !tillageLevels.equals(tillageLevelsNew)) {
             tillageLevels.getTreatmentsCollection().remove(entity);
         }
@@ -288,7 +288,7 @@ public class TreatmentResource {
      */
     private void deleteEntity(Treatment entity) {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
-        Users updateUserId = entity.getUpdateUserId();
+        User updateUserId = entity.getUpdateUserId();
         if (updateUserId != null) {
             updateUserId.getTreatmentsCollection().remove(entity);
         }
@@ -320,7 +320,7 @@ public class TreatmentResource {
         if (genotype != null) {
             genotype.getTreatmentsCollection().remove(entity);
         }
-        HarvestLevels harvestLevels = entity.getHarvestLevels();
+        HarvestLevel harvestLevels = entity.getHarvestLevels();
         if (harvestLevels != null) {
             harvestLevels.getTreatmentsCollection().remove(entity);
         }
@@ -340,10 +340,10 @@ public class TreatmentResource {
         if (organicMaterialLevel != null) {
             organicMaterialLevel.getTreatmentsCollection().remove(entity);
         }
-        SoilAnalysesLevel soilAnalysesLevels = entity.getSoilAnalysesLevel();
+        /*SoilAnalysesLevel soilAnalysesLevels = entity.getSoilAnalysesLevel();
         if (soilAnalysesLevels != null) {
             soilAnalysesLevels.getTreatmentsCollection().remove(entity);
-        }
+        }*/
         TillageLevel tillageLevels = entity.getTillageLevels();
         if (tillageLevels != null) {
             tillageLevels.getTreatmentsCollection().remove(entity);
@@ -352,13 +352,13 @@ public class TreatmentResource {
     }
 
     /**
-     * Returns a dynamic instance of UsersResource used for entity navigation.
+     * Returns a dynamic instance of UserResource used for entity navigation.
      *
      * @param id identifier for the parent entity
-     * @return an instance of UsersResource
+     * @return an instance of UserResource
      */
     @Path("updateUserId/")
-    public UsersResource getUpdateUserIdResource() {
+    public UserResource getUpdateUserIdResource() {
         UpdateUserIdResourceSub updateUserIdResourceSub = resourceContext.getResource(UpdateUserIdResourceSub.class);
         updateUserIdResourceSub.setParent(getEntity());
         return updateUserIdResourceSub;
@@ -456,13 +456,13 @@ public class TreatmentResource {
     }
 
     /**
-     * Returns a dynamic instance of HarvestLevelsResource used for entity navigation.
+     * Returns a dynamic instance of HarvestLevelResource used for entity navigation.
      *
      * @param id identifier for the parent entity
-     * @return an instance of HarvestLevelsResource
+     * @return an instance of HarvestLevelResource
      */
     @Path("harvestLevels/")
-    public HarvestLevelsResource getHarvestLevelsResource() {
+    public HarvestLevelResource getHarvestLevelsResource() {
         HarvestLevelsResourceSub harvestLevelsResourceSub = resourceContext.getResource(HarvestLevelsResourceSub.class);
         harvestLevelsResourceSub.setParent(getEntity());
         return harvestLevelsResourceSub;
@@ -475,7 +475,7 @@ public class TreatmentResource {
      * @return an instance of InitialConditionLevelResource
      */
     @Path("initialConditionLevels/")
-    public InitialConditionLevelResource getInitialConditionLevelsResource() {
+    public InitialConditionLevelsResourceSub getInitialConditionLevelsResource() {
         InitialConditionLevelsResourceSub initialConditionLevelsResourceSub = resourceContext.getResource(InitialConditionLevelsResourceSub.class);
         initialConditionLevelsResourceSub.setParent(getEntity());
         return initialConditionLevelsResourceSub;
@@ -546,7 +546,7 @@ public class TreatmentResource {
         return tillageLevelsResourceSub;
     }
 
-    public static class UpdateUserIdResourceSub extends UsersResource {
+    public static class UpdateUserIdResourceSub extends UserResource {
 
         private Treatment parent;
 
@@ -555,8 +555,8 @@ public class TreatmentResource {
         }
 
         @Override
-        protected Users getEntity() {
-            Users entity = parent.getUpdateUserId();
+        protected User getEntity() {
+            User entity = parent.getUpdateUserId();
             if (entity == null) {
                 throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
             }
@@ -690,7 +690,7 @@ public class TreatmentResource {
         }
     }
 
-    public static class HarvestLevelsResourceSub extends HarvestLevelsResource {
+    public static class HarvestLevelsResourceSub extends HarvestLevelResource {
 
         private Treatment parent;
 
@@ -699,8 +699,8 @@ public class TreatmentResource {
         }
 
         @Override
-        protected HarvestLevels getEntity() {
-            HarvestLevels entity = parent.getHarvestLevels();
+        protected HarvestLevel getEntity() {
+            HarvestLevel entity = parent.getHarvestLevels();
             if (entity == null) {
                 throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
             }

@@ -15,9 +15,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.Treatment;
-import converter.FertilizerLevelsConverter;
+import converter.FertilizerLevelConverter;
 import converter.FertilizerLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
+import converter.FertilizerLevelsConverter;
 
 /**
  *
@@ -37,7 +38,7 @@ public class FertilizerLevelsResource {
     /**
      * Get method for retrieving a collection of FertilizerLevel instance in XML format.
      *
-     * @return an instance of FertilizerLevelsConverter
+     * @return an instance of FertilizerLevelConverter
      */
     @GET
     @Produces({"application/xml", "application/json"})

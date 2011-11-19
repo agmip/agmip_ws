@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "organic_material_levels")
 @XmlRootElement
 public class OrganicMaterialLevel implements Serializable {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organicMaterialLevel")
+	private Collection<OrganicMaterialEvent> organicMaterialEventsCollection;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected OrganicMaterialLevelPK organicMaterialLevelPK;
@@ -104,5 +106,14 @@ public class OrganicMaterialLevel implements Serializable {
     public String toString() {
         return "beans.OrganicMaterialLevel[ organicMaterialLevelPK=" + organicMaterialLevelPK + " ]";
     }
+
+	@XmlTransient
+	public Collection<OrganicMaterialEvent> getOrganicMaterialEventsCollection() {
+		return organicMaterialEventsCollection;
+	}
+
+	public void setOrganicMaterialEventsCollection(Collection<OrganicMaterialEvent> organicMaterialEventsCollection) {
+		this.organicMaterialEventsCollection = organicMaterialEventsCollection;
+	}
 
 }
