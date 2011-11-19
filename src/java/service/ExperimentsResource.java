@@ -1,16 +1,24 @@
 package service;
 
+import beans.EnvironModifEvent;
 import beans.EnvironModifLevel;
 import beans.Experiment;
+import beans.FertilizerEvent;
 import beans.FertilizerLevel;
 import beans.Field;
 import beans.Genotype;
+import beans.InitialConditionEvent;
 import beans.InitialConditionLevel;
+import beans.IrrigationEvent;
 import beans.IrrigationLevel;
+import beans.MulchEvent;
 import beans.MulchLevel;
+import beans.OrganicMaterialEvent;
 import beans.OrganicMaterialLevel;
 import beans.Planting;
+import beans.SoilAnalysesEvent;
 import beans.SoilAnalysesLevel;
+import beans.TillageEvent;
 import beans.TillageLevel;
 import java.util.Collection;
 import javax.ws.rs.Path;
@@ -150,8 +158,6 @@ public class ExperimentsResource {
 				}
 
 				if (treatment.getGenotype() != null){
-					System.out.println(treatment.getGenotype());
-					System.out.println(treatment.getGenotype().getClass());
 					System.out.println("GENOTYPES");
 					// Set the Experiment ID to the Genotype
 					treatment.getGenotype().getGenotypePK().setExpId(entity.getExpId());
@@ -165,8 +171,24 @@ public class ExperimentsResource {
 					System.out.println("TILLAGE LEVELS");
 					// Set the Experiment ID to the TillageLevel
 					treatment.getTillageLevel().getTillageLevelPK().setExpId(entity.getExpId());
-					// Persists the TillageLevel
+
+					/* Gets the TillageLevel, add references to the childs
+					 and then persists it */
 					TillageLevel tillageLevel = treatment.getTillageLevel();
+
+					Collection <TillageEvent> list = tillageLevel.getTillageEventsCollection();
+
+					if (list != null){
+						Collection <TillageEvent> newList = new ArrayList<TillageEvent>();
+
+						for (TillageEvent obj : list){
+							obj.getTillageEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						tillageLevel.setTillageEventsCollection(newList);
+					}
+
 					em.persist(tillageLevel);
 					treatment.setTillageLevel(tillageLevel);
 				}
@@ -175,8 +197,24 @@ public class ExperimentsResource {
 					System.out.println("ENVIRON MODIF LEVELS");
 					// Set the Experiment ID to the EnvironModifLevel
 					treatment.getEnvironModifLevel().getEnvironModifLevelPK().setExpId(entity.getExpId());
-					// Persists the EnvironModifLevel
+
+					/* Gets the EnvironModifLevel, add references to the childs
+					 and then persists it */
 					EnvironModifLevel environModifLevel = treatment.getEnvironModifLevel();
+
+					Collection <EnvironModifEvent> list = environModifLevel.getEnvironModifEventsCollection();
+
+					if (list != null){
+						Collection <EnvironModifEvent> newList = new ArrayList<EnvironModifEvent>();
+
+						for (EnvironModifEvent obj : list){
+							obj.getEnvironModifEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						environModifLevel.setEnvironModifEventsCollection(newList);
+					}
+
 					em.persist(environModifLevel);
 					treatment.setEnvironModifLevel(environModifLevel);
 				}
@@ -186,8 +224,24 @@ public class ExperimentsResource {
 					System.out.println("FERTILIZER LEVELS");
 					// Set the Experiment ID to the FertilizerLevel
 					treatment.getFertilizerLevel().getFertilizerLevelPK().setExpId(entity.getExpId());
-					// Persists the FertilizerLevel
+
+					/* Gets the FertilizerLevel, add references to the childs
+					 and then persists it */
 					FertilizerLevel fertilizerLevel = treatment.getFertilizerLevel();
+
+					Collection <FertilizerEvent> list = fertilizerLevel.getFertilizerEventsCollection();
+
+					if (list != null){
+						Collection <FertilizerEvent> newList = new ArrayList<FertilizerEvent>();
+
+						for (FertilizerEvent obj : list){
+							obj.getFertilizerEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						fertilizerLevel.setFertilizerEventsCollection(newList);
+					}
+
 					em.persist(fertilizerLevel);
 					treatment.setFertilizerLevel(fertilizerLevel);
 				}
@@ -196,8 +250,24 @@ public class ExperimentsResource {
 					System.out.println("INITIAL CONDITION LEVELS");
 					// Set the Experiment ID to the InitialConditionLevel
 					treatment.getInitialConditionLevel().getInitialConditionLevelPK().setExpId(entity.getExpId());
-					// Persists the InitialConditionLevel
+
+					/* Gets the InitialConditionLevel, add references to the childs
+					 and then persists it */
 					InitialConditionLevel initialConditionLevel = treatment.getInitialConditionLevel();
+
+					Collection <InitialConditionEvent> list = initialConditionLevel.getInitialConditionEventsCollection();
+
+					if (list != null){
+						Collection <InitialConditionEvent> newList = new ArrayList<InitialConditionEvent>();
+
+						for (InitialConditionEvent obj : list){
+							obj.getInitialConditionEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						initialConditionLevel.setInitialConditionEventsCollection(newList);
+					}
+
 					em.persist(initialConditionLevel);
 					treatment.setInitialConditionLevel(initialConditionLevel);
 				}
@@ -207,8 +277,24 @@ public class ExperimentsResource {
 					System.out.println("IRRIGATION LEVELS");
 					// Set the Experiment ID to the IrrigationLevel
 					treatment.getIrrigationLevel().getIrrigationLevelPK().setExpId(entity.getExpId());
-					// Persists the IrrigationLevel
+
+					/* Gets the IrrigationLevel, add references to the childs
+					 and then persists it */
 					IrrigationLevel irrigationLevel = treatment.getIrrigationLevel();
+
+					Collection<IrrigationEvent> list = irrigationLevel.getIrrigationEventsCollection();
+
+					if (list != null){
+						Collection<IrrigationEvent> newList = new ArrayList<IrrigationEvent>();
+
+						for (IrrigationEvent obj : list){
+							obj.getIrrigationEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						irrigationLevel.setIrrigationEventsCollection(newList);
+					}
+
 					em.persist(irrigationLevel);
 					treatment.setIrrigationLevel(irrigationLevel);
 				}
@@ -218,8 +304,24 @@ public class ExperimentsResource {
 					System.out.println("MULCH LEVELS");
 					// Set the Experiment ID to the MulchLevel
 					treatment.getMulchLevel().getMulchLevelPK().setExpId(entity.getExpId());
-					// Persists the MulchLevel
+
+					/* Gets the MulchLevel, add references to the childs
+					 and then persists it */
 					MulchLevel mulchLevel= treatment.getMulchLevel();
+
+					Collection <MulchEvent> list = mulchLevel.getMulchEventsCollection();
+
+					if (list != null){
+						Collection <MulchEvent> newList = new ArrayList<MulchEvent>();
+
+						for (MulchEvent obj : list){
+							obj.getMulchEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						mulchLevel.setMulchEventsCollection(newList);
+					}
+
 					em.persist(mulchLevel);
 					treatment.setMulchLevel(mulchLevel);
 				}
@@ -229,8 +331,24 @@ public class ExperimentsResource {
 					System.out.println("ORGANIC MATERIAL LEVELS");
 					// Set the Experiment ID to the OrganicMaterialLevel
 					treatment.getOrganicMaterialLevel().getOrganicMaterialLevelPK().setExpId(entity.getExpId());
-					// Persists the OrganicMaterialLevel
+
+					/* Gets the OrganicMaterialLevel, add references to the childs
+					 and then persists it */
 					OrganicMaterialLevel organicMaterialLevel = treatment.getOrganicMaterialLevel();
+
+					Collection<OrganicMaterialEvent> list = organicMaterialLevel.getOrganicMaterialEventsCollection();
+
+					if (list != null){
+						Collection<OrganicMaterialEvent> newList = new ArrayList<OrganicMaterialEvent>();
+
+						for (OrganicMaterialEvent obj : list){
+							obj.getOrganicMaterialEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						organicMaterialLevel.setOrganicMaterialEventsCollection(newList);
+					}
+
 					em.persist(organicMaterialLevel);
 					treatment.setOrganicMaterialLevel(organicMaterialLevel);
 				}
@@ -240,7 +358,8 @@ public class ExperimentsResource {
 					System.out.println("PLANTINGS");
 					// Set the Experiment ID to the Plantings
 					treatment.getPlanting().getPlantingPK().setExpId(entity.getExpId());
-					// Persists the Plantings
+
+					// Persists the Field
 					Planting planting = treatment.getPlanting();
 					em.persist(planting);
 					treatment.setPlanting(planting);
@@ -251,8 +370,23 @@ public class ExperimentsResource {
 					System.out.println("SOIL ANALYSES");
 					// Set the Experiment ID to the SoilAnalysesLevels
 					treatment.getSoilAnalysesLevel().getSoilAnalysesLevelPK().setExpId(entity.getExpId());
-					// Persists the SoilAnalysesLevels
+
+					/* Gets the OrganicMaterialLevel, add references to the childs
+					 and then persists it */
 					SoilAnalysesLevel soilAnalyses = treatment.getSoilAnalysesLevel();
+
+					Collection <SoilAnalysesEvent> list = soilAnalyses.getSoilAnalysesEventsCollection();
+
+					if (list != null){
+						Collection <SoilAnalysesEvent> newList = new ArrayList<SoilAnalysesEvent>();
+						for (SoilAnalysesEvent obj : list){
+							obj.getSoilAnalysesEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						soilAnalyses.setSoilAnalysesEventsCollection(newList);
+					}
+
 					em.persist(soilAnalyses);
 					treatment.setSoilAnalysesLevel(soilAnalyses);
 				}

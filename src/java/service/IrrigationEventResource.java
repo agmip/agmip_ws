@@ -15,7 +15,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
 import beans.IrrigationLevel;
-import beans.IrrigationLevelPK;
 import converter.IrrigationEventConverter;
 import com.sun.jersey.api.core.ResourceContext;
 

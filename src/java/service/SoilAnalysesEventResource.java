@@ -15,8 +15,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
 import beans.SoilAnalysesLevel;
-import beans.SoilAnalysesLevelPK;
-import converter.SoilAnalysesEventsConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.SoilAnalysesEventConverter;
 

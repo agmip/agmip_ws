@@ -17,7 +17,6 @@ import javax.persistence.EntityManager;
 import beans.Treatment;
 import beans.OrganicMaterialEvent;
 import java.util.Collection;
-import converter.OrganicMaterialLevelConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.OrganicMaterialLevelConverter;
 

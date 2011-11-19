@@ -14,7 +14,6 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
-import beans.OrganicMaterialLevelPK;
 import beans.OrganicMaterialLevel;
 import converter.OrganicMaterialEventConverter;
 import com.sun.jersey.api.core.ResourceContext;

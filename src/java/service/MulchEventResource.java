@@ -15,7 +15,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
 import beans.MulchLevel;
-import beans.MulchLevelPK;
 import converter.MulchEventConverter;
 import com.sun.jersey.api.core.ResourceContext;
 

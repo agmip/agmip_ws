@@ -14,7 +14,6 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
-import beans.TillageLevelPK;
 import beans.TillageLevel;
 import converter.TillageEventConverter;
 import com.sun.jersey.api.core.ResourceContext;
