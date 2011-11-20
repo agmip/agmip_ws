@@ -109,7 +109,7 @@ public class FieldResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         try {
             beans.FieldPK id = new beans.FieldPK(id1, id2);
-            return (Field) em.createQuery("SELECT e FROM Field e where e.fieldsPK = :fieldsPK").setParameter("fieldsPK", id).getSingleResult();
+            return (Field) em.createQuery("SELECT e FROM Field e where e.fieldPK = :fieldPK").setParameter("fieldPK", id).getSingleResult();
         } catch (NoResultException ex) {
             throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
         }

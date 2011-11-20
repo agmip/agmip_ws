@@ -39,8 +39,8 @@ public class TillageLevel implements Serializable {
     public TillageLevel() {
     }
 
-    public TillageLevel(TillageLevelPK tillageLevelsPK) {
-        this.tillageLevelPK = tillageLevelsPK;
+    public TillageLevel(TillageLevelPK tillageLevelPK) {
+        this.tillageLevelPK = tillageLevelPK;
     }
 
     public TillageLevel(int expId, int ti) {

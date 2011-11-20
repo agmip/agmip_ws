@@ -109,7 +109,7 @@ public class EnvironModifLevelResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         try {
             beans.EnvironModifLevelPK id = new beans.EnvironModifLevelPK(id1, id2);
-            return (EnvironModifLevel) em.createQuery("SELECT e FROM EnvironModifLevel e where e.environModifLevelPK = :environModifLevelsPK").setParameter("environModifLevelsPK", id).getSingleResult();
+            return (EnvironModifLevel) em.createQuery("SELECT e FROM EnvironModifLevel e where e.environModifLevelPK = :environModifLevelPK").setParameter("environModifLevelPK", id).getSingleResult();
         } catch (NoResultException ex) {
             throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
         }

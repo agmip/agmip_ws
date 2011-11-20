@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -77,8 +75,8 @@ public class SoilAnalysesLevel implements Serializable {
 		return soilAnalysesLevelPK;
 	}
 
-	public void setSoilAnalysesLevelPK(SoilAnalysesLevelPK soilAnalysesLevelsPK) {
-		this.soilAnalysesLevelPK = soilAnalysesLevelsPK;
+	public void setSoilAnalysesLevelPK(SoilAnalysesLevelPK soilAnalysesLevelPK) {
+		this.soilAnalysesLevelPK = soilAnalysesLevelPK;
 	}
 
 	public Date getSadat() {

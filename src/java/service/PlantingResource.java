@@ -109,7 +109,7 @@ public class PlantingResource {
         EntityManager em = PersistenceService.getInstance().getEntityManager();
         try {
             beans.PlantingPK id = new beans.PlantingPK(id1, id2);
-            return (Planting) em.createQuery("SELECT e FROM Planting e where e.plantingsPK = :plantingsPK").setParameter("plantingsPK", id).getSingleResult();
+            return (Planting) em.createQuery("SELECT e FROM Planting e where e.plantingPK = :plantingPK").setParameter("plantingPK", id).getSingleResult();
         } catch (NoResultException ex) {
             throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
         }

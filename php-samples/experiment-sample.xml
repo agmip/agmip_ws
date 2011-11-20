@@ -1,0 +1,375 @@
+	<experiment>
+		<address>FICTIONAL UNIVERSITY, BR</address>
+		<exname>JFONINI510</exname>
+		<localName>MARAU, RS</localName>
+		<people>FONINI,J</people>
+		<site>MARAU</site>
+		
+		<treatmentsCollection>
+			<treatment>
+				<trName>RAINFED HIGH NITROGEN </trName>
+				<treatmentPK>
+					<co>0</co>
+					<op>0</op>
+					<rp>1</rp>
+					<sq>1</sq>
+					<trno>1</trno>
+				</treatmentPK>
+				<updateDate>2011-09-10T15:25:40-03:00</updateDate>   
+				
+				<chemicalLevel>
+					<chemicalLevelPK>
+						<ch>1</ch>
+					</chemicalLevelPK>
+					
+					<chName>-99</chName>
+					
+					<chemicalEventsCollection>
+						<chemicalEvent>
+							<chemicalEventPK>
+								<ch>1</ch>
+								<chApplNo>0</chApplNo>
+							</chemicalEventPK>
+							
+							<cdate>2006-02-16T00:00:00-02:00</cdate>
+							<chTargets>-99</chTargets>
+							<chacd>-99</chacd>
+							<chamt>-99.0</chamt>
+							<chcd>-99</chcd>
+							<chdep>-99.0</chdep>
+						</chemicalEvent>
+					</chemicalEventsCollection>
+					
+				</chemicalLevel>
+				
+				
+				<mulchLevel>
+					<mulchLevelPK>
+						<ml>1</ml>
+					</mulchLevelPK>
+					
+					<mlName>test</mlName>
+					<mlNotes>test</mlNotes>
+					
+					<mulchEventsCollection>
+						<mulchEvent>
+							<mulchEventPK>
+								<ml>1</ml>
+								<mlApplNo>0</mlApplNo>
+							</mulchEventPK>
+							
+							<mltp>test</mltp>
+						</mulchEvent>
+					</mulchEventsCollection>
+					
+				</mulchLevel>
+				
+
+				<field>
+					<farea>0.0</farea>
+					<fhdur>-99</fhdur>
+					<fieldPK>
+						<fl>1</fl>
+					</fieldPK>
+					<flDrntype>DR000</flDrntype>
+					<flLat>29.63</flLat>
+					<flLong>-82.37</flLong>
+					<flName>Field section</flName>
+					<fldrd>0.0</fldrd>
+					<fldrs>0.0</fldrs>
+					<flele>40.0</flele>
+					<flhst>-99</flhst>
+					<fllwr>0</fllwr>
+					<flob>0.0</flob>
+					<flsl>-99.0</flsl>
+					<flsla>0</flsla>
+					<flst>00000</flst>
+					<idField>UFGA0002</idField>
+					<sldp>180.0</sldp>
+					<sltx>-99</sltx>
+					<soilId>IBMZ910014</soilId>
+					<wstaId>UFGA</wstaId>
+				</field>
+					
+				<genotype>
+					<cr>CC</cr>
+					<culId>IB0171</culId>
+					<culName>AG9010</culName>
+					<genotypePK>
+						<ge>1</ge>
+					</genotypePK>
+				</genotype>
+		
+				<tillageLevel>
+					<tiName>-99</tiName>
+					<tillageLevelPK>
+						<ti>1</ti>
+					</tillageLevelPK>
+					
+					<tillageEventsCollection>
+						<tillageEvent>
+							<tdate>2006-02-16T00:00:00-02:00</tdate>
+							<tidep>-99.0</tidep>
+							<tiimp>-99</tiimp>
+							<tillageEventPK>
+								<ti>1</ti>
+								<tiOpsNo>0</tiOpsNo>
+							</tillageEventPK>
+						</tillageEvent>
+					</tillageEventsCollection>
+					
+				</tillageLevel>
+					
+				<environModifLevel>
+					<environModifLevelPK>
+						<em>1</em>
+					</environModifLevelPK>
+					
+					<environModifEventsCollection>
+					
+						<environModifEvent>
+							<ecco2>A</ecco2>
+							<ecdew>A</ecdew>
+							<ecdyl>A</ecdyl>
+							<ecmax>A</ecmax>
+							<ecmin>A</ecmin>
+							<ecrad>A</ecrad>
+							<ecrai>R</ecrai>
+							<ecwnd>A</ecwnd>
+							<emco2>0.0</emco2>
+							<emday>2006-06-01T00:00:00-03:00</emday>
+							<emdew>0.0</emdew>
+							<emdyl>0.0</emdyl>
+							<emmax>0.0</emmax>
+							<emmin>0.0</emmin>
+							<emrad>0.0</emrad>
+							<emrai>0.0</emrai>
+							<emwnd>0.0</emwnd>
+							<environModifEventPK>
+								<em>1</em>
+								<envLevNo>0</envLevNo>
+							</environModifEventPK>
+						</environModifEvent>
+						
+					</environModifEventsCollection>	
+					
+				</environModifLevel>
+					
+				<fertilizerLevel>
+					<feName>-99</feName>
+					<fertilizerLevelPK>
+						<fe>1</fe>
+					</fertilizerLevelPK>
+					
+					<fertilizerEventsCollection>
+					
+						<fertilizerEvent>
+							<fdate>2006-04-07T00:00:00-03:00</fdate>
+							<feacd>AP005</feacd>
+							<feamc>-99.0</feamc>
+							<feamk>12.0</feamk>
+							<feamn>9.0</feamn>
+							<feamo>1.0</feamo>
+							<feamp>25.0</feamp>
+							<fecd>FE011</fecd>
+							<fedep>10.0</fedep>
+							<feocd>0</feocd>
+							<fertilizerEventPK>
+								<fe>1</fe>
+								<feApplNo>0</feApplNo>
+							</fertilizerEventPK>
+						</fertilizerEvent>
+						
+					</fertilizerEventsCollection>
+					
+				</fertilizerLevel>
+					
+				<initialConditionLevel>
+					<icName>rainfed</icName>
+					<icdat>2002-03-01T00:00:00-03:00</icdat>
+					<icnd>-99.0</icnd>
+					<icpcr>MZ</icpcr>
+					<icrag>5100.0</icrag>
+					<icrdp>15.0</icrdp>
+					<icrip>100.0</icrip>
+					<icrn>1.5</icrn>
+					<icrp>-99.0</icrp>
+					<icrt>-99.0</icrt>
+					<icrze>1</icrze>
+					<icrzno>1.0</icrzno>
+					<icwt>-99.0</icwt>
+					<initialConditionLevelPK>
+						<ic>1</ic>
+					</initialConditionLevelPK>
+					
+					<initialConditionEventsCollection>
+					
+						<initialConditionEvent>
+							<icbl>10</icbl>
+							<ich2o>0.092</ich2o>
+							<icnh4>0.2</icnh4>
+							<icno3>1.0</icno3>
+							<initialConditionEventPK>
+								<ic>1</ic>
+								<icLayer>0</icLayer>
+							</initialConditionEventPK>
+						</initialConditionEvent>
+					
+					</initialConditionEventsCollection>
+					
+				</initialConditionLevel>
+					
+				<irrigationLevel>
+					<iame>IR001</iame>
+					<iamt>10.0</iamt>
+					<irName>-99</irName>
+					<ireff>0.9</ireff>
+					<irept>100.0</irept>
+					<irmdp>30.0</irmdp>
+					<irrigationLevelPK>
+						<ir>1</ir>
+					</irrigationLevelPK>
+					<irstg>GS000</irstg>
+					<irthr>50.0</irthr>
+					
+					<irrigationEventsCollection>
+						
+						<irrigationEvent>
+							<idate>2006-04-03T00:00:00-03:00</idate>
+							<irop>IR005</irop>
+							<irrigationEventPK>
+								<ir>1</ir>
+								<irAppNo>0</irAppNo>
+							</irrigationEventPK>
+							<irval>2.9</irval>
+						</irrigationEvent>
+						
+					</irrigationEventsCollection>
+				</irrigationLevel>
+				
+				
+				<harvestLevel>
+					<harvestLevelPK>
+						<ha>1</ha>
+					</harvestLevelPK>
+					
+					<haName>Control</haName>
+					
+					<harvestEventsCollection>
+						<harvestEvent>
+							<harvestEventPK>
+								<ha>1</ha>
+								<haOpsNo>0</haOpsNo>
+							</harvestEventPK>
+							
+							<habpc>-99.0</habpc>
+							<hacom>-99</hacom>
+							<haday>2006-07-02T00:00:00-03:00</haday>
+							<hapc>-99.0</hapc>
+							<hasiz>-99</hasiz>
+							<hastg>GS000</hastg>
+						</harvestEvent>
+					</harvestEventsCollection>
+					
+				</harvestLevel>
+				
+			
+				<planting>
+					<page>-99.0</page>
+					<pdate>2002-03-13T00:00:00-03:00</pdate>
+					<penv>-99.0</penv>
+					<plName>-99</plName>
+					<plantingPK>
+						<pl>1</pl>
+					</plantingPK>
+					<pldae>2011-09-29T13:37:36-03:00</pldae>
+					<pldp>5.0</pldp>
+					<plds>R</plds>
+					<plme>S</plme>
+					<plmwt>-99.0</plmwt>
+					<plph>-99</plph>
+					<plpoe>5.0</plpoe>
+					<plpop>7.0</plpop>
+					<plrd>45.0</plrd>
+					<plrs>80.0</plrs>
+					<plspl>0.0</plspl>
+				</planting>
+				
+				<organicMaterialLevel>
+					<omName>-99</omName>
+					<organicMaterialLevelPK>
+						<om>2</om>
+					</organicMaterialLevelPK>
+					
+					<organicMaterialEventsCollection>
+					
+						<organicMaterialEvent>
+							<omacd>-99</omacd>
+							<omamt>0.0</omamt>
+							<omcd>RE004</omcd>
+							<omdat>2008-02-17T00:00:00-02:00</omdat>
+							<omdep>10.0</omdep>
+							<ominp>100.0</ominp>
+							<omkpct>1.5</omkpct>
+							<omnpct>6.0</omnpct>
+							<omppct>2.0</omppct>
+							<organicMaterialEventPK>
+								<om>2</om>
+								<omOpsNo>1</omOpsNo>
+							</organicMaterialEventPK>
+						</organicMaterialEvent>
+						
+						<organicMaterialEvent>
+							<omacd>-99</omacd>
+							<omamt>0.0</omamt>
+							<omcd>RE004</omcd>
+							<omdat>2008-02-17T00:00:00-02:00</omdat>
+							<omdep>10.0</omdep>
+							<ominp>100.0</ominp>
+							<omkpct>1.5</omkpct>
+							<omnpct>6.0</omnpct>
+							<omppct>2.0</omppct>
+							<organicMaterialEventPK>
+								<om>2</om>
+								<omOpsNo>2</omOpsNo>
+							</organicMaterialEventPK>
+						</organicMaterialEvent>
+						
+					</organicMaterialEventsCollection>
+					
+				</organicMaterialLevel>
+					
+				<soilAnalysesLevel>
+					<saName>-99</saName>
+					<sadat>2002-03-13T00:00:00-03:00</sadat>
+					<samhb>-99</samhb>
+					<samke>-99</samke>
+					<sampx>-99</sampx>
+					<soilAnalysesLevelPK>
+						<sa>1</sa>
+					</soilAnalysesLevelPK>
+					
+					<soilAnalysesEventsCollection>
+						<soilAnalysesEvent>
+							<sabdm>-99.0</sabdm>
+							<sabl>15</sabl>
+							<sake>-99.0</sake>
+							<sani>-99.0</sani>
+							<saoc>-99.0</saoc>
+							<saphb>-99.0</saphb>
+							<saphw>-99.0</saphw>
+							<sapx>-99.0</sapx>
+							<sasc>-99.0</sasc>
+							<soilAnalysesEventPK>
+								<sa>1</sa>
+								<saApplNo>0</saApplNo>
+							</soilAnalysesEventPK>
+						</soilAnalysesEvent>
+					</soilAnalysesEventsCollection>
+					
+				</soilAnalysesLevel>
+
+			</treatment>
+			
+		</treatmentsCollection>
+	</experiment>

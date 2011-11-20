@@ -113,7 +113,7 @@ public class SoilAnalysesLevelResource {
 		EntityManager em = PersistenceService.getInstance().getEntityManager();
 		try {
 			beans.SoilAnalysesLevelPK id = new beans.SoilAnalysesLevelPK(id1, id2);
-			return (SoilAnalysesLevel) em.createQuery("SELECT e FROM SoilAnalysesLevel e where e.soilAnalysesLevelPK = :soilAnalysesLevelsPK").setParameter("soilAnalysesLevelsPK", id).getSingleResult();
+			return (SoilAnalysesLevel) em.createQuery("SELECT e FROM SoilAnalysesLevel e where e.soilAnalysesLevelPK = :soilAnalysesLevelPK").setParameter("soilAnalysesLevelPK", id).getSingleResult();
 		}
 		catch (NoResultException ex) {
 			throw new WebApplicationException(new Throwable("Resource for " + uriInfo.getAbsolutePath() + " does not exist."), 404);
