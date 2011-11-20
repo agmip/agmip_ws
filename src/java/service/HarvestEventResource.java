@@ -14,10 +14,9 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.WebApplicationException;
 import javax.persistence.NoResultException;
 import javax.persistence.EntityManager;
-import beans.HarvestLevelPK;
 import beans.HarvestLevel;
-import converter.HarvestEventConverter;
 import com.sun.jersey.api.core.ResourceContext;
+import converter.HarvestEventConverter;
 
 /**
  *

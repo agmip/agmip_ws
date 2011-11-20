@@ -37,7 +37,7 @@ public class SoilAnalysesEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getSoilAnalysesEvents();
+		getSoilAnalysesEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class SoilAnalysesEventsConverter {
 	 * @return a collection of SoilAnalysesEventConverter
 	 */
 	@XmlElement
-	public Collection<SoilAnalysesEventConverter> getSoilAnalysesEvents() {
+	public Collection<SoilAnalysesEventConverter> getSoilAnalysesEvent() {
 		if (items == null) {
 			items = new ArrayList<SoilAnalysesEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class SoilAnalysesEventsConverter {
 	 *
 	 * @param a collection of SoilAnalysesEventConverter to set
 	 */
-	public void setSoilAnalysesEvents(Collection<SoilAnalysesEventConverter> items) {
+	public void setSoilAnalysesEvent(Collection<SoilAnalysesEventConverter> items) {
 		this.items = items;
 	}
 

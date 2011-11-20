@@ -37,7 +37,7 @@ public class IrrigationEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getIrrigationEvents();
+		getIrrigationEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class IrrigationEventsConverter {
 	 * @return a collection of IrrigationEventConverter
 	 */
 	@XmlElement
-	public Collection<IrrigationEventConverter> getIrrigationEvents() {
+	public Collection<IrrigationEventConverter> getIrrigationEvent() {
 		if (items == null) {
 			items = new ArrayList<IrrigationEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class IrrigationEventsConverter {
 	 *
 	 * @param a collection of IrrigationEventConverter to set
 	 */
-	public void setIrrigationEvents(Collection<IrrigationEventConverter> items) {
+	public void setIrrigationEvent(Collection<IrrigationEventConverter> items) {
 		this.items = items;
 	}
 

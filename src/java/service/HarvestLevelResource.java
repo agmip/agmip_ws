@@ -17,7 +17,6 @@ import javax.persistence.EntityManager;
 import beans.Treatment;
 import beans.HarvestEvent;
 import java.util.Collection;
-import converter.HarvestLevelsConverter;
 import com.sun.jersey.api.core.ResourceContext;
 import converter.HarvestLevelConverter;
 
@@ -183,13 +182,13 @@ public class HarvestLevelResource {
 	}
 
 	/**
-	 * Returns a dynamic instance of HarvestEventssResource used for entity navigation.
+	 * Returns a dynamic instance of HarvestEventsResource used for entity navigation.
 	 *
 	 * @param id identifier for the parent entity
-	 * @return an instance of HarvestEventssResource
+	 * @return an instance of HarvestEventsResource
 	 */
 	@Path("harvestEventsCollection/")
-	public HarvestEventsCollectionResourceSub getHarvestEventsCollectionResource() {
+	public HarvestEventsResource getHarvestEventsCollectionResource() {
 		HarvestEventsCollectionResourceSub harvestEventsCollectionResourceSub = resourceContext.getResource(HarvestEventsCollectionResourceSub.class);
 		harvestEventsCollectionResourceSub.setParent(getEntity());
 		return harvestEventsCollectionResourceSub;
@@ -208,7 +207,7 @@ public class HarvestLevelResource {
 		return treatmentsCollectionResourceSub;
 	}
 
-	public static class HarvestEventsCollectionResourceSub extends HarvestEventResource {
+	public static class HarvestEventsCollectionResourceSub extends HarvestEventsResource {
 
 		private HarvestLevel parent;
 
@@ -216,6 +215,7 @@ public class HarvestLevelResource {
 			this.parent = parent;
 		}
 
+		@Override
 		protected Collection<HarvestEvent> getEntities(int start, int max, String query) {
 			Collection<HarvestEvent> result = new java.util.ArrayList<HarvestEvent>();
 			int index = 0;

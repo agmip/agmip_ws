@@ -15,7 +15,7 @@ import java.util.HashSet;
  *
  * @author fonini
  */
-@XmlRootElement(name = "harvestEvents")
+@XmlRootElement(name = "harvestEventss")
 public class HarvestEventsConverter {
 	private Collection<HarvestEvent> entities;
 	private Collection<HarvestEventConverter> items;
@@ -37,7 +37,7 @@ public class HarvestEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getHarvestEvents();
+		getHarvestEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class HarvestEventsConverter {
 	 * @return a collection of HarvestEventConverter
 	 */
 	@XmlElement
-	public Collection<HarvestEventConverter> getHarvestEvents() {
+	public Collection<HarvestEventConverter> getHarvestEvent() {
 		if (items == null) {
 			items = new ArrayList<HarvestEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class HarvestEventsConverter {
 	 *
 	 * @param a collection of HarvestEventConverter to set
 	 */
-	public void setHarvestEvents(Collection<HarvestEventConverter> items) {
+	public void setHarvestEvent(Collection<HarvestEventConverter> items) {
 		this.items = items;
 	}
 

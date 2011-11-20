@@ -233,7 +233,7 @@ public class HarvestEventConverter {
 	public HarvestLevelConverter getHarvestLevel() {
 		if (expandLevel > 0) {
 			if (entity.getHarvestLevel() != null) {
-				return new HarvestLevelConverter(entity.getHarvestLevel(), uri.resolve("harvestLevel/"), expandLevel - 1, false);
+				return new HarvestLevelConverter(entity.getHarvestLevel(), uri.resolve("harvestLevels/"), expandLevel - 1, false);
 			}
 		}
 		return null;

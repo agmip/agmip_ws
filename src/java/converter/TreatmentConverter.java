@@ -60,7 +60,7 @@ public class TreatmentConverter {
         getFertilizerLevel();
         getField();
         getGenotype();
-        getHarvestLevels();
+        getHarvestLevel();
         getInitialConditionLevel();
         getIrrigationLevel();
         getMulchLevel();
@@ -411,7 +411,7 @@ public class TreatmentConverter {
      * @return value for harvestLevels
      */
     @XmlElement
-    public HarvestLevelConverter getHarvestLevels() {
+    public HarvestLevelConverter getHarvestLevel() {
         if (expandLevel > 0) {
             if (entity.getHarvestLevel() != null) {
                 return new HarvestLevelConverter(entity.getHarvestLevel(), uri.resolve("harvestLevels/"), expandLevel - 1, false);
@@ -425,7 +425,7 @@ public class TreatmentConverter {
      *
      * @param value the value to set
      */
-    public void setHarvestLevels(HarvestLevelConverter value) {
+    public void setHarvestLevel(HarvestLevelConverter value) {
         entity.setHarvestLevel((value != null) ? value.getEntity() : null);
     }
 

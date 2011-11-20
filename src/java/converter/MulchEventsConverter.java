@@ -37,7 +37,7 @@ public class MulchEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getMulchEvents();
+		getMulchEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class MulchEventsConverter {
 	 * @return a collection of MulchEventConverter
 	 */
 	@XmlElement
-	public Collection<MulchEventConverter> getMulchEvents() {
+	public Collection<MulchEventConverter> getMulchEvent() {
 		if (items == null) {
 			items = new ArrayList<MulchEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class MulchEventsConverter {
 	 *
 	 * @param a collection of MulchEventConverter to set
 	 */
-	public void setMulchEvents(Collection<MulchEventConverter> items) {
+	public void setMulchEvent(Collection<MulchEventConverter> items) {
 		this.items = items;
 	}
 

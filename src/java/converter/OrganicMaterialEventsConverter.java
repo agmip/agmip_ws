@@ -37,7 +37,7 @@ public class OrganicMaterialEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getOrganicMaterialEvents();
+		getOrganicMaterialEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class OrganicMaterialEventsConverter {
 	 * @return a collection of OrganicMaterialEventConverter
 	 */
 	@XmlElement
-	public Collection<OrganicMaterialEventConverter> getOrganicMaterialEvents() {
+	public Collection<OrganicMaterialEventConverter> getOrganicMaterialEvent() {
 		if (items == null) {
 			items = new ArrayList<OrganicMaterialEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class OrganicMaterialEventsConverter {
 	 *
 	 * @param a collection of OrganicMaterialEventConverter to set
 	 */
-	public void setOrganicMaterialEvents(Collection<OrganicMaterialEventConverter> items) {
+	public void setOrganicMaterialEvent(Collection<OrganicMaterialEventConverter> items) {
 		this.items = items;
 	}
 

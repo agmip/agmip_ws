@@ -37,7 +37,7 @@ public class InitialConditionEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getInitialConditionEvents();
+		getInitialConditionEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class InitialConditionEventsConverter {
 	 * @return a collection of InitialConditionEventConverter
 	 */
 	@XmlElement
-	public Collection<InitialConditionEventConverter> getInitialConditionEvents() {
+	public Collection<InitialConditionEventConverter> getInitialConditionEvent() {
 		if (items == null) {
 			items = new ArrayList<InitialConditionEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class InitialConditionEventsConverter {
 	 *
 	 * @param a collection of InitialConditionEventConverter to set
 	 */
-	public void setInitialConditionEvents(Collection<InitialConditionEventConverter> items) {
+	public void setInitialConditionEvent(Collection<InitialConditionEventConverter> items) {
 		this.items = items;
 	}
 

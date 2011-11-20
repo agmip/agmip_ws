@@ -37,7 +37,7 @@ public class TillageEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getTillageEvents();
+		getTillageEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class TillageEventsConverter {
 	 * @return a collection of TillageEventConverter
 	 */
 	@XmlElement
-	public Collection<TillageEventConverter> getTillageEvents() {
+	public Collection<TillageEventConverter> getTillageEvent() {
 		if (items == null) {
 			items = new ArrayList<TillageEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class TillageEventsConverter {
 	 *
 	 * @param a collection of TillageEventConverter to set
 	 */
-	public void setTillageEvents(Collection<TillageEventConverter> items) {
+	public void setTillageEvent(Collection<TillageEventConverter> items) {
 		this.items = items;
 	}
 

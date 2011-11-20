@@ -37,7 +37,7 @@ public class EnvironModifEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getEnvironModifEvents();
+		getEnvironModifEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class EnvironModifEventsConverter {
 	 * @return a collection of EnvironModifEventConverter
 	 */
 	@XmlElement
-	public Collection<EnvironModifEventConverter> getEnvironModifEvents() {
+	public Collection<EnvironModifEventConverter> getEnvironModifEvent() {
 		if (items == null) {
 			items = new ArrayList<EnvironModifEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class EnvironModifEventsConverter {
 	 *
 	 * @param a collection of EnvironModifEventConverter to set
 	 */
-	public void setEnvironModifEvents(Collection<EnvironModifEventConverter> items) {
+	public void setEnvironModifEvent(Collection<EnvironModifEventConverter> items) {
 		this.items = items;
 	}
 

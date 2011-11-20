@@ -37,7 +37,7 @@ public class ChemicalEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getChemicalEvents();
+		getChemicalEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class ChemicalEventsConverter {
 	 * @return a collection of ChemicalEventConverter
 	 */
 	@XmlElement
-	public Collection<ChemicalEventConverter> getChemicalEvents() {
+	public Collection<ChemicalEventConverter> getChemicalEvent() {
 		if (items == null) {
 			items = new ArrayList<ChemicalEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class ChemicalEventsConverter {
 	 *
 	 * @param a collection of ChemicalEventConverter to set
 	 */
-	public void setChemicalEvents(Collection<ChemicalEventConverter> items) {
+	public void setChemicalEvent(Collection<ChemicalEventConverter> items) {
 		this.items = items;
 	}
 

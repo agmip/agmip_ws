@@ -15,8 +15,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.persistence.EntityManager;
 import beans.HarvestLevel;
-import converter.HarvestEventConverter;
 import converter.HarvestEventsConverter;
+import converter.HarvestEventConverter;
 import com.sun.jersey.api.core.ResourceContext;
 
 /**

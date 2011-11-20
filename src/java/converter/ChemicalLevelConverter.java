@@ -60,7 +60,7 @@ public class ChemicalLevelConverter {
 	 * @return value for chemicalLevelsPK
 	 */
 	@XmlElement
-	public ChemicalLevelPK getChemicalLevelsPK() {
+	public ChemicalLevelPK getChemicalLevelPK() {
 		return (expandLevel > 0) ? entity.getChemicalLevelPK() : null;
 	}
 
@@ -69,7 +69,7 @@ public class ChemicalLevelConverter {
 	 *
 	 * @param value the value to set
 	 */
-	public void setChemicalLevelsPK(ChemicalLevelPK value) {
+	public void setChemicalLevelPK(ChemicalLevelPK value) {
 		entity.setChemicalLevelPK(value);
 	}
 

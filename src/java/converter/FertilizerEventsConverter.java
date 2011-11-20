@@ -15,7 +15,7 @@ import java.util.HashSet;
  *
  * @author fonini
  */
-@XmlRootElement(name = "fertilizerEventss")
+@XmlRootElement(name = "fertilizerEvents")
 public class FertilizerEventsConverter {
 	private Collection<FertilizerEvent> entities;
 	private Collection<FertilizerEventConverter> items;
@@ -37,7 +37,7 @@ public class FertilizerEventsConverter {
 		this.entities = entities;
 		this.uri = uri;
 		this.expandLevel = expandLevel;
-		getFertilizerEvents();
+		getFertilizerEvent();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class FertilizerEventsConverter {
 	 * @return a collection of FertilizerEventConverter
 	 */
 	@XmlElement
-	public Collection<FertilizerEventConverter> getFertilizerEvents() {
+	public Collection<FertilizerEventConverter> getFertilizerEvent() {
 		if (items == null) {
 			items = new ArrayList<FertilizerEventConverter>();
 		}
@@ -64,7 +64,7 @@ public class FertilizerEventsConverter {
 	 *
 	 * @param a collection of FertilizerEventConverter to set
 	 */
-	public void setFertilizerEvents(Collection<FertilizerEventConverter> items) {
+	public void setFertilizerEvent(Collection<FertilizerEventConverter> items) {
 		this.items = items;
 	}
 

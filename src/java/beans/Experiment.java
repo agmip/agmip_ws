@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import service.PersistenceService;
 
 /**
  *
@@ -259,6 +261,12 @@ public class Experiment implements Serializable {
 
     @XmlTransient
     public Collection<Treatment> getTreatmentsCollection() {
+		if (treatmentsCollection != null && treatmentsCollection.isEmpty()){
+			PersistenceService svc = PersistenceService.getInstance();
+			EntityManager em = svc.getEntityManager();
+
+			return treatmentsCollection = em.createQuery("from Treatment t where t.treatmentPK.expId = :id").setParameter("id", this.expId).getResultList();
+		}
         return treatmentsCollection;
     }
 

@@ -1,5 +1,7 @@
 package service;
 
+import beans.ChemicalEvent;
+import beans.ChemicalLevel;
 import beans.EnvironModifEvent;
 import beans.EnvironModifLevel;
 import beans.Experiment;
@@ -7,6 +9,8 @@ import beans.FertilizerEvent;
 import beans.FertilizerLevel;
 import beans.Field;
 import beans.Genotype;
+import beans.HarvestEvent;
+import beans.HarvestLevel;
 import beans.InitialConditionEvent;
 import beans.InitialConditionLevel;
 import beans.IrrigationEvent;
@@ -72,7 +76,7 @@ public class ExperimentsResource {
             persistenceSvc.beginTx();
             return new ExperimentsConverter(getEntities(start, max, query), uriInfo.getAbsolutePath(), expandLevel);
         } finally {
-            //persistenceSvc.commitTx();
+            persistenceSvc.commitTx();
             persistenceSvc.close();
         }
     }
@@ -165,6 +169,32 @@ public class ExperimentsResource {
 					Genotype genotype = treatment.getGenotype();
 					em.persist(genotype);
 					treatment.setGenotype(genotype);
+				}
+
+				if (treatment.getChemicalLevel() != null){
+					System.out.println("CHEMICAL LEVELS");
+					// Set the Experiment ID to the ChemicalLevel
+					treatment.getChemicalLevel().getChemicalLevelPK().setExpId(entity.getExpId());
+
+					/* Gets the ChemicalLevel, add references to the childs
+					 and then persists it */
+					ChemicalLevel chemicalLevel = treatment.getChemicalLevel();
+
+					Collection <ChemicalEvent> list = chemicalLevel.getChemicalEventsCollection();
+
+					if (list != null){
+						Collection <ChemicalEvent> newList = new ArrayList<ChemicalEvent>();
+
+						for (ChemicalEvent obj : list){
+							obj.getChemicalEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						chemicalLevel.setChemicalEventsCollection(newList);
+					}
+
+					em.persist(chemicalLevel);
+					treatment.setChemicalLevel(chemicalLevel);
 				}
 
 				if (treatment.getTillageLevel() != null){
@@ -351,6 +381,32 @@ public class ExperimentsResource {
 
 					em.persist(organicMaterialLevel);
 					treatment.setOrganicMaterialLevel(organicMaterialLevel);
+				}
+
+				if (treatment.getHarvestLevel() != null){
+					System.out.println("HARVEST LEVELS");
+					// Set the Experiment ID to the HarvestLevel
+					treatment.getHarvestLevel().getHarvestLevelPK().setExpId(entity.getExpId());
+
+					/* Gets the HarvestLevel, add references to the childs
+					 and then persists it */
+					HarvestLevel harvestLevel = treatment.getHarvestLevel();
+
+					Collection<HarvestEvent> list = harvestLevel.getHarvestEventsCollection();
+
+					if (list != null){
+						Collection<HarvestEvent> newList = new ArrayList<HarvestEvent>();
+
+						for (HarvestEvent obj : list){
+							obj.getHarvestEventPK().setExpId(entity.getExpId());
+							newList.add(obj);
+						}
+
+						harvestLevel.setHarvestEventsCollection(newList);
+					}
+
+					em.persist(harvestLevel);
+					treatment.setHarvestLevel(harvestLevel);
 				}
 
 
