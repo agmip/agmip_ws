@@ -5,5 +5,7 @@ build
 build/*
 dist
 dist/*
+src/java/service/TesteResource.java
+src/java/service/TestesResource.java
 
 .DS_Store

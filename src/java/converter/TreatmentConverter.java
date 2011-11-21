@@ -401,7 +401,7 @@ public class TreatmentConverter {
      *
      * @param value the value to set
      */
-    public void setGenotype(GenotypeConverter value) {
+	public void setGenotype(GenotypeConverter value) {
         entity.setGenotype((value != null) ? value.getEntity() : null);
     }
 

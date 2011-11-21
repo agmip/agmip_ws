@@ -110,7 +110,6 @@ public class OrganicMaterialLevelsResource {
 	 * @param entity the entity to persist
 	 */
 	protected void createEntity(OrganicMaterialLevel entity) {
-		System.out.println("chegou");
 		EntityManager em = PersistenceService.getInstance().getEntityManager();
 		em.persist(entity);
 		for (OrganicMaterialEvent value : entity.getOrganicMaterialEventsCollection()) {

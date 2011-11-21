@@ -72,7 +72,6 @@ public class GenotypesResource {
             persistenceSvc.beginTx();
             EntityManager em = persistenceSvc.getEntityManager();
             Genotype entity = data.resolveEntity(em);
-			System.out.println(entity.getCulName());
             createEntity(data.resolveEntity(em));
             persistenceSvc.commitTx();
             return Response.created(uriInfo.getAbsolutePath().resolve(entity.getGenotypePK().getExpId() + "," + entity.getGenotypePK().getGe() + "/")).entity(entity).build();

@@ -39,8 +39,6 @@ public class ExperimentConverter {
         this.uri = (isUriExtendable) ? UriBuilder.fromUri(uri).path(entity.getExpId() + "/").build() : uri;
         this.expandLevel = expandLevel;
         getTreatmentsCollection();
-
-		System.out.println(entity.getTreatmentsCollection().size());
     }
 
     /**
@@ -489,7 +487,6 @@ public class ExperimentConverter {
 
         if (treatmentsCollection != null) {
             for (Treatment item : treatmentsCollection) {
-                //newtreatmentsCollection.add(em.getReference(Treatment.class, item.getTreatmentsPK()));
 				TreatmentPK key = item.getTreatmentPK();
 				key.setExpId(id);
 
